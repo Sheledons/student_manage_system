@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * @author sheledon
  */
 @Configuration
-@ImportResource("classpath:properties/jdbc.properties")
+@PropertySource("classpath:properties/jdbc.properties")
 public class DataBaseConfig {
     @Value("${jdbc.driver}")
     private String driver;

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -13,7 +14,7 @@ import redis.clients.jedis.JedisPoolConfig;
  * @author sheledon
  */
 @Configuration
-@ImportResource("classpath:redis.properties")
+@PropertySource("classpath:redis.properties")
 public class RedisConfig {
 
     @Value("${redis.host}")
