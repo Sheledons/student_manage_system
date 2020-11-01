@@ -27,6 +27,7 @@
         <security.version>3.2.3.RELEASE</security.version>
         <spring-data-readis.version>2.1.8.RELEASE</spring-data-readis.version>
         <jedis.version>2.9.3</jedis.version>
+        <slf4j.version>1.6.6</slf4j.version>
     </properties>
     <dependencies>
 <!--        spring start-->
@@ -82,7 +83,7 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
-        <!-- Mybatis -->
+<!--            Mybatis -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
@@ -93,25 +94,24 @@
             <artifactId>mybatis-spring</artifactId>
             <version>${mybatis.spring.version}</version>
         </dependency>
-        <!-- MySql -->
+<!--           MySql -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
-        <!-- 连接池 -->
+<!--          连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
         </dependency>
-        <!--        redis依赖-->
+<!--        redis依赖-->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
             <version>${spring-data-readis.version}</version>
         </dependency>
-
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
@@ -135,6 +135,28 @@
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
         </dependency>
+<!--        导入日志依赖的包采用 slf4j+logback-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+            <version>1.1.7</version>
+        </dependency>
+<!--        log end-->
     </dependencies>
     <build>
         <defaultGoal>compile</defaultGoal>

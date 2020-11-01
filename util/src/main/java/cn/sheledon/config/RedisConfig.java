@@ -3,9 +3,10 @@ package cn.sheledon.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.redis.connection.RedisClusterConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import redis.clients.jedis.JedisPoolConfig;
@@ -26,11 +27,13 @@ public class RedisConfig {
 
     @Bean
     public RedisConnectionFactory redisConnectionFactory(){
-        JedisConnectionFactory jc=new JedisConnectionFactory();
-        jc.setHostName(host);
-        jc.setPort(port);
-        jc.setUsePool(true);
-        return jc;
+        JedisClientConfiguration clientConfiguration=JedisClientConfiguration
+                .builder()
+                .usePooling()
+                .poolConfig(jedisPoolConfig())
+                .build();
+        JedisConnectionFactory jedisConnectionFactory=new JedisConnectionFactory(new RedisClusterConfiguration(),clientConfiguration);
+        return jedisConnectionFactory;
     }
 
     /**
