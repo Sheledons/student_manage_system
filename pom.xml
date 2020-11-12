@@ -13,6 +13,7 @@
         <module>service</module>
         <module>dao</module>
         <module>util</module>
+        <module>pojo</module>
     </modules>
 
     <properties>
@@ -157,6 +158,12 @@
             <version>1.1.7</version>
         </dependency>
 <!--        log end-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.10</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
     <build>
         <defaultGoal>compile</defaultGoal>
