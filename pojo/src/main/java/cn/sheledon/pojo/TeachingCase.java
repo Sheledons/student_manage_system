@@ -8,6 +8,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
+ * 教学评价
  * @author sheledon
  */
 @Setter
@@ -16,9 +17,6 @@ import java.io.Serializable;
 @ToString
 public class TeachingCase implements Serializable {
     private String caseId;
-    /**
-     *教学评价
-     */
     private Integer assessmentScore;
     private String teachingSchedule;
 }

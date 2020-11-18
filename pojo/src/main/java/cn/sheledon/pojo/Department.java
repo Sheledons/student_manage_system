@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * 系
  * @author sheledon
  */
 @Setter
@@ -18,5 +19,5 @@ import java.util.List;
 public class Department implements Serializable {
     private String departmentId;
     private String name;
-    private List<Academy> academies;
+    private Academy academy;
 }

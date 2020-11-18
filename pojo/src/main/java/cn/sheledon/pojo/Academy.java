@@ -8,6 +8,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
+ * 学院
  * @author sheledon
  */
 @Setter

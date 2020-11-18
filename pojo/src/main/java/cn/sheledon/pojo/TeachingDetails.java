@@ -7,6 +7,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
+ * 教学细节
  * @author sheledon
  */
 @Setter

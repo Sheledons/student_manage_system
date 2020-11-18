@@ -18,6 +18,6 @@ public class Course implements Serializable {
     private String courseId;
     private String courseName;
     private Department department;
-    private String text;
+    private String introduce;
     private TeachingDetails teachingDetails;
 }

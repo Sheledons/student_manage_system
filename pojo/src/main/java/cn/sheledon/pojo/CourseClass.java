@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
+ * 课程班级
+ * 开设课程的教学班
+ *
  * @author sheledon
  */
 @Setter
