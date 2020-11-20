@@ -16,6 +16,7 @@ import java.io.Serializable;
 @ToString
 public class Teacher implements Serializable {
     private String teacherId;
+    private String userId;
     private String gender;
     private String name;
     private String phoneNumber;

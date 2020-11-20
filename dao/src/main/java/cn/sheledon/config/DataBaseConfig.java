@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 /**
+ * mysqBatis配置相关类
+ *
  * @author sheledon
  */
 @Configuration
