@@ -29,9 +29,9 @@ and studentArchive.certificateId=certificate.certificateId;
 SELECT planName ,classHours,makeDate,requiredCourseCredit,selectiveCourseCredit
 FROM teachingplan,student,studentInfo 
 WHERE teachingplan.majorId=studentInfo.majorId
-and student.userId=2500001
 and teachingplan.studentTypeId=studentInfo.studentTypeId
 and student.infoId=studentinfo.infoId;
+and student.userId=2500001
 
 -- 课程查询 创建视图，以后学生课程查询和可选课程查询均使用该视图
 

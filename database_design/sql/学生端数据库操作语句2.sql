@@ -4,7 +4,7 @@ select * from stuselectcourse;
 -- 学生课程查询
 
 SELECT courseInfo.* from courseInfo ,student,stuselectcourse
-WHERE userId=2500001
+WHERE student.studentId=20181102928
 and student.studentId=stuselectcourse.studentId
 and stuselectCourse.courseClassId=courseInfo.courseClassId;
 

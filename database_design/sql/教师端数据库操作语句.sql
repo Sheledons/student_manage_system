@@ -20,19 +20,16 @@ FROM student,class,teacher,studentinfo
 WHERE studentinfo.classId=class.classId
 AND studentInfo.infoId=student.infoId;
 -- AND teacherID="  "
+-- AND class.classId=""
 -- LIMIT 0,0
 
 -- 教师所任职教学班查询
 
-SELECT  courseClass.courseClassId,teachingStartDate,teachingEndDate,qualifyPeopleNum,coursename,course.courseId,location,classroomNum
-FROM courseClass,classroom,course,courseuseclassroom,teacher,teachingcase
-WHERE  
-		courseClass.courseClassId=teachingcase.courseClassId
-AND courseClass.courseClassId=courseuseclassroom.courseClassId
-AND courseuseclassroom.classroomId=classroom.classroomId
-AND course.courseId=courseclass.courseid
-AND teachingCase.teacherId=teacher.teacherId
-AND teacher.userId=2500002;
+SELECT  courseInfo.* 
+from courseInfo,teacher,teachingcase 
+WHERE teacher.teacherId=teachingcase.teacherId
+AND teachingcase.courseClassId=courseInfo.courseClassId
+AND teacher.teacherId=2500002;
 
 -- 教师所任职教学班的学生查询,提供教学班的id和老师id
 
