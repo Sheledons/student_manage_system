@@ -1,619 +1,494 @@
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
---
--- Host: localhost    Database: student_manage_database
--- ------------------------------------------------------
--- Server version	8.0.22
+/*
+ Navicat Premium Data Transfer
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+ Source Server         : student_system
+ Source Server Type    : MySQL
+ Source Server Version : 80022
+ Source Host           : localhost:3306
+ Source Schema         : student_manage_database
 
---
--- Table structure for table `academy`
---
+ Target Server Type    : MySQL
+ Target Server Version : 80022
+ File Encoding         : 65001
 
+ Date: 21/11/2020 22:03:49
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for academy
+-- ----------------------------
 DROP TABLE IF EXISTS `academy`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `academy` (
-  `academyId` varchar(10) NOT NULL,
-  `name` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`academyId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `academy`  (
+  `academyId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`academyId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `academy`
---
+-- ----------------------------
+-- Records of academy
+-- ----------------------------
+INSERT INTO `academy` VALUES ('1000001', '计算机学院');
 
-LOCK TABLES `academy` WRITE;
-/*!40000 ALTER TABLE `academy` DISABLE KEYS */;
-/*!40000 ALTER TABLE `academy` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `address`
---
-
+-- ----------------------------
+-- Table structure for address
+-- ----------------------------
 DROP TABLE IF EXISTS `address`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `address` (
-  `addressId` varchar(10) NOT NULL,
-  `provinces` varchar(10) DEFAULT NULL,
-  `city` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`addressId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `address`  (
+  `addressId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `provinces` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `city` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`addressId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `address`
---
+-- ----------------------------
+-- Records of address
+-- ----------------------------
+INSERT INTO `address` VALUES ('2000001', '内蒙古', 'Ⅷ');
 
-LOCK TABLES `address` WRITE;
-/*!40000 ALTER TABLE `address` DISABLE KEYS */;
-/*!40000 ALTER TABLE `address` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `certificate`
---
-
+-- ----------------------------
+-- Table structure for certificate
+-- ----------------------------
 DROP TABLE IF EXISTS `certificate`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `certificate` (
-  `certificateId` varchar(10) NOT NULL,
-  `content` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`certificateId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `certificate`  (
+  `certificateId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `content` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`certificateId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `certificate`
---
+-- ----------------------------
+-- Records of certificate
+-- ----------------------------
+INSERT INTO `certificate` VALUES ('3000001', '中国诗词大会观看奖');
 
-LOCK TABLES `certificate` WRITE;
-/*!40000 ALTER TABLE `certificate` DISABLE KEYS */;
-/*!40000 ALTER TABLE `certificate` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `class`
---
-
+-- ----------------------------
+-- Table structure for class
+-- ----------------------------
 DROP TABLE IF EXISTS `class`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `class` (
-  `classId` varchar(10) NOT NULL,
-  `className` varchar(10) DEFAULT NULL,
-  `chargerTeacherId` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`classId`),
-  KEY `FK_class_to_teacher` (`chargerTeacherId`),
-  CONSTRAINT `FK_class_to_teacher` FOREIGN KEY (`chargerTeacherId`) REFERENCES `teacher` (`teacherId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `class`  (
+  `classId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `className` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `chargerTeacherId` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`classId`) USING BTREE,
+  INDEX `FK_class_to_teacher`(`chargerTeacherId`) USING BTREE,
+  CONSTRAINT `FK_class_to_teacher` FOREIGN KEY (`chargerTeacherId`) REFERENCES `teacher` (`teacherId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `class`
---
+-- ----------------------------
+-- Records of class
+-- ----------------------------
+INSERT INTO `class` VALUES ('4000001', '18软件工程', '1800001');
 
-LOCK TABLES `class` WRITE;
-/*!40000 ALTER TABLE `class` DISABLE KEYS */;
-/*!40000 ALTER TABLE `class` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `classroom`
---
-
+-- ----------------------------
+-- Table structure for classroom
+-- ----------------------------
 DROP TABLE IF EXISTS `classroom`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `classroom` (
-  `classroomId` varchar(10) NOT NULL,
-  `capacity` int DEFAULT NULL,
-  `location` varchar(10) DEFAULT NULL,
-  `classroomNum` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`classroomId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `classroom`  (
+  `classroomId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `capacity` int(0) NULL DEFAULT NULL,
+  `location` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `classroomNum` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`classroomId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `classroom`
---
+-- ----------------------------
+-- Records of classroom
+-- ----------------------------
+INSERT INTO `classroom` VALUES ('5000001', 33, '行纸篓', '201');
+INSERT INTO `classroom` VALUES ('5000002', 100, '李工娄', '321');
 
-LOCK TABLES `classroom` WRITE;
-/*!40000 ALTER TABLE `classroom` DISABLE KEYS */;
-/*!40000 ALTER TABLE `classroom` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `course`
---
-
+-- ----------------------------
+-- Table structure for course
+-- ----------------------------
 DROP TABLE IF EXISTS `course`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `course` (
-  `courseId` varchar(10) NOT NULL,
-  `courseName` varchar(10) DEFAULT NULL,
-  `departmentId` varchar(10) DEFAULT NULL,
-  `introduce` text,
-  PRIMARY KEY (`courseId`),
-  KEY `FK_course_department` (`departmentId`),
-  CONSTRAINT `FK_course_department` FOREIGN KEY (`departmentId`) REFERENCES `department` (`departmentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `course`  (
+  `courseId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `courseName` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `departmentId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `introduce` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+  PRIMARY KEY (`courseId`) USING BTREE,
+  INDEX `FK_course_department`(`departmentId`) USING BTREE,
+  CONSTRAINT `FK_course_department` FOREIGN KEY (`departmentId`) REFERENCES `department` (`departmentId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `course`
---
+-- ----------------------------
+-- Records of course
+-- ----------------------------
+INSERT INTO `course` VALUES ('6000001', '分布式理论', '9000001', '分布式不真正到企业里实践，你能学会？');
+INSERT INTO `course` VALUES ('6000002', '闪电五连鞭教学', '9000001', '我大意了啊！！！');
 
-LOCK TABLES `course` WRITE;
-/*!40000 ALTER TABLE `course` DISABLE KEYS */;
-/*!40000 ALTER TABLE `course` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `courseclass`
---
-
+-- ----------------------------
+-- Table structure for courseclass
+-- ----------------------------
 DROP TABLE IF EXISTS `courseclass`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `courseclass` (
-  `courseClassId` varchar(10) NOT NULL,
-  `teachingStartDate` date DEFAULT NULL,
-  `teachingEndDate` date DEFAULT NULL,
-  `courseId` varchar(10) DEFAULT NULL,
-  `qualifyPeopleNum` int DEFAULT NULL,
-  PRIMARY KEY (`courseClassId`),
-  KEY `FK_courseClass_to_course` (`courseId`),
-  CONSTRAINT `FK_courseClass_to_course` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `courseclass`  (
+  `courseClassId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `teachingStartDate` date NULL DEFAULT NULL,
+  `teachingEndDate` date NULL DEFAULT NULL,
+  `courseId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `qualifyPeopleNum` int(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`courseClassId`) USING BTREE,
+  INDEX `FK_courseClass_to_course`(`courseId`) USING BTREE,
+  CONSTRAINT `FK_courseClass_to_course` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `courseclass`
---
+-- ----------------------------
+-- Records of courseclass
+-- ----------------------------
+INSERT INTO `courseclass` VALUES ('7000001', '2020-09-01', '2021-01-01', '6000001', 100);
+INSERT INTO `courseclass` VALUES ('7000002', '2020-09-02', '2921-01-01', '6000002', 1000);
 
-LOCK TABLES `courseclass` WRITE;
-/*!40000 ALTER TABLE `courseclass` DISABLE KEYS */;
-/*!40000 ALTER TABLE `courseclass` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `courseuseclassroom`
---
-
+-- ----------------------------
+-- Table structure for courseuseclassroom
+-- ----------------------------
 DROP TABLE IF EXISTS `courseuseclassroom`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `courseuseclassroom` (
-  `classroomId` varchar(10) NOT NULL,
-  `courseClassId` varchar(10) NOT NULL,
-  PRIMARY KEY (`classroomId`,`courseClassId`),
-  KEY `FK_use_to_courseClass` (`courseClassId`),
-  CONSTRAINT `FK_use_to_classroom` FOREIGN KEY (`classroomId`) REFERENCES `classroom` (`classroomId`),
-  CONSTRAINT `FK_use_to_courseClass` FOREIGN KEY (`courseClassId`) REFERENCES `courseclass` (`courseClassId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `courseuseclassroom`  (
+  `classroomId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `courseClassId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`classroomId`, `courseClassId`) USING BTREE,
+  INDEX `FK_use_to_courseClass`(`courseClassId`) USING BTREE,
+  CONSTRAINT `FK_use_to_classroom` FOREIGN KEY (`classroomId`) REFERENCES `classroom` (`classroomId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_use_to_courseClass` FOREIGN KEY (`courseClassId`) REFERENCES `courseclass` (`courseClassId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `courseuseclassroom`
---
+-- ----------------------------
+-- Records of courseuseclassroom
+-- ----------------------------
+INSERT INTO `courseuseclassroom` VALUES ('5000001', '7000001');
 
-LOCK TABLES `courseuseclassroom` WRITE;
-/*!40000 ALTER TABLE `courseuseclassroom` DISABLE KEYS */;
-/*!40000 ALTER TABLE `courseuseclassroom` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `department`
---
-
+-- ----------------------------
+-- Table structure for department
+-- ----------------------------
 DROP TABLE IF EXISTS `department`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `department` (
-  `departmentId` varchar(10) NOT NULL,
-  `name` varchar(10) DEFAULT NULL,
-  `academyId` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`departmentId`),
-  KEY `FK_department_academy` (`academyId`),
-  CONSTRAINT `FK_department_academy` FOREIGN KEY (`academyId`) REFERENCES `academy` (`academyId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `department`  (
+  `departmentId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `academyId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`departmentId`) USING BTREE,
+  INDEX `FK_department_academy`(`academyId`) USING BTREE,
+  CONSTRAINT `FK_department_academy` FOREIGN KEY (`academyId`) REFERENCES `academy` (`academyId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `department`
---
+-- ----------------------------
+-- Records of department
+-- ----------------------------
+INSERT INTO `department` VALUES ('9000001', '计算机系', '1000001');
 
-LOCK TABLES `department` WRITE;
-/*!40000 ALTER TABLE `department` DISABLE KEYS */;
-/*!40000 ALTER TABLE `department` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `dormitory`
---
-
+-- ----------------------------
+-- Table structure for dormitory
+-- ----------------------------
 DROP TABLE IF EXISTS `dormitory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `dormitory` (
-  `dorId` varchar(10) NOT NULL,
-  `buildingNum` int DEFAULT NULL,
-  `dormitoryNum` int DEFAULT NULL,
-  PRIMARY KEY (`dorId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `dormitory`  (
+  `dorId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `buildingNum` int(0) NULL DEFAULT NULL,
+  `dormitoryNum` int(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`dorId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `dormitory`
---
+-- ----------------------------
+-- Records of dormitory
+-- ----------------------------
+INSERT INTO `dormitory` VALUES ('1100001', 8, 925);
 
-LOCK TABLES `dormitory` WRITE;
-/*!40000 ALTER TABLE `dormitory` DISABLE KEYS */;
-/*!40000 ALTER TABLE `dormitory` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `major`
---
-
+-- ----------------------------
+-- Table structure for major
+-- ----------------------------
 DROP TABLE IF EXISTS `major`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `major` (
-  `majorId` varchar(10) NOT NULL,
-  `majorName` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`majorId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `major`  (
+  `majorId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `majorName` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`majorId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `major`
---
+-- ----------------------------
+-- Records of major
+-- ----------------------------
+INSERT INTO `major` VALUES ('1100001', '软件工程');
+INSERT INTO `major` VALUES ('1100002', '大数据');
 
-LOCK TABLES `major` WRITE;
-/*!40000 ALTER TABLE `major` DISABLE KEYS */;
-/*!40000 ALTER TABLE `major` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `punishment`
---
-
+-- ----------------------------
+-- Table structure for punishment
+-- ----------------------------
 DROP TABLE IF EXISTS `punishment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `punishment` (
-  `punishmentId` varchar(10) NOT NULL,
-  `content` varchar(20) DEFAULT NULL,
-  `category` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`punishmentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `punishment`  (
+  `punishmentId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `content` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `category` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`punishmentId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `punishment`
---
+-- ----------------------------
+-- Records of punishment
+-- ----------------------------
+INSERT INTO `punishment` VALUES ('1200001', '垃圾没扔', '校级');
+INSERT INTO `punishment` VALUES ('1200002', '被子没叠', '校级');
 
-LOCK TABLES `punishment` WRITE;
-/*!40000 ALTER TABLE `punishment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `punishment` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `student`
---
-
+-- ----------------------------
+-- Table structure for student
+-- ----------------------------
 DROP TABLE IF EXISTS `student`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `student` (
-  `studentId` varchar(20) NOT NULL,
-  `name` varchar(10) NOT NULL,
-  `gender` varchar(3) NOT NULL,
-  `birthday` date DEFAULT NULL,
-  `phoneNumber` varchar(20) DEFAULT NULL,
-  `infoId` varchar(10) DEFAULT NULL,
-  `registerTime` varchar(15) DEFAULT NULL,
-  `password` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`studentId`),
-  KEY `FK_student_to_info` (`infoId`),
-  CONSTRAINT `FK_student_to_info` FOREIGN KEY (`infoId`) REFERENCES `studentinfo` (`infoId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `student`  (
+  `studentId` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `gender` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `birthday` date NULL DEFAULT NULL,
+  `phoneNumber` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `infoId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `registerTime` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `userId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`studentId`) USING BTREE,
+  INDEX `FK_student_to_info`(`infoId`) USING BTREE,
+  CONSTRAINT `FK_student_to_info` FOREIGN KEY (`infoId`) REFERENCES `studentinfo` (`infoId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `student`
---
+-- ----------------------------
+-- Records of student
+-- ----------------------------
+INSERT INTO `student` VALUES ('20181102928', '落拓', '男', '2000-01-01', '1983449241', '1600001', '2020-11-17', '2500001');
 
-LOCK TABLES `student` WRITE;
-/*!40000 ALTER TABLE `student` DISABLE KEYS */;
-/*!40000 ALTER TABLE `student` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `studentarchive`
---
-
+-- ----------------------------
+-- Table structure for studentarchive
+-- ----------------------------
 DROP TABLE IF EXISTS `studentarchive`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `studentarchive` (
-  `archiveId` varchar(10) NOT NULL,
-  `origin` varchar(10) DEFAULT NULL,
-  `startSchoolDate` date DEFAULT NULL,
-  `punishmentId` varchar(10) DEFAULT NULL,
-  `certificateId` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`archiveId`),
-  KEY `FK_studentArchive_to_punishment` (`punishmentId`),
-  KEY `FK_studentArchive_to_certificate` (`certificateId`),
-  CONSTRAINT `FK_studentArchive_to_certificate` FOREIGN KEY (`certificateId`) REFERENCES `certificate` (`certificateId`),
-  CONSTRAINT `FK_studentArchive_to_punishment` FOREIGN KEY (`punishmentId`) REFERENCES `punishment` (`punishmentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `studentarchive`  (
+  `archiveId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `origin` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `startSchoolDate` date NULL DEFAULT NULL,
+  `punishmentId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `certificateId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`archiveId`) USING BTREE,
+  INDEX `FK_studentArchive_to_punishment`(`punishmentId`) USING BTREE,
+  INDEX `FK_studentArchive_to_certificate`(`certificateId`) USING BTREE,
+  CONSTRAINT `FK_studentArchive_to_certificate` FOREIGN KEY (`certificateId`) REFERENCES `certificate` (`certificateId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_studentArchive_to_punishment` FOREIGN KEY (`punishmentId`) REFERENCES `punishment` (`punishmentId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `studentarchive`
---
+-- ----------------------------
+-- Records of studentarchive
+-- ----------------------------
+INSERT INTO `studentarchive` VALUES ('1400001', '上海', '2018-09-01', '1200001', '3000001');
 
-LOCK TABLES `studentarchive` WRITE;
-/*!40000 ALTER TABLE `studentarchive` DISABLE KEYS */;
-/*!40000 ALTER TABLE `studentarchive` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `studentinfo`
---
-
+-- ----------------------------
+-- Table structure for studentinfo
+-- ----------------------------
 DROP TABLE IF EXISTS `studentinfo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `studentinfo` (
-  `infoId` varchar(10) NOT NULL,
-  `majorId` varchar(10) DEFAULT NULL,
-  `studentTypeId` varchar(10) DEFAULT NULL,
-  `archiveId` varchar(10) DEFAULT NULL,
-  `classId` varchar(10) DEFAULT NULL,
-  `dormitoryId` varchar(10) DEFAULT NULL,
-  `addressId` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`infoId`),
-  KEY `FK_info_to_major` (`majorId`),
-  KEY `FK_info_to_studentType` (`studentTypeId`),
-  KEY `FK_info_to_archive` (`archiveId`),
-  KEY `FK_info_to_class` (`classId`),
-  KEY `FK_info_to_dormitory` (`dormitoryId`),
-  KEY `FK_info_to_address` (`addressId`),
-  CONSTRAINT `FK_info_to_address` FOREIGN KEY (`addressId`) REFERENCES `address` (`addressId`),
-  CONSTRAINT `FK_info_to_archive` FOREIGN KEY (`archiveId`) REFERENCES `studentarchive` (`archiveId`),
-  CONSTRAINT `FK_info_to_class` FOREIGN KEY (`classId`) REFERENCES `class` (`classId`),
-  CONSTRAINT `FK_info_to_dormitory` FOREIGN KEY (`dormitoryId`) REFERENCES `dormitory` (`dorId`),
-  CONSTRAINT `FK_info_to_major` FOREIGN KEY (`majorId`) REFERENCES `major` (`majorId`),
-  CONSTRAINT `FK_info_to_studentType` FOREIGN KEY (`studentTypeId`) REFERENCES `studenttype` (`studentTypeId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `studentinfo`  (
+  `infoId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `majorId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `studentTypeId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `archiveId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `classId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `dormitoryId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `addressId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`infoId`) USING BTREE,
+  INDEX `FK_info_to_major`(`majorId`) USING BTREE,
+  INDEX `FK_info_to_studentType`(`studentTypeId`) USING BTREE,
+  INDEX `FK_info_to_archive`(`archiveId`) USING BTREE,
+  INDEX `FK_info_to_class`(`classId`) USING BTREE,
+  INDEX `FK_info_to_dormitory`(`dormitoryId`) USING BTREE,
+  INDEX `FK_info_to_address`(`addressId`) USING BTREE,
+  CONSTRAINT `FK_info_to_address` FOREIGN KEY (`addressId`) REFERENCES `address` (`addressId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_info_to_archive` FOREIGN KEY (`archiveId`) REFERENCES `studentarchive` (`archiveId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_info_to_class` FOREIGN KEY (`classId`) REFERENCES `class` (`classId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_info_to_dormitory` FOREIGN KEY (`dormitoryId`) REFERENCES `dormitory` (`dorId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_info_to_major` FOREIGN KEY (`majorId`) REFERENCES `major` (`majorId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_info_to_studentType` FOREIGN KEY (`studentTypeId`) REFERENCES `studenttype` (`studentTypeId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `studentinfo`
---
+-- ----------------------------
+-- Records of studentinfo
+-- ----------------------------
+INSERT INTO `studentinfo` VALUES ('1600001', '1100001', '1700001', '1400001', '4000001', '1100001', '2000001');
 
-LOCK TABLES `studentinfo` WRITE;
-/*!40000 ALTER TABLE `studentinfo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `studentinfo` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `studenttype`
---
-
+-- ----------------------------
+-- Table structure for studenttype
+-- ----------------------------
 DROP TABLE IF EXISTS `studenttype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `studenttype` (
-  `studentTypeId` varchar(10) NOT NULL,
-  `typeName` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`studentTypeId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `studenttype`  (
+  `studentTypeId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `typeName` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`studentTypeId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `studenttype`
---
+-- ----------------------------
+-- Records of studenttype
+-- ----------------------------
+INSERT INTO `studenttype` VALUES ('1700001', '一本');
+INSERT INTO `studenttype` VALUES ('1700002', '二本');
+INSERT INTO `studenttype` VALUES ('1700003', '专科');
 
-LOCK TABLES `studenttype` WRITE;
-/*!40000 ALTER TABLE `studenttype` DISABLE KEYS */;
-/*!40000 ALTER TABLE `studenttype` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `stuselectcourse`
---
-
+-- ----------------------------
+-- Table structure for stuselectcourse
+-- ----------------------------
 DROP TABLE IF EXISTS `stuselectcourse`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `stuselectcourse` (
-  `score` int DEFAULT NULL,
-  `studentId` varchar(20) NOT NULL,
-  `courseClassId` varchar(10) NOT NULL,
-  PRIMARY KEY (`studentId`,`courseClassId`),
-  KEY `FK_selectCourse_CourseClass` (`courseClassId`),
-  CONSTRAINT `FK_selectCourse_CourseClass` FOREIGN KEY (`courseClassId`) REFERENCES `courseclass` (`courseClassId`),
-  CONSTRAINT `FK_selectCourse_student` FOREIGN KEY (`studentId`) REFERENCES `student` (`studentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `stuselectcourse`  (
+  `score` int(0) NULL DEFAULT NULL,
+  `studentId` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `courseClassId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`studentId`, `courseClassId`) USING BTREE,
+  INDEX `FK_selectCourse_CourseClass`(`courseClassId`) USING BTREE,
+  CONSTRAINT `FK_selectCourse_CourseClass` FOREIGN KEY (`courseClassId`) REFERENCES `courseclass` (`courseClassId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_selectCourse_student` FOREIGN KEY (`studentId`) REFERENCES `student` (`studentId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `stuselectcourse`
---
+-- ----------------------------
+-- Records of stuselectcourse
+-- ----------------------------
+INSERT INTO `stuselectcourse` VALUES (100, '20181102928', '7000001');
 
-LOCK TABLES `stuselectcourse` WRITE;
-/*!40000 ALTER TABLE `stuselectcourse` DISABLE KEYS */;
-/*!40000 ALTER TABLE `stuselectcourse` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `teacher`
---
-
+-- ----------------------------
+-- Table structure for teacher
+-- ----------------------------
 DROP TABLE IF EXISTS `teacher`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `teacher` (
-  `teacherId` varchar(20) NOT NULL,
-  `gender` varchar(5) DEFAULT NULL,
-  `name` varchar(10) DEFAULT NULL,
-  `phoneNumber` varchar(20) DEFAULT NULL,
-  `archiveId` varchar(10) DEFAULT NULL,
-  `departmentId` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`teacherId`),
-  KEY `FK_teacher_to_teacherArchive` (`archiveId`),
-  KEY `FK_teacher_to_department` (`departmentId`),
-  CONSTRAINT `FK_teacher_to_department` FOREIGN KEY (`departmentId`) REFERENCES `department` (`departmentId`),
-  CONSTRAINT `FK_teacher_to_teacherArchive` FOREIGN KEY (`archiveId`) REFERENCES `teacherarchive` (`archiveId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `teacher`  (
+  `teacherId` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `gender` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `phoneNumber` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `archiveId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `departmentId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `userid` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`teacherId`) USING BTREE,
+  INDEX `FK_teacher_to_teacherArchive`(`archiveId`) USING BTREE,
+  INDEX `FK_teacher_to_department`(`departmentId`) USING BTREE,
+  CONSTRAINT `FK_teacher_to_department` FOREIGN KEY (`departmentId`) REFERENCES `department` (`departmentId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_teacher_to_teacherArchive` FOREIGN KEY (`archiveId`) REFERENCES `teacherarchive` (`archiveId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `teacher`
---
+-- ----------------------------
+-- Records of teacher
+-- ----------------------------
+INSERT INTO `teacher` VALUES ('1800001', '男', '张力', '1234567', '1900001', '9000001', '2500002');
 
-LOCK TABLES `teacher` WRITE;
-/*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-/*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `teacherarchive`
---
-
+-- ----------------------------
+-- Table structure for teacherarchive
+-- ----------------------------
 DROP TABLE IF EXISTS `teacherarchive`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `teacherarchive` (
-  `archiveId` varchar(10) NOT NULL,
-  `inductionDate` date DEFAULT NULL,
-  `professionalGrade` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`archiveId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `teacherarchive`  (
+  `archiveId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `inductionDate` date NULL DEFAULT NULL,
+  `professionalGrade` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`archiveId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `teacherarchive`
---
+-- ----------------------------
+-- Records of teacherarchive
+-- ----------------------------
+INSERT INTO `teacherarchive` VALUES ('1900001', '2010-10-10', '教授');
 
-LOCK TABLES `teacherarchive` WRITE;
-/*!40000 ALTER TABLE `teacherarchive` DISABLE KEYS */;
-/*!40000 ALTER TABLE `teacherarchive` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `teachingcase`
---
-
+-- ----------------------------
+-- Table structure for teachingcase
+-- ----------------------------
 DROP TABLE IF EXISTS `teachingcase`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `teachingcase` (
-  `caseId` int NOT NULL AUTO_INCREMENT,
-  `assessmentScore` int DEFAULT NULL,
-  `teachingSchedule` int DEFAULT NULL,
-  `teacherId` varchar(10) DEFAULT NULL,
-  `courseClassId` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`caseId`),
-  KEY `FK_teachingCase_to_teacher` (`teacherId`),
-  KEY `FK_teachingCase_to_courseClass` (`courseClassId`),
-  CONSTRAINT `FK_teachingCase_to_courseClass` FOREIGN KEY (`courseClassId`) REFERENCES `courseclass` (`courseClassId`),
-  CONSTRAINT `FK_teachingCase_to_teacher` FOREIGN KEY (`teacherId`) REFERENCES `teacher` (`teacherId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `teachingcase`  (
+  `caseId` int(0) NOT NULL AUTO_INCREMENT,
+  `assessmentScore` int(0) NULL DEFAULT NULL,
+  `teachingSchedule` int(0) NULL DEFAULT NULL,
+  `teacherId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `courseClassId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`caseId`) USING BTREE,
+  INDEX `FK_teachingCase_to_teacher`(`teacherId`) USING BTREE,
+  INDEX `FK_teachingCase_to_courseClass`(`courseClassId`) USING BTREE,
+  CONSTRAINT `FK_teachingCase_to_courseClass` FOREIGN KEY (`courseClassId`) REFERENCES `courseclass` (`courseClassId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_teachingCase_to_teacher` FOREIGN KEY (`teacherId`) REFERENCES `teacher` (`teacherId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 2300001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `teachingcase`
---
+-- ----------------------------
+-- Records of teachingcase
+-- ----------------------------
+INSERT INTO `teachingcase` VALUES (2300001, 100, 50, '1800001', '7000001');
 
-LOCK TABLES `teachingcase` WRITE;
-/*!40000 ALTER TABLE `teachingcase` DISABLE KEYS */;
-/*!40000 ALTER TABLE `teachingcase` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `teachingdetails`
---
-
+-- ----------------------------
+-- Table structure for teachingdetails
+-- ----------------------------
 DROP TABLE IF EXISTS `teachingdetails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `teachingdetails` (
-  `detailId` varchar(10) NOT NULL,
-  `credit` int DEFAULT NULL,
-  `semester` varchar(10) DEFAULT NULL,
-  `teachingPlanId` varchar(10) DEFAULT NULL,
-  `courseId` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`detailId`),
-  KEY `FK_details_course` (`courseId`),
-  KEY `FK_DETAILS_PLAN` (`teachingPlanId`),
-  CONSTRAINT `FK_details_course` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`),
-  CONSTRAINT `FK_DETAILS_PLAN` FOREIGN KEY (`teachingPlanId`) REFERENCES `teachingplan` (`planId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `teachingdetails`  (
+  `detailId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `credit` int(0) NULL DEFAULT NULL,
+  `semester` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `teachingPlanId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `courseId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`detailId`) USING BTREE,
+  INDEX `FK_details_course`(`courseId`) USING BTREE,
+  INDEX `FK_DETAILS_PLAN`(`teachingPlanId`) USING BTREE,
+  CONSTRAINT `FK_details_course` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_DETAILS_PLAN` FOREIGN KEY (`teachingPlanId`) REFERENCES `teachingplan` (`planId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `teachingdetails`
---
+-- ----------------------------
+-- Records of teachingdetails
+-- ----------------------------
+INSERT INTO `teachingdetails` VALUES ('2100001', 1, '大三上', '2200001', '6000001');
 
-LOCK TABLES `teachingdetails` WRITE;
-/*!40000 ALTER TABLE `teachingdetails` DISABLE KEYS */;
-/*!40000 ALTER TABLE `teachingdetails` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `teachingplan`
---
-
+-- ----------------------------
+-- Table structure for teachingplan
+-- ----------------------------
 DROP TABLE IF EXISTS `teachingplan`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `teachingplan` (
-  `planId` varchar(10) NOT NULL,
-  `planName` varchar(15) DEFAULT NULL,
-  `classHours` int DEFAULT NULL,
-  `requiredCourseCredit` int DEFAULT NULL,
-  `selectiveCourseCredit` int DEFAULT NULL,
-  `makeDate` date DEFAULT NULL,
-  PRIMARY KEY (`planId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `teachingplan`  (
+  `planId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `planName` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `classHours` int(0) NULL DEFAULT NULL,
+  `requiredCourseCredit` int(0) NULL DEFAULT NULL,
+  `selectiveCourseCredit` int(0) NULL DEFAULT NULL,
+  `makeDate` date NULL DEFAULT NULL,
+  `majorId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `studentTypeId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`planId`) USING BTREE,
+  INDEX `FK_teachplan_major`(`majorId`) USING BTREE,
+  INDEX `FK_teachplan_type`(`studentTypeId`) USING BTREE,
+  CONSTRAINT `FK_teachplan_major` FOREIGN KEY (`majorId`) REFERENCES `major` (`majorId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_teachplan_type` FOREIGN KEY (`studentTypeId`) REFERENCES `studenttype` (`studentTypeId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `teachingplan`
---
+-- ----------------------------
+-- Records of teachingplan
+-- ----------------------------
+INSERT INTO `teachingplan` VALUES ('2200001', '2020软件工程教学计划', 100, 20, 20, '2019-11-01', '1100001', '1700001');
 
-LOCK TABLES `teachingplan` WRITE;
-/*!40000 ALTER TABLE `teachingplan` DISABLE KEYS */;
-/*!40000 ALTER TABLE `teachingplan` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user`  (
+  `userId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `password` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `permission` int(0) NOT NULL,
+  PRIMARY KEY (`userId`) USING BTREE,
+  INDEX `id`(`userId`) USING BTREE,
+  INDEX `userId`(`userId`) USING BTREE,
+  INDEX `userId_2`(`userId`) USING BTREE,
+  INDEX `userId_3`(`userId`) USING BTREE,
+  INDEX `userId_4`(`userId`) USING BTREE,
+  INDEX `userId_5`(`userId`) USING BTREE,
+  INDEX `userId_6`(`userId`) USING BTREE,
+  INDEX `userId_7`(`userId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES ('2500001', '张三', '1983449241', 15946);
+INSERT INTO `user` VALUES ('2500002', '李四', '123456', 18934);
 
--- Dump completed on 2020-11-18 23:22:52
+-- ----------------------------
+-- View structure for courseinfo
+-- ----------------------------
+DROP VIEW IF EXISTS `courseinfo`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `courseinfo` AS select `course`.`courseId` AS `courseId`,`course`.`courseName` AS `courseName`,`teachingdetails`.`credit` AS `credit`,`course`.`introduce` AS `introduce`,`courseclass`.`qualifyPeopleNum` AS `qualifyPeopleNum`,`courseclass`.`teachingEndDate` AS `teachingEndDate`,`courseclass`.`teachingStartDate` AS `teachingStartDate`,`classroom`.`location` AS `location`,`classroom`.`classroomNum` AS `classroomNum`,`courseclass`.`courseClassId` AS `courseClassId` from (((((`student` join `course`) join `courseclass`) join `classroom`) join `courseuseclassroom`) join `teachingdetails`) where ((`teachingdetails`.`courseId` = `course`.`courseId`) and (`courseclass`.`courseId` = `course`.`courseId`) and (`courseclass`.`courseClassId` = `courseuseclassroom`.`courseClassId`) and (`courseuseclassroom`.`classroomId` = `classroom`.`classroomId`));
+
+-- ----------------------------
+-- View structure for stuarchive
+-- ----------------------------
+DROP VIEW IF EXISTS `stuarchive`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `stuarchive` AS select `student`.`name` AS `name`,`studentarchive`.`origin` AS `origin`,`studentarchive`.`startSchoolDate` AS `startSchoolDate`,`punishment`.`content` AS `punishmentContent`,`punishment`.`category` AS `punishmentCategory`,`certificate`.`content` AS `certificateContent` from ((((`student` join `studentinfo`) join `studentarchive`) join `punishment`) join `certificate`) where ((`student`.`infoId` = `studentinfo`.`infoId`) and (`studentinfo`.`archiveId` = `studentarchive`.`archiveId`) and (`studentarchive`.`punishmentId` = `punishment`.`punishmentId`) and (`studentarchive`.`certificateId` = `certificate`.`certificateId`));
+
+-- ----------------------------
+-- View structure for studentallinfo
+-- ----------------------------
+DROP VIEW IF EXISTS `studentallinfo`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `studentallinfo` AS select `student`.`name` AS `name`,`student`.`gender` AS `gender`,`student`.`birthday` AS `birthday`,`student`.`phoneNumber` AS `phoneNumber`,`major`.`majorName` AS `majorName`,`studenttype`.`typeName` AS `typeName` from (((((`student` join `studentinfo`) join `major`) join `address`) join `dormitory`) join `studenttype`) where ((`student`.`userId` = 2500001) and (`student`.`infoId` = `studentinfo`.`infoId`) and (`studentinfo`.`majorId` = `major`.`majorId`) and (`studentinfo`.`addressId` = `address`.`addressId`) and (`studentinfo`.`dormitoryId` = `dormitory`.`dorId`) and (`studentinfo`.`studentTypeId` = `studenttype`.`studentTypeId`));
+
+SET FOREIGN_KEY_CHECKS = 1;

@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Builder
 @ToString
 public class Punishment implements Serializable {
-    private String punishment;
+    private String punishmentId;
     private String name;
     private String category;
 }
