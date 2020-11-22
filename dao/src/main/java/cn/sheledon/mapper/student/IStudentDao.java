@@ -35,25 +35,19 @@ public interface IStudentDao {
     StudentArchive getStudentArchive(@Param("studentId") String studentId);
 
     /**
-     * 根据教师Id和班级Id获得班级内学生
+     * 根据教师IdId获得学生信息
      * @param teacherId
-     * @param classId
+     * @param id
+     * @param isClass 为true时id为班级id，为false时id为教学班id
      * @param page
      * @param num
      * @return
      */
-    List<StudentInfo> getStudentInfoByTeacherIdAndClassId(@Param("teacherId") String teacherId,@Param("classId") String classId,@Param("page") int page,@Param("num") int num);
+    List<StudentInfo> getStuInfoByTeacherIdAndId(@Param("teacherId") String teacherId,@Param("id") String id,@Param("isClass") boolean isClass,@Param("page") int page,@Param("num") int num);
+
 
     /**
-     * 根据教师Id和教学班Id获得学生的信息
-     * @param teacherId
-     * @param courseClassId
-     * @return
-     */
-    List<StudentInfo> getStudentInfoByTeacherIdAndCourseClassId(@Param("teacherId") String teacherId,@Param("courseClassId") String courseClassId);
-
-    /**
-     * 根据学生id和教学班Id更新学生的Id
+     * 根据学生id和教学班id更新学生分数
      * @param studentId
      * @param courseClassID
      */

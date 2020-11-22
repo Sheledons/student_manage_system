@@ -2,14 +2,14 @@ package cn.sheledon.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 /**
- * mysqBatis配置相关类
- *
+ * mysqBatis配置类
  * @author sheledon
  */
 @Configuration
@@ -39,5 +39,12 @@ public class DataBaseConfig {
         SqlSessionFactoryBean factoryBean=new SqlSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
         return factoryBean;
+    }
+
+    @Bean
+    public MapperScannerConfigurer getMapperScannerConfigurer(){
+        MapperScannerConfigurer configurer=new MapperScannerConfigurer();
+        configurer.setBasePackage("cn.sheledon.dao");
+        return configurer;
     }
 }

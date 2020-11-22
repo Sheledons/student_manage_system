@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sheledon.mapper.teacher.ITeacherDao">
+    <resultMap id="teacherMap" type="cn.sheledon.pojo.Teacher">
+        <id property="teacherId" column="teacherId"></id>
+        <result property="userId" column="userId"></result>
+        <result property="gender" column="gender"></result>
+        <result property="name" column="name"></result>
+        <result property="phoneNumber" column="phoneNumber"></result>
+        <association property="archive" resultMap="archiveMap"></association>
+    </resultMap>
+    <resultMap id="archiveMap" type="cn.sheledon.pojo.TeacherArchive">
+        <id property="archiveId" column="archiveId"></id>
+        <result property="inductionDate" column="inductionDate" javaType="java.time.LocalDate"></result>
+        <result property="professionGrade" column="professionGrade"></result>
+    </resultMap>
+    <select id="getTeacherByUserId" resultMap="teacherMap">
+        SELECT teacherId,name,gender FROM  teacher WHERE teacherId=#{teacherId}
+    </select>
+    <select id="getTeacherArchive" resultMap="archiveMap">
+        SELECT teacherId,gender,teacher.name,phoneNumber,department.name AS departmentName,academy.name AS academyName
+        FROM teacher , department,academy
+        WHERE teacher.departmentId=department.departmentId
+        AND department.academyId=academy.acadeMyId
+        AND teacher.teacherId=#{teacherId};
+    </select>
+</mapper>

@@ -2,6 +2,7 @@ package cn.sheledon.mapper.course;
 
 import cn.sheledon.pojo.CourseClass;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * 课程相关Dao
  * @author sheledon
  */
+@Repository
 public interface ICourseDao{
 
     /**

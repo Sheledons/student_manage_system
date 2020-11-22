@@ -16,5 +16,5 @@ import java.io.Serializable;
 @ToString
 public class Certificate implements Serializable {
     private String certificateId;
-    private String name;
+    private String content;
 }

@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * @author sheledon
@@ -19,7 +20,7 @@ public class Student implements Serializable {
     private String userId;
     private String name;
     private String gender;
-    private String birthday;
+    private LocalDate birthday;
     private String phoneNumber;
     private StudentInfo studentInfo;
 }

@@ -22,8 +22,8 @@ public class CourseClass implements Serializable {
     private String courseClassId;
     private LocalDate teachingStartDate;
     private LocalDate teachingEndDate;
-    private Course course;
     private Integer qualifyNumber;
+    private Course course;
     private Classroom classroom;
     private TeachingCase teachingCase;
     private Teacher teacher;
