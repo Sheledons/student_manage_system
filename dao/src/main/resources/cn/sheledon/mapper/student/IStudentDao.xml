@@ -59,25 +59,24 @@
         <id property="classId" column="classId"></id>
         <result property="className" column="className"></result>
     </resultMap>
-    <select id="getStudentByUserId" resultMap="studentMap">
+    <select id="getStudentByUserId" resultMap="studentMap" parameterType="java.lang.String" >
         SELECT * FROM student WHERE userId=#{userId};
     </select>
-    <select id="getStudentInfo" resultMap="studentInfoMap">
+    <select id="getStudentInfo" resultMap="infoMap">
         select * from studentInfoView WHERE studentId=#{studentId};
     </select>
     <select id="getStudentArchive" resultMap="archiveMap">
         SELECT * FROM stuArchiveView WHERE studentId=#{studentId};
     </select>
     <select id=" getStuInfoByTeacherIdAndId" resultMap="studentMap">
+        SELECT student.name ,student.gender,student.phoneNumber,class.classId ,class.className
         <if test="isClass==true">
-            SELECT student.name ,student.gender,student.phoneNumber,class.classId ,class.className
             FROM student,class,teacher,studentinfo
             WHERE studentinfo.classId=class.classId
             AND studentInfo.infoId=student.infoId
             AND class.classId=#{id}
         </if>
         <if test="isClass!=true">
-            SELECT student.`name`,student.gender,student.phoneNumber,class.classId,class.className
             FROM student,teacher,stuselectcourse,courseClass,teachingCase,class
             WHERE teacher.teacherId=teachingCase.teacherId
             AND courseClass.courseClassId=teachingCase.courseClassId

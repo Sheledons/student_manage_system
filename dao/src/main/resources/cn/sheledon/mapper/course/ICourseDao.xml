@@ -13,17 +13,68 @@
         <association property="teachingCase" resultMap="teachingCaseMap"></association>
         <association property="teacher" resultMap="teacher"></association>
     </resultMap>
-    <resultMap id="department" type="cn.sheledon.pojo.Department">
-        <id property="departmentId" column="departmentId"></id>
-        <result property="name" column="name"></result>
-        <association property="academy" resultMap="academyMap"></association>
-    </resultMap>
-    <resultMap id="academyMap" type="cn.sheledon.pojo.Academy">
-        <id property="academyId" column="academyId"></id>
-        <result property="name" column="name"></result>
-    </resultMap>
-    <resultMap id="course" type="cn.sheledon.pojo.CourseClass">
+    <resultMap id="courseMap" type="cn.sheledon.pojo.Course">
         <id property="courseId" column="courseId"></id>
         <result property="courseName" column="courseName"></result>
+        <result property="introduce" column="introduce"></result>
+        <association property="department" resultMap="cn.sheledon.mapper.common.MapCommon.departmentMap"></association>
+        <association property="teachingDetails" resultMap="teachingDetailsMap"></association>
     </resultMap>
+    <resultMap id="teachingDetailsMap" type="cn.sheledon.pojo.TeachingDetails">
+        <id property="detailId" column="detailId"></id>
+        <result property="credit" column="credit"></result>
+        <result property="semester" column="semester"></result>
+        <association property="teachingPlan" resultMap="teachingPlanMap"></association>
+    </resultMap>
+    <resultMap id="teachingPlanMap" type="cn.sheledon.pojo.TeachingPlan">
+        <id property="planId" column="planId"></id>
+        <result property="planName" column="planName"></result>
+        <result property="classHours" column="classHours"></result>
+        <result property="makeDate" column="makeDate" javaType="java.time.LocalDate"></result>
+        <result property="requiredCourseCredit" column="requiredCourseCredit"></result>
+        <result property="selectiveCourseCredit" column="selectiveCourseCredit"></result>
+    </resultMap>
+    <resultMap id="classroomMap" type="cn.sheledon.pojo.Classroom">
+        <id property="classroomId" column="classroomId"></id>
+        <result property="capacity" column="capacity"></result>
+        <result property="location" column="location"></result>
+        <result property="classroomNum" column="classroomNum"></result>
+    </resultMap>
+    <select id="getCourseClassById" resultMap="courseMap">
+        SELECT courseInfo.*
+        <if test="isTeacher==true">
+            FROM courseInfo,teacher,teachingcase
+            WHERE teacher.teacherId=teachingcase.teacherId
+            AND teachingcase.courseClassId=courseInfo.courseClassId
+            AND teacher.teacherId=#{id};
+        </if>
+        <if test="isTeacher==false">
+            FROM courseInfo ,student,stuselectcourse
+            WHERE student.studentId=stuselectcourse.studentId
+            AND stuselectCourse.courseClassId=courseInfo.courseClassId;
+            AND student.studentId=#{id};
+        </if>
+    </select>
+    <select id="getCourseClass" resultMap="courseMap">
+            SELECT courseInfo.* ,teacher.name,teacher.gender
+            FROM courseInfo,teacher,teachingcase
+            WHERE teachingcase.teacherId=teacher.teacherid
+            AND teachingcase.courseClassId=courseInfo.courseClassId
+            LIMIT #{page},#{num};
+    </select>
+    <insert id="createSelectCourse" >
+        INSERT INTO stuselectcourse (studentId,courseclassId)
+        VALUES(#{studentId},#{courseClassId})
+    </insert>
+    <delete id="deleteSelectCourse">
+        DELETE FROM stuselectcourse
+        WHERE studentId=#{studentId}
+        AND courseClassId=#{courseClassId};
+    </delete>
+
+    <update id="updateStudentScore" >
+        UPDATE stuselectcourse SET score=#{score}
+        WHERE studentId=#{studentId}
+        AND courseClassId=#{courseClassId};
+    </update>
 </mapper>

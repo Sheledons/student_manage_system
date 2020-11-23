@@ -4,6 +4,7 @@ import cn.sheledon.pojo.Student;
 import cn.sheledon.pojo.StudentArchive;
 import cn.sheledon.pojo.StudentInfo;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * 与学生相关操作的Dao
  * @author sheledon
  */
+@Repository
 public interface IStudentDao {
     /**
      * 根据用户Id获得学生基本信息
@@ -43,7 +45,8 @@ public interface IStudentDao {
      * @param num
      * @return
      */
-    List<StudentInfo> getStuInfoByTeacherIdAndId(@Param("teacherId") String teacherId,@Param("id") String id,@Param("isClass") boolean isClass,@Param("page") int page,@Param("num") int num);
+    List<Student> getStuInfoByTeacherIdAndId(@Param("teacherId") String teacherId,@Param("id") String id,@Param("isClass") boolean isClass,@Param("page") int page,@Param("num") int num);
+
 
 
     /**

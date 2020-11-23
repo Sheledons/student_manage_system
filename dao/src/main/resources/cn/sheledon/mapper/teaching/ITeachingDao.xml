@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sheledon.mapper.teaching.ITeachingDao">
+    <select id="getTeachingPlan" parameterType="java.lang.String" resultType="cn.sheledon.pojo.TeachingPlan">
+        SELECT planName ,classHours,makeDate,requiredCourseCredit,selectiveCourseCredit
+        FROM teachingplan,student,studentInfo
+        WHERE teachingplan.majorId=studentInfo.majorId
+        AND teachingplan.studentTypeId=studentInfo.studentTypeId
+        AND student.infoId=studentinfo.infoId;
+        AND  student.studentId=#{studentId}
+    </select>
+</mapper>

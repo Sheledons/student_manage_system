@@ -1,10 +1,12 @@
 package cn.sheledon.systemGroup;
 
+import java.io.Serializable;
+
 /**
  * @author sheledon
  */
 
-public enum ResultCode {
+public enum ResultCode  implements Serializable {
 
     SUCCESS(1,"成功"),
     PARAM_IS_INVALID(1001,"参数无效"),

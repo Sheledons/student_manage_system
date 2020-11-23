@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sheledon.mapper.student.IStudentDao">
+    <resultMap id="studentMap" type="cn.sheledon.pojo.User">
+        <id property="studentId" column="studentId" ></id>
+        <result property="name" column="name"></result>
+        <result property="userId" column="userId"></result>
+        <result property="gender" column="gender"></result>
+        <result property="birthday" column="birthday" javaType="java.time.LocalDate"></result>
+        <result property="phoneNumber" column="phoneNumber"></result>
+        <association property="studentInfo" resultMap="infoMap"></association>
+    </resultMap>
+    <resultMap id="infoMap" type="cn.sheledon.pojo.StudentInfo">
+        <id property="infoId" column="infoId"></id>
+        <association property="major" resultMap="majorMap"></association>
+        <association property="studentType" resultMap="typeMap"></association>
+        <association property="studentArchive" resultMap="archiveMap"></association>
+        <association property="dormitory" resultMap="dormitoryMap"></association>
+        <association property="address" resultMap="addressMap"></association>
+        <association property="studentClass" resultMap="studentClassMap"></association>
+    </resultMap>
+    <resultMap id="majorMap" type="cn.sheledon.pojo.Major">
+        <id property="majorId" column="majorId"></id>
+        <result property="majorName" column="majorName"></result>
+    </resultMap>
+    <resultMap id="typeMap" type="cn.sheledon.pojo.StudentType">
+        <id property="studentTypeId" column="studentTypeId"></id>
+        <result property="typeName" column="typeName"></result>
+    </resultMap>
+    <resultMap id="archiveMap" type="cn.sheledon.pojo.StudentArchive">
+        <id property="archiveId" column="archiveId"></id>
+        <result property="origin" column="origin"></result>
+        <result property="startSchoolDate" column="startSchoolDate" javaType="java.time.LocalDate"></result>
+        <collection property="punishments" resultMap="punishmentMap"></collection>
+        <collection property="certificates" resultMap="certificateMap"></collection>
+    </resultMap>
+    <resultMap id="punishmentMap" type="cn.sheledon.pojo.Punishment">
+        <id property="punishmentId" column="punishmentId" ></id>
+        <result property="content" column="punishmentContent"></result>
+        <result property="category" column="punishmentCategory"></result>
+    </resultMap>
+    <resultMap id="certificateMap" type="cn.sheledon.pojo.Certificate">
+        <id property="certificateId"  column="certificateId"></id>
+        <result property="content" column="certificateContent"></result>
+    </resultMap>
+    <resultMap id="dormitoryMap" type="cn.sheledon.pojo.Dormitory">
+        <id property="dorId" column="dorId"></id>
+        <result property="buildingNum" column="buildingNum"></result>
+        <result property="dormitoryNum" column="dormitoryNum"></result>
+    </resultMap>
+    <resultMap id="addressMap" type="cn.sheledon.pojo.Address">
+        <id property="addressId" column="addressId"></id>
+        <result property="provinces" column="provinces"></result>
+        <result property="city" column="city"></result>
+    </resultMap>
+    <resultMap id="studentClassMap" type="cn.sheledon.pojo.StudentClass">
+        <id property="classId" column="classId"></id>
+        <result property="className" column="className"></result>
+    </resultMap>
+    <select id="getStudentByUserId" resultMap="studentMap" parameterType="java.lang.String" >
+        SELECT * FROM student WHERE userId=#{userId};
+    </select>
+    <select id="getStudentInfo" resultMap="infoMap">
+        select * from studentInfoView WHERE studentId=#{studentId};
+    </select>
+    <select id="getStudentArchive" resultMap="archiveMap">
+        SELECT * FROM stuArchiveView WHERE studentId=#{studentId};
+    </select>
+    <select id=" getStuInfoByTeacherIdAndId" resultMap="studentMap">
+        SELECT student.name ,student.gender,student.phoneNumber,class.classId ,class.className
+        <if test="isClass==true">
+            FROM student,class,teacher,studentinfo
+            WHERE studentinfo.classId=class.classId
+            AND studentInfo.infoId=student.infoId
+            AND class.classId=#{id}
+        </if>
+        <if test="isClass!=true">
+            FROM student,teacher,stuselectcourse,courseClass,teachingCase,class
+            WHERE teacher.teacherId=teachingCase.teacherId
+            AND courseClass.courseClassId=teachingCase.courseClassId
+            AND stuselectCourse.studentId=student.studentId
+            AND stuSlectCourse.courseClassId=#{id}
+        </if>
+        AND teacherId=#{teacherId}
+        LIMIT #{page},#{num};
+    </select>
+</mapper>

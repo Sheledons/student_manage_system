@@ -3,10 +3,12 @@ package cn.sheledon.mapper.teacher;
 import cn.sheledon.pojo.Teacher;
 import cn.sheledon.pojo.TeacherArchive;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author sheledon
  */
+@Repository
 public interface ITeacherDao{
 
     /**

@@ -18,5 +18,4 @@ public class Classroom implements Serializable {
     private int capacity;
     private String location;
     private String classroomNum;
-    private CourseClass courseClass;
 }

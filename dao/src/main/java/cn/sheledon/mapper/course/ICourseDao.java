@@ -15,17 +15,19 @@ public interface ICourseDao{
 
     /**
      * 根据教师或者是学生ID获得相应的课程班信息
-     * @param idm
+     * @param id
      * @param isTeacher
      * @return
      */
-    List<CourseClass> getCourseClass(@Param("id") String idm,@Param("isTeacher") boolean isTeacher);
+    List<CourseClass> getCourseClassById(@Param("id") String id,@Param("isTeacher") boolean isTeacher);
 
     /**
      * 当前开设的所有教学班查询查询
+     * @param page
+     * @param num
      * @return
      */
-    List<CourseClass> getCourseClass();
+    List<CourseClass> getCourseClass(@Param("page") int page,@Param("num") int num);
 
     /**
      * 这里注意选课操作是应该是一个事务
@@ -44,6 +46,11 @@ public interface ICourseDao{
      */
     void deleteSelectCourse(@Param("studentId") String studentId,@Param("courseClassId") String courseClassId);
 
-
-
+    /**
+     * 教师对学生分数的录入
+     * @param score
+     * @param studentId
+     * @param courseClassId
+     */
+    void updateStudentScore(@Param("score") int score,@Param("studentId") String studentId,@Param("courseClassId") String courseClassId);
 }
