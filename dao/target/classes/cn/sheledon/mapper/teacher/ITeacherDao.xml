@@ -41,4 +41,7 @@
         WHERE teacher.archiveId=teacherarchive.archiveId
         AND teacher.teacherId=#{teacherId};
     </select>
+    <select id="getTeacherNameByUserId" resultMap="teacherMap">
+        SELECT name FROM teacher WHERE userId=#{userId}
+    </select>
 </mapper>

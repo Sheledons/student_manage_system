@@ -21,6 +21,13 @@ public interface IStudentDao {
      * @return
      */
     Student getStudentByUserId(@Param("userId") String userId);
+
+    /**
+     * 根据studentId获得学生的姓名
+     * @param userId
+     * @return
+     */
+    Student getStudentNameByUserId(@Param("studentId") String userId);
     /**
      * 根据学生Id获得学生的信息
      * 例如宿舍，专业，类型等
@@ -36,6 +43,29 @@ public interface IStudentDao {
      */
     StudentArchive getStudentArchive(@Param("studentId") String studentId);
 
+    /**
+     * 根据教师id和班级id获得学生信息
+     * @param teacherId
+     * @param classId
+     * @param page
+     * @param num
+     * @return
+     */
+    default List<Student> getClassStudentInfoById(String teacherId,String classId,int page,int num){
+        return this.getStuInfoByTeacherIdAndId(teacherId,classId,true,page,num);
+    }
+
+    /**
+     * 根据教师id和教学班id获得学生的信息
+     * @param teacherId
+     * @param courseClassId
+     * @param page
+     * @param num
+     * @return
+     */
+    default List<Student> getCourseClassStudentInfoById(String teacherId,String courseClassId,int page,int num){
+        return this.getStuInfoByTeacherIdAndId(teacherId,courseClassId, false,page,num);
+    }
     /**
      * 根据教师Id ,Id获得学生信息
      * @param teacherId

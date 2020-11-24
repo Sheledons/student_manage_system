@@ -12,8 +12,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.sql.SQLException;
-
 /**
  * mysqBatis配置类
  * @author sheledon
@@ -31,15 +29,6 @@ public class DataBaseConfig {
     private String username="root";
     @Value("${jdbc.password}")
     private String password="1983449241";
-
-//    @Value("${jdbc.driver}")
-//    private String driver;
-//    @Value("${jdbc.url}")
-//    private String url;
-//    @Value("${jdbc.username}")
-//    private String username;
-//    @Value("${jdbc.password}")
-//    private String password;
 
     @Bean
     public DruidDataSource getDataSource(){

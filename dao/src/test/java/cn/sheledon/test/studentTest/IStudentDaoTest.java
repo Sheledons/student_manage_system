@@ -50,5 +50,10 @@ public class IStudentDaoTest {
                 .getStuInfoByTeacherIdAndId("1800001","4000001",true,0,1);
         System.out.println(list);
     }
+    @Test
+    public void getNameTest(){
+        Student student=studentDao.getStudentNameByUserId("20181102928");
+        System.out.println(student.getName());
+    }
 
 }

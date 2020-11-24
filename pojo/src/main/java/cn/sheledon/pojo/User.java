@@ -16,9 +16,10 @@ import lombok.*;
 public class User {
     private String userId;
     private String name;
+    private String pwd;
     /**
      * 后端检索出更改为枚举
      */
     private String strPermission;
-//    private Permission permission;
+    private Permission permission;
 }

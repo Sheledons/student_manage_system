@@ -86,4 +86,7 @@
         AND teacher.teacherId=#{teacherId}
         LIMIT #{page},#{num};
     </select>
+    <select id="getStudentNameByUserId" resultMap="studentMap">
+        SELECT name FROM student WHERE userId=#{userId}
+    </select>
 </mapper>

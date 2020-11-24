@@ -8,9 +8,9 @@
         <result property="strPermission" column="permission" javaType="java.lang.String"></result>
         <result property="name" column="name"></result>
     </resultMap>
-    <select id="getUserByNameAnsPassword" resultMap="userMap">
+    <select id="getUserByNameAnsPassword" resultMap="userMap" parameterType="cn.sheledon.pojo.User">
         SELECT name,userId,permission
         FROM user
-        WHERE  name=#{username}  AND password=#{password}
+        WHERE  name=#{user.name}  AND password=#{user.pwd}
     </select>
 </mapper>

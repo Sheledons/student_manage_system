@@ -11,10 +11,9 @@ import org.springframework.stereotype.Repository;
 public interface IUserDao {
     /**
      * 根据用户名和密码检索用户
-     * @param username
-     * @param password
+     * @param user
      * @return
      */
-    User getUserByNameAnsPassword(@Param("username") String username,@Param("password") String password);
+    User getUserByNameAnsPassword(@Param("user") User user);
 
 }

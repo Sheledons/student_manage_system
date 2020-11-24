@@ -34,6 +34,10 @@ public class ITeacherDaoTest {
         TeacherArchive archive=teacherDao.getTeacherArchive("1800001");
         System.out.println(archive);
     }
-
+    @Test
+    public void getNameTest(){
+        Teacher teacher=teacherDao.getTeacherNameByUserId("2500002");
+        System.out.println(teacher.getName());
+    }
 
 }
