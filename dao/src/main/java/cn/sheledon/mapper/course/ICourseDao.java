@@ -49,8 +49,12 @@ public interface ICourseDao{
     List<CourseClass> getCourseClass(@Param("page") int page,@Param("num") int num);
 
     /**
-     * 这里注意选课操作是应该是一个事务
+     * 根据学生id获得其分数
+     * @param studentId
+     * @return
      */
+    List<CourseClass> getCourseClassScoreByStudentId(@Param("studentId") String studentId);
+
     /**
      * 在学生选课关联表中插入数据，即选课
      * @param studentId
@@ -72,4 +76,6 @@ public interface ICourseDao{
      * @param courseClassId
      */
     void updateStudentScore(@Param("score") int score,@Param("studentId") String studentId,@Param("courseClassId") String courseClassId);
+
+
 }

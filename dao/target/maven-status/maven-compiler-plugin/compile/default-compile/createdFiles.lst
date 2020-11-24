@@ -1,6 +1,0 @@
-cn\sheledon\mapper\student\IStudentDao.class
-cn\sheledon\config\DataBaseConfig.class
-cn\sheledon\mapper\teacher\ITeacherDao.class
-cn\sheledon\mapper\course\ICourseDao.class
-cn\sheledon\mapper\teaching\ITeachingDao.class
-cn\sheledon\mapper\user\IUserDao.class

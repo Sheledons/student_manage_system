@@ -48,5 +48,4 @@ public interface IStudentDao {
     List<Student> getStuInfoByTeacherIdAndId(@Param("teacherId") String teacherId,@Param("id") String id,@Param("isClass") boolean isClass,@Param("page") int page,@Param("num") int num);
 
 
-
 }

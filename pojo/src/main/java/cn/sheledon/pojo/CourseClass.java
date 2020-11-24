@@ -26,4 +26,5 @@ public class CourseClass implements Serializable {
     private Classroom classroom;
     private TeachingCase teachingCase;
     private Teacher teacher;
+    private Integer score;
 }

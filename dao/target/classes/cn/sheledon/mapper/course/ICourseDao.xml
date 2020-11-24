@@ -8,6 +8,7 @@
         <result property="teachingStartDate" column="teachingStartDate" javaType="java.time.LocalDate"></result>
         <result property="teachingEndDate" column="teachingEndDate" javaType="java.time.LocalDate"></result>
         <result property="qualifyNumber" column="qualifyNumber"></result>
+        <result property="score" column="score"></result>
         <association property="course" resultMap="courseMap"></association>
         <association property="classroom" resultMap="classroomMap"></association>
         <association property="teachingCase" resultMap="teachingCaseMap"></association>
@@ -49,7 +50,26 @@
         <id property="academyId" column="academyId"></id>
         <result property="name" column="academyName"></result>
     </resultMap>
-    <select id="getCourseClassById" resultMap="courseMap">
+    <resultMap id="teachingCaseMap" type="cn.sheledon.pojo.TeachingCase">
+        <id property="caseId" column="caseId"></id>
+        <result property="assessmentScore" column="assessmentScore"></result>
+        <result property="teachingSchedule" column="teachingSchedule"></result>
+    </resultMap>
+    <resultMap id="teacher" type="cn.sheledon.pojo.Teacher">
+        <id property="teacherId" column="teacherId"></id>
+        <result property="userId" column="userId"></result>
+        <result property="gender" column="gender"></result>
+        <result property="name" column="name"></result>
+        <result property="phoneNumber" column="phoneNumber"></result>
+        <association property="archive" resultMap="archiveMap"></association>
+        <association property="department" resultMap="departmentMap"></association>
+    </resultMap>
+    <resultMap id="archiveMap" type="cn.sheledon.pojo.TeacherArchive">
+        <id property="archiveId" column="archiveId"></id>
+        <result property="inductionDate" column="inductionDate" javaType="java.time.LocalDate"></result>
+        <result property="professionGrade" column="professionGrade"></result>
+    </resultMap>
+    <select id="getCourseClassById" resultMap="courseClassMap">
         SELECT courseInfo.*
         <if test="isTeacher==true">
             FROM courseInfo,teacher,teachingcase
@@ -64,7 +84,7 @@
             AND student.studentId=#{id};
         </if>
     </select>
-    <select id="getCourseClass" resultMap="courseMap">
+    <select id="getCourseClass" resultMap="courseClassMap">
             SELECT courseInfo.* ,teacher.name,teacher.gender
             FROM courseInfo,teacher,teachingcase
             WHERE teachingcase.teacherId=teacher.teacherid
@@ -85,4 +105,11 @@
         WHERE studentId=#{studentId}
         AND courseClassId=#{courseClassId};
     </update>
+    <select id="getCourseClassScoreByStudentId" resultMap="courseClassMap">
+        SELECT  courseName,credit,score
+        FROM courseInfo,student,stuselectcourse
+        WHERE student.studentId=stuselectcourse.studentId
+        AND stuselectCourse.courseClassId=courseInfo.courseClassId
+        AND student.studentId=#{studentId};
+    </select>
 </mapper>

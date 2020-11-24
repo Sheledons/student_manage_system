@@ -48,4 +48,12 @@ public class ICourseDaoTest {
     public void updateStudentScoreTest(){
         courseDao.updateStudentScore(200,"20181102928","7000002");
     }
+
+    @Test
+    public void getCourseClassScoreByStudentIdTest(){
+        List<CourseClass> list=courseDao.getCourseClassScoreByStudentId("20181102928");
+        for (CourseClass courseClass:list){
+            System.out.println(courseClass);
+        }
+    }
 }
