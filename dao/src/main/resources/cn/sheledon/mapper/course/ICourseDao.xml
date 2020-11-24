@@ -17,7 +17,7 @@
         <id property="courseId" column="courseId"></id>
         <result property="courseName" column="courseName"></result>
         <result property="introduce" column="introduce"></result>
-        <association property="department" resultMap="cn.sheledon.mapper.common.MapCommon.departmentMap"></association>
+        <association property="department" resultMap="departmentMap"></association>
         <association property="teachingDetails" resultMap="teachingDetailsMap"></association>
     </resultMap>
     <resultMap id="teachingDetailsMap" type="cn.sheledon.pojo.TeachingDetails">
@@ -40,6 +40,15 @@
         <result property="location" column="location"></result>
         <result property="classroomNum" column="classroomNum"></result>
     </resultMap>
+    <resultMap id="departmentMap" type="cn.sheledon.pojo.Department">
+        <id property="departmentId" column="departmentId"></id>
+        <result property="name" column="departmentName"></result>
+        <association property="academy" resultMap="academyMap"></association>
+    </resultMap>
+    <resultMap id="academyMap" type="cn.sheledon.pojo.Academy">
+        <id property="academyId" column="academyId"></id>
+        <result property="name" column="academyName"></result>
+    </resultMap>
     <select id="getCourseClassById" resultMap="courseMap">
         SELECT courseInfo.*
         <if test="isTeacher==true">
@@ -51,7 +60,7 @@
         <if test="isTeacher==false">
             FROM courseInfo ,student,stuselectcourse
             WHERE student.studentId=stuselectcourse.studentId
-            AND stuselectCourse.courseClassId=courseInfo.courseClassId;
+            AND stuselectCourse.courseClassId=courseInfo.courseClassId
             AND student.studentId=#{id};
         </if>
     </select>

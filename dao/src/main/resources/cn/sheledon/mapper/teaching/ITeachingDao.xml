@@ -8,7 +8,7 @@
         FROM teachingplan,student,studentInfo
         WHERE teachingplan.majorId=studentInfo.majorId
         AND teachingplan.studentTypeId=studentInfo.studentTypeId
-        AND student.infoId=studentinfo.infoId;
-        AND  student.studentId=#{studentId}
+        AND student.infoId=studentinfo.infoId
+        AND student.studentId=#{studentId}
     </select>
 </mapper>

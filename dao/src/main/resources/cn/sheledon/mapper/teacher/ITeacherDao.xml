@@ -10,20 +10,35 @@
         <result property="name" column="name"></result>
         <result property="phoneNumber" column="phoneNumber"></result>
         <association property="archive" resultMap="archiveMap"></association>
+        <association property="department" resultMap="departmentMap"></association>
     </resultMap>
     <resultMap id="archiveMap" type="cn.sheledon.pojo.TeacherArchive">
         <id property="archiveId" column="archiveId"></id>
         <result property="inductionDate" column="inductionDate" javaType="java.time.LocalDate"></result>
         <result property="professionGrade" column="professionGrade"></result>
     </resultMap>
-    <select id="getTeacherByUserId" resultMap="teacherMap">
-        SELECT teacherId,name,gender FROM  teacher WHERE teacherId=#{teacherId}
-    </select>
-    <select id="getTeacherArchive" resultMap="archiveMap">
-        SELECT teacherId,gender,teacher.name,phoneNumber,department.name AS departmentName,academy.name AS academyName
-        FROM teacher , department,academy
+    <resultMap id="departmentMap" type="cn.sheledon.pojo.Department">
+        <id property="departmentId" column="departmentId"></id>
+        <result property="name" column="departmentName"></result>
+        <association property="academy" resultMap="academyMap"></association>
+    </resultMap>
+    <resultMap id="academyMap" type="cn.sheledon.pojo.Academy">
+        <id property="academyId" column="academyId"></id>
+        <result property="name" column="academyName"></result>
+    </resultMap>
+    <select id="getTeacherInfoByTeacherId" resultMap="teacherMap">
+        SELECT teacherId,gender,teacher.name,phoneNumber,department.name as departmentName,academy.name as academyName
+        FROM teacher,department,academy
         WHERE teacher.departmentId=department.departmentId
         AND department.academyId=academy.acadeMyId
+        AND teacher.teacherId=#{teacherId};
+    </select>
+    <select id="getTeacherByUserId" resultMap="teacherMap">
+        SELECT teacherId,name,gender FROM  teacher  WHERE userId=#{userId}
+    </select>
+    <select id="getTeacherArchive" resultMap="archiveMap">
+        SELECT inductionDate,professionalGrade FROM teacher,teacherarchive
+        WHERE teacher.archiveId=teacherarchive.archiveId
         AND teacher.teacherId=#{teacherId};
     </select>
 </mapper>

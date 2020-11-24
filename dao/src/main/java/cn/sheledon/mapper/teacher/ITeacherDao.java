@@ -17,6 +17,13 @@ public interface ITeacherDao{
      * @return
      */
     Teacher getTeacherByUserId(@Param("userId") String userId);
+
+    /**
+     * 根据教师id获得教师基本信息
+     * @param teacherId
+     * @return
+     */
+    Teacher getTeacherInfoByTeacherId(@Param("teacherId") String teacherId);
     /**
      * 根据教师的Id获得教师档案信息
      * @param teacherId

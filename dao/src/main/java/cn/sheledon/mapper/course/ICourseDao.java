@@ -12,6 +12,23 @@ import java.util.List;
  */
 @Repository
 public interface ICourseDao{
+    /**
+     * 根据教师id获得教师所任职的教学班信息
+     * @param teacherId
+     * @return
+     */
+    default List<CourseClass> getCourseClassByTeacherId(String teacherId){
+        return this.getCourseClassById(teacherId,true);
+    }
+
+    /**
+     * 根据学生id获得它所在的教学班的信息
+     * @param studentId
+     * @return
+     */
+    default List<CourseClass> getCourseClassByStudentId(String studentId){
+        return this.getCourseClassById(studentId,false);
+    }
 
     /**
      * 根据教师或者是学生ID获得相应的课程班信息
@@ -20,6 +37,8 @@ public interface ICourseDao{
      * @return
      */
     List<CourseClass> getCourseClassById(@Param("id") String id,@Param("isTeacher") boolean isTeacher);
+
+
 
     /**
      * 当前开设的所有教学班查询查询

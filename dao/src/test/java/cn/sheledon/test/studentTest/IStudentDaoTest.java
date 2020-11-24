@@ -1,7 +1,6 @@
-package cn.sheledon.test.IStudentDaoTest;
+package cn.sheledon.test.studentTest;
 
 import cn.sheledon.config.DataBaseConfig;
-import cn.sheledon.mapper.student.IStudentDao;
 import cn.sheledon.pojo.Student;
 import cn.sheledon.pojo.StudentArchive;
 import cn.sheledon.pojo.StudentInfo;
@@ -15,10 +14,10 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {DataBaseConfig.class})
-public class IStudent {
+public class IStudentDaoTest {
 
     @Autowired
-    IStudentDao studentDao;
+    cn.sheledon.mapper.student.IStudentDao studentDao;
     private  String testStudentId="20181102928";
     @Test
     public void  getStudentByUserIdTest(){
