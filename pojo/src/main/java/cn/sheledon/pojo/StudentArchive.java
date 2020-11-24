@@ -1,9 +1,6 @@
 package cn.sheledon.pojo;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -16,6 +13,8 @@ import java.util.List;
 @Getter
 @Builder
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class StudentArchive implements Serializable {
     private String archiveId;
     private String origin;

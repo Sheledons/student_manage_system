@@ -71,7 +71,6 @@
         WHERE studentId=#{studentId}
         AND courseClassId=#{courseClassId};
     </delete>
-
     <update id="updateStudentScore" >
         UPDATE stuselectcourse SET score=#{score}
         WHERE studentId=#{studentId}

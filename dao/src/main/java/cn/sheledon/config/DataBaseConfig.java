@@ -1,36 +1,45 @@
 package cn.sheledon.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.junit.Test;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import java.sql.SQLException;
 
 /**
  * mysqBatis配置类
  * @author sheledon
  */
 @Configuration
-@ComponentScan("cn.sheledon.mapper")
 @PropertySource("classpath:properties/jdbc.properties")
 @EnableTransactionManagement
 public class DataBaseConfig {
 
     @Value("${jdbc.driver}")
-    private String driver;
+    private String driver="com.mysql.cj.jdbc.Driver";
     @Value("${jdbc.url}")
-    private String url;
+    private String url="jdbc:mysql://localhost:3306/student_manage_database?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL";
     @Value("${jdbc.username}")
-    private String username;
+    private String username="root";
     @Value("${jdbc.password}")
-    private String password;
+    private String password="1983449241";
+
+//    @Value("${jdbc.driver}")
+//    private String driver;
+//    @Value("${jdbc.url}")
+//    private String url;
+//    @Value("${jdbc.username}")
+//    private String username;
+//    @Value("${jdbc.password}")
+//    private String password;
 
     @Bean
     public DruidDataSource getDataSource(){
@@ -42,17 +51,22 @@ public class DataBaseConfig {
         return dataSource;
     }
 
-    @Bean
-    public SqlSessionFactoryBean getSqlSessionFactoryBean(){
+    @Bean("sqlSessionFactory")
+    public SqlSessionFactory getSqlSessionFactory() throws Exception {
         SqlSessionFactoryBean factoryBean=new SqlSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
-        return factoryBean;
+        return factoryBean.getObject();
     }
 
     @Bean
     public MapperScannerConfigurer getMapperScannerConfigurer(){
         MapperScannerConfigurer configurer=new MapperScannerConfigurer();
         configurer.setBasePackage("cn.sheledon.mapper");
+        configurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
         return configurer;
+    }
+    @Bean
+    public DataSourceTransactionManager transactionManager()  {
+        return new DataSourceTransactionManager(getDataSource());
     }
 }

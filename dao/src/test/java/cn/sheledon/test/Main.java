@@ -4,13 +4,11 @@ import cn.sheledon.config.DataBaseConfig;
 import cn.sheledon.mapper.student.IStudentDao;
 import cn.sheledon.mapper.user.IUserDao;
 import cn.sheledon.pojo.Student;
+import cn.sheledon.pojo.StudentArchive;
 import cn.sheledon.pojo.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -29,7 +27,11 @@ public class Main {
     }
     @Test
     public void IUserDaoTest() throws Exception {
-        User user=userDao.getUserByNameAnsPassword("1","2");
-        System.out.println(user);
+        try {
+            User user=userDao.getUserByNameAnsPassword("张三","1983449241");
+            System.out.println(user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

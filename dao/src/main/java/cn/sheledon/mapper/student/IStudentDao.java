@@ -37,7 +37,7 @@ public interface IStudentDao {
     StudentArchive getStudentArchive(@Param("studentId") String studentId);
 
     /**
-     * 根据教师IdId获得学生信息
+     * 根据教师Id ,Id获得学生信息
      * @param teacherId
      * @param id
      * @param isClass 为true时id为班级id，为false时id为教学班id
@@ -49,10 +49,4 @@ public interface IStudentDao {
 
 
 
-    /**
-     * 根据学生id和教学班id更新学生分数
-     * @param studentId
-     * @param courseClassID
-     */
-    void updateStudentScore(@Param("studentId") String studentId,@Param("courseClassId") String courseClassID);
 }
