@@ -2,9 +2,7 @@ package cn.sheledon.config.webconfig;
 
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -18,8 +16,10 @@ import java.util.List;
  * @author sheledon
  */
 @Configuration
+@ImportResource("classpath:springMVC-servlet.xml")
 @EnableWebMvc
 @ComponentScan("cn.sheledon.controller")
+//@Import({SecurityConfig.class})
 public class WebConfig  extends WebMvcConfigurationSupport {
 
     @Override

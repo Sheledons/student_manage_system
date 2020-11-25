@@ -4,7 +4,6 @@ D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\pojo\Major.java
 D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\pojo\User.java
 D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\pojo\TeachingCase.java
 D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\pojo\Dormitory.java
-D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\systemGroup\Result.java
 D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\pojo\Punishment.java
 D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\pojo\StudentClass.java
 D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\pojo\TeachingDetails.java
@@ -17,6 +16,7 @@ D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\pojo\StudentTyp
 D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\pojo\TeachingPlan.java
 D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\systemGroup\ResultCode.java
 D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\pojo\Teacher.java
+D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\systemGroup\ResponseResult.java
 D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\pojo\Academy.java
 D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\pojo\Address.java
 D:\IDEAProject\databaseExperiment\pojo\src\main\java\cn\sheledon\pojo\CourseClass.java

@@ -16,7 +16,7 @@ import lombok.*;
 public class User {
     private String userId;
     private String name;
-    private String pwd;
+    private String password;
     /**
      * 后端检索出更改为枚举
      */

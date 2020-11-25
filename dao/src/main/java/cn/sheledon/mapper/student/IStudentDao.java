@@ -27,7 +27,7 @@ public interface IStudentDao {
      * @param userId
      * @return
      */
-    Student getStudentNameByUserId(@Param("studentId") String userId);
+    Student getStudentNameByUserId(@Param("userId") String userId);
     /**
      * 根据学生Id获得学生的信息
      * 例如宿舍，专业，类型等

@@ -2,6 +2,7 @@ package cn.sheledon.test.teacherTest;
 
 
 import cn.sheledon.config.DataBaseConfig;
+import cn.sheledon.config.SpringConfig;
 import cn.sheledon.pojo.Teacher;
 import cn.sheledon.pojo.TeacherArchive;
 import org.junit.Test;
@@ -11,7 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {DataBaseConfig.class})
+@ContextConfiguration(classes = {SpringConfig.class})
 public class ITeacherDaoTest {
 
     @Autowired

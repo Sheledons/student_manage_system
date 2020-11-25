@@ -1,6 +1,7 @@
 package cn.sheledon.test.studentTest;
 
 import cn.sheledon.config.DataBaseConfig;
+import cn.sheledon.config.SpringConfig;
 import cn.sheledon.pojo.Student;
 import cn.sheledon.pojo.StudentArchive;
 import cn.sheledon.pojo.StudentInfo;
@@ -11,9 +12,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+import java.util.Objects;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {DataBaseConfig.class})
+@ContextConfiguration(classes = {SpringConfig.class})
 public class IStudentDaoTest {
 
     @Autowired
@@ -52,7 +54,8 @@ public class IStudentDaoTest {
     }
     @Test
     public void getNameTest(){
-        Student student=studentDao.getStudentNameByUserId("20181102928");
+        Student student=studentDao.getStudentNameByUserId("2500001");
+        Objects.requireNonNull(student);
         System.out.println(student.getName());
     }
 

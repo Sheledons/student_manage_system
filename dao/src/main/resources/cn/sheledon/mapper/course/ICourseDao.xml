@@ -105,11 +105,24 @@
         WHERE studentId=#{studentId}
         AND courseClassId=#{courseClassId};
     </update>
-    <select id="getCourseClassScoreByStudentId" resultMap="courseClassMap">
+    <select id="getStudentScoreByStudentId" resultMap="courseClassMap">
         SELECT  courseName,credit,score
         FROM courseInfo,student,stuselectcourse
         WHERE student.studentId=stuselectcourse.studentId
         AND stuselectCourse.courseClassId=courseInfo.courseClassId
         AND student.studentId=#{studentId};
+    </select>
+    <select id="getStudentScoreByStuIdAndCourseClassId" resultMap="courseClassMap">
+        SELECT score FROM stuselectcourse
+        WHERE studentId=#{studentId}
+        AND courseClassId=#{courseClassId}
+    </select>
+    <select id="getCourseClassByStudentIdAndCourseClassId" resultMap="courseClassMap">
+        SELECT courseInfo.courseName
+        FROM courseInfo ,student,stuselectcourse
+        WHERE student.studentId=stuselectcourse.studentId
+        AND stuselectCourse.courseClassId=courseInfo.courseClassId
+        AND student.studentId=#{studentId};
+        AND courseInfo.courseClassId=#{courseClassId}
     </select>
 </mapper>

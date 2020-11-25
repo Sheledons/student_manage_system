@@ -17,18 +17,17 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author sheledon
  */
 @Configuration
-@PropertySource("classpath:properties/jdbc.properties")
-@EnableTransactionManagement
+@PropertySource(value="classpath:properties/jdbc.properties")
 public class DataBaseConfig {
 
     @Value("${jdbc.driver}")
-    private String driver="com.mysql.cj.jdbc.Driver";
+    private String driver;
     @Value("${jdbc.url}")
-    private String url="jdbc:mysql://localhost:3306/student_manage_database?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL";
+    private String url;
     @Value("${jdbc.username}")
-    private String username="root";
+    private String username;
     @Value("${jdbc.password}")
-    private String password="1983449241";
+    private String password;
 
     @Bean
     public DruidDataSource getDataSource(){
@@ -38,24 +37,5 @@ public class DataBaseConfig {
         dataSource.setPassword(password);
         dataSource.setUrl(url);
         return dataSource;
-    }
-
-    @Bean("sqlSessionFactory")
-    public SqlSessionFactory getSqlSessionFactory() throws Exception {
-        SqlSessionFactoryBean factoryBean=new SqlSessionFactoryBean();
-        factoryBean.setDataSource(getDataSource());
-        return factoryBean.getObject();
-    }
-
-    @Bean
-    public MapperScannerConfigurer getMapperScannerConfigurer(){
-        MapperScannerConfigurer configurer=new MapperScannerConfigurer();
-        configurer.setBasePackage("cn.sheledon.mapper");
-        configurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
-        return configurer;
-    }
-    @Bean
-    public DataSourceTransactionManager transactionManager()  {
-        return new DataSourceTransactionManager(getDataSource());
     }
 }

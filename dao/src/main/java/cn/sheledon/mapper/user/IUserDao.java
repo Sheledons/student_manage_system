@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 /**
  * @author sheledon
  */
-@Repository
 public interface IUserDao {
     /**
      * 根据用户名和密码检索用户

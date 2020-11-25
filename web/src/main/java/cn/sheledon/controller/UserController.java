@@ -1,24 +1,52 @@
 package cn.sheledon.controller;
+import cn.sheledon.pojo.User;
+import cn.sheledon.service.inter.user.IUserService;
+import cn.sheledon.systemGroup.Permission;
+import cn.sheledon.systemGroup.ResponseResult;
+import cn.sheledon.systemGroup.ResponseStatus;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-import cn.sheledon.utils.LoggerUtils;
-import org.slf4j.Logger;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author sheledon
  */
 @RequestMapping("/user")
-@Controller
 @ResponseBody
+@RestController
+@Slf4j
 public class UserController {
 
-    private static Logger logger= LoggerUtils.getLogger(UserController.class);
-    @RequestMapping("/test")
-    public String test(){
-        logger.info("log test");
-        return "Hello World";
+    private IUserService userService;
+
+    @Autowired
+    public UserController(IUserService userService) {
+        this.userService = userService;
     }
 
+    @PostMapping("/login")
+    public ResponseResult toLogin(@RequestBody User user, HttpServletResponse response) throws IOException {
+        User resUser=userService.getUserOneByNameAndPwd(user);
+        Permission userPermission=resUser.getPermission();
+        if (Permission.STUDENT.compareTo(userPermission)==0){
+            response.sendRedirect("/studentIndex.html");
+        }
+        if (Permission.TEACHER.compareTo(userPermission)==0){
+            response.sendRedirect("/teacherIndex.html");
+        }
+        return ResponseResult.builder()
+                .status(ResponseStatus.USERINFO_ERROR)
+                .data(user)
+                .build();
+    }
+    private String buildLogInfo(Object... objects){
+        StringBuilder builder=new StringBuilder();
+        for (Object o: objects){
+            builder.append(o);
+        }
+        return builder.toString();
+    }
 }

@@ -12,6 +12,8 @@ import java.util.List;
  */
 @Repository
 public interface ICourseDao{
+
+
     /**
      * 根据教师id获得教师所任职的教学班信息
      * @param teacherId
@@ -20,7 +22,13 @@ public interface ICourseDao{
     default List<CourseClass> getCourseClassByTeacherId(String teacherId){
         return this.getCourseClassById(teacherId,true);
     }
-
+    /**
+     * 根据学生id和课程id获得课程信息 *****
+     * @param studentId
+     * @param courseClassId
+     * @return
+     */
+    CourseClass getCourseClassByStudentIdAndCourseClassId(String studentId,String courseClassId);
     /**
      * 根据学生id获得它所在的教学班的信息
      * @param studentId
@@ -38,8 +46,6 @@ public interface ICourseDao{
      */
     List<CourseClass> getCourseClassById(@Param("id") String id,@Param("isTeacher") boolean isTeacher);
 
-
-
     /**
      * 当前开设的所有教学班查询查询
      * @param page
@@ -53,14 +59,23 @@ public interface ICourseDao{
      * @param studentId
      * @return
      */
-    List<CourseClass> getCourseClassScoreByStudentId(@Param("studentId") String studentId);
+    List<CourseClass> getStudentScoreByStudentId(@Param("studentId") String studentId);
+
+
+    /**
+     * 根据学生id和课程班id获得学生分数*******
+     * @param studentId
+     * @param courseClassId
+     * @return
+     */
+    CourseClass getStudentScoreByStuIdAndCourseClassId(@Param("studentId") String studentId,@Param("courseClassId") String courseClassId);
 
     /**
      * 在学生选课关联表中插入数据，即选课
      * @param studentId
      * @param courseClassId
      */
-    void createSelectCourse(@Param("studentId") String studentId,@Param("courseClassId") String courseClassId);
+    void updateSelectCourse(@Param("studentId") String studentId,@Param("courseClassId") String courseClassId);
 
     /**
      * 从选课表中删除记录，即退课操作

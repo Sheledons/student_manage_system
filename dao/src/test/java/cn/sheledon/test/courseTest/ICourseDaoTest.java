@@ -1,6 +1,7 @@
 package cn.sheledon.test.courseTest;
 
 import cn.sheledon.config.DataBaseConfig;
+import cn.sheledon.config.SpringConfig;
 import cn.sheledon.mapper.course.ICourseDao;
 import cn.sheledon.pojo.CourseClass;
 import org.junit.Test;
@@ -12,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {DataBaseConfig.class})
+@ContextConfiguration(classes = {SpringConfig.class})
 public class ICourseDaoTest {
 
     @Autowired
@@ -36,7 +37,7 @@ public class ICourseDaoTest {
     }
     @Test
     public void createSelectCourseTest(){
-        courseDao.createSelectCourse("20181102928","7000002");
+//        courseDao.createSelectCourse("20181102928","7000002");
         getCourseClassByStudentIdTest();
     }
     @Test
@@ -51,9 +52,9 @@ public class ICourseDaoTest {
 
     @Test
     public void getCourseClassScoreByStudentIdTest(){
-        List<CourseClass> list=courseDao.getCourseClassScoreByStudentId("20181102928");
-        for (CourseClass courseClass:list){
-            System.out.println(courseClass);
-        }
+//        List<CourseClass> list=courseDao.getCourseClassScoreByStudentId("20181102928");
+//        for (CourseClass courseClass:list){
+//            System.out.println(courseClass);
+//        }
     }
 }

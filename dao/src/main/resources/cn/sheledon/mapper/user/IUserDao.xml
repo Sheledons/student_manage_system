@@ -11,6 +11,7 @@
     <select id="getUserByNameAnsPassword" resultMap="userMap" parameterType="cn.sheledon.pojo.User">
         SELECT name,userId,permission
         FROM user
-        WHERE  name=#{user.name}  AND password=#{user.pwd}
+        WHERE  name=#{user.name}
+        AND password=#{user.password}
     </select>
 </mapper>

@@ -2,55 +2,74 @@ package cn.sheledon.service.impl.user;
 
 import cn.sheledon.mapper.user.IUserDao;
 import cn.sheledon.pojo.User;
+import cn.sheledon.exception.UserNotFoundException;
+import cn.sheledon.exception.PermissionException;
 import cn.sheledon.service.inter.user.IUserService;
 import cn.sheledon.systemGroup.Permission;
-import cn.sheledon.utils.LoggerUtils;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 
 /**
  * @author sheledon
  */
 @Service
-@PropertySource("classpath:permission.properties")
 public class UserService implements IUserService {
-    @Value("student")
     private  static String PERMISSION_STUDENT;
-    @Value("teacher")
-    private static String PERMISSION_TEACHER;
-    @Value("manager")
-    private static String PERMISSION_MANAGER;
+    private  static String PERMISSION_TEACHER;
+    private  static String PERMISSION_MANAGER;
+
+    static {
+        Properties properties=new Properties();
+        try(InputStream in=UserService.class.getClassLoader().getResourceAsStream("permission.properties");
+        ) {
+            properties.load(in);
+            PERMISSION_TEACHER=properties.getProperty("teacher");
+            PERMISSION_STUDENT=properties.getProperty("student");
+            PERMISSION_MANAGER=properties.getProperty("manager");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private IUserDao userDao;
 
     @Autowired
-    private IUserDao userDao;
-    private Logger logger= LoggerUtils.getLogger(UserService.class);
+    public UserService(IUserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Override
     public User getUserOneByNameAndPwd(User user){
-        user=userDao.getUserByNameAnsPassword(user);
-        if (user==null || !setPermission(user)){
-            logger.error("User为空");
-            throw new NullPointerException();
+        User resUser=userDao.getUserByNameAnsPassword(user);
+        if (user==null){
+            throw new UserNotFoundException();
         }
-        return user;
+        if (!setPermission(user)){
+            throw new PermissionException();
+        }
+        return resUser;
     }
     private boolean setPermission(User user) {
         if (user.getStrPermission()==null){
             return false;
         }
+        boolean flag=false;
         if (PERMISSION_MANAGER.equals(user.getStrPermission())){
+            flag=true;
             user.setPermission(Permission.MANAGER);
         }
         if (PERMISSION_STUDENT.equals(user.getStrPermission())){
+            flag=true;
             user.setPermission(Permission.STUDENT);
         }
         if (PERMISSION_TEACHER.equals(user.getStrPermission())){
+            flag=true;
             user.setPermission(Permission.TEACHER);
         }
-        return true;
+        return flag;
     }
 }
