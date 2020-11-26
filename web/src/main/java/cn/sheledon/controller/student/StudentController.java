@@ -11,13 +11,9 @@ import cn.sheledon.systemGroup.ResponseStatus;
 import cn.sheledon.utils.ControllerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -28,7 +24,6 @@ import java.util.List;
 @RestController
 @Slf4j
 public class StudentController {
-
     /**
      *  学生的权限式最低的，只能是对基本信息的查询，选课，退课操作
      *  而对于学生信息的录入更改后面添加到管理员模块，管理员模块会涉及到很多对表数据的更新操作

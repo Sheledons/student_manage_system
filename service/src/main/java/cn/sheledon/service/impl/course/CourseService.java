@@ -3,6 +3,7 @@ package cn.sheledon.service.impl.course;
 import cn.sheledon.mapper.course.ICourseDao;
 import cn.sheledon.pojo.CourseClass;
 import cn.sheledon.exception.UpdateException;
+import cn.sheledon.pojo.StudentCourse;
 import cn.sheledon.service.inter.course.ICourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,15 +69,16 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public CourseClass updateStudentScore(int score, String studentId, String courseClassId) {
-        courseDao.updateStudentScore(score,studentId,courseClassId);
-        CourseClass courseClass=courseDao.getStudentScoreByStuIdAndCourseClassId(studentId,courseClassId);
-        if (courseClass==null || courseClass.getScore()!=score){
-            String info=buildInfo("更新分数失败，学生id: "+studentId,"  课程id  ",courseClassId);
-            log.info(info);
-            throw new UpdateException(info);
+    public boolean updateStudentScore(List<StudentCourse> studentCourseList) {
+        try {
+            for (StudentCourse sc:studentCourseList){
+                courseDao.updateStudentScore(sc.getScore(),sc.getStudentId(),sc.getCourseClassId());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
         }
-        return courseClass;
+        return true;
     }
 
     private String buildInfo(Object... objects){

@@ -1,6 +1,7 @@
 package cn.sheledon.service.inter.course;
 
 import cn.sheledon.pojo.CourseClass;
+import cn.sheledon.pojo.StudentCourse;
 
 import java.util.List;
 
@@ -53,11 +54,9 @@ public interface ICourseService {
     void deleteSelectCourse(String studentId,String courseClassId);
 
     /**
-     * 根据学生id和教学班id更新学生的分数
-     * @param score
-     * @param studentId
-     * @param courseClassId
+     * 批量更新学生的分数
+     * @param studentCourseList
      * @return
      */
-    CourseClass updateStudentScore(int score,String studentId,String courseClassId);
+    boolean updateStudentScore(List<StudentCourse> studentCourseList);
 }

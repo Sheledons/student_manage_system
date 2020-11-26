@@ -1,6 +1,7 @@
 package cn.sheledon.controller.course;
 
 import cn.sheledon.pojo.CourseClass;
+import cn.sheledon.pojo.StudentCourse;
 import cn.sheledon.pojo.Teacher;
 import cn.sheledon.service.inter.course.ICourseService;
 import cn.sheledon.systemGroup.ResponseResult;
@@ -37,4 +38,15 @@ public class CourseClassController {
         List<CourseClass> resList=courseService.getCourseClassByTeacherId(teacher.getTeacherId());
         return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,request);
     }
+
+    @PostMapping("/studentCourses")
+    public ResponseResult addStudentCourse(HttpServletRequest request, @RequestBody List<StudentCourse> studentCourseList){
+        Teacher teacher=(Teacher)ControllerUtils.getObjectFromSession(request,"teacher");
+        boolean flag=courseService.updateStudentScore(studentCourseList);
+        if (!flag){
+            return ControllerUtils.buildResponseResult(ResponseStatus.SERVER_INTER_ERROR);
+        }
+        return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,studentCourseList);
+    }
+
 }
