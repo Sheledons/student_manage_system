@@ -22,4 +22,9 @@ public class ITeachingDaoTest {
         TeachingPlan plan=teachingDao.getTeachingPlan("20181102928");
         System.out.println(plan);
     }
+
+    @Test
+    public void getTeachingCaseTest(){
+        System.out.println(teachingDao.getTeachingCase("7000001"));
+    }
 }

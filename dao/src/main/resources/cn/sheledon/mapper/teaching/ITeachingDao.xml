@@ -11,4 +11,9 @@
         AND student.infoId=studentinfo.infoId
         AND student.studentId=#{studentId}
     </select>
+    <select id="getTeachingCase" resultType="cn.sheledon.pojo.TeachingCase">
+        SELECT *
+        FROM teachingCase
+        WHERE courseClassId=#{courseClassId}
+    </select>
 </mapper>

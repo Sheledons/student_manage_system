@@ -1,5 +1,6 @@
 package cn.sheledon.mapper.teaching;
 
+import cn.sheledon.pojo.TeachingCase;
 import cn.sheledon.pojo.TeachingPlan;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -17,5 +18,10 @@ public interface ITeachingDao {
      */
     TeachingPlan getTeachingPlan(@Param("studentId") String studentId);
 
-
+    /**
+     * 根据教学班id获得教学情况
+     * @param courseClassId
+     * @return
+     */
+    TeachingCase getTeachingCase(@Param("courseClassId") String courseClassId);
 }

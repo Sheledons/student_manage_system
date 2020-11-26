@@ -1,6 +1,7 @@
 package cn.sheledon.mapper.course;
 
 import cn.sheledon.pojo.CourseClass;
+import cn.sheledon.pojo.TeachingCase;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

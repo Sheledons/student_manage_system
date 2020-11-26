@@ -1,5 +1,4 @@
 package cn.sheledon.controller.course;
-
 import cn.sheledon.pojo.CourseClass;
 import cn.sheledon.pojo.StudentCourse;
 import cn.sheledon.pojo.Teacher;
