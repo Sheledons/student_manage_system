@@ -21,4 +21,5 @@ public class Teacher implements Serializable {
     private String phoneNumber;
     private TeacherArchive archive;
     private Department department;
+    private User user;
 }

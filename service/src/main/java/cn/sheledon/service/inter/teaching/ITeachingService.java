@@ -1,5 +1,6 @@
 package cn.sheledon.service.inter.teaching;
 
+import cn.sheledon.pojo.TeachingCase;
 import cn.sheledon.pojo.TeachingPlan;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,5 +14,12 @@ public interface ITeachingService {
      * @param studentId
      * @return
      */
-    TeachingPlan getTeachingPlan(@Param("studnetId") String studentId);
+    TeachingPlan getTeachingPlan(String studentId);
+
+    /**
+     * 获得教学班的教学情况
+     * @param courseClassId
+     * @return
+     */
+    TeachingCase getTeachingCase(String courseClassId);
 }
