@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -36,7 +35,7 @@ public class StudentController {
     }
 
     @GetMapping("/infos")
-    public StudentInfo getInfos(HttpServletRequest request, HttpServletResponse response){
+    public StudentInfo getInfos(HttpServletRequest request){
         //后期要使用SpringSecurity对用户是否存在进行校验
         Student student=getAndCheckStudent(request);
         return studentService.getStudentInfoByStudentId(student.getStudentId());
@@ -73,6 +72,7 @@ public class StudentController {
         List<Student> resList=studentService.getCourseClassStudentByTeacherId(teacher.getTeacherId(),courseClassId,page,number);
         return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,resList);
     }
+
 
     private Student getAndCheckStudent(HttpServletRequest request){
         Student student= (Student) ControllerUtils.getObjectFromSession(request,"student");

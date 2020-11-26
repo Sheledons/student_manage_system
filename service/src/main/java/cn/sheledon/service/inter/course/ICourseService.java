@@ -39,19 +39,19 @@ public interface ICourseService {
     List<CourseClass> getStudentScoreById(String studentId);
 
     /**
-     * 根据学生id和教学班id更新学生的选课信息
+     * 批量添加选课信息
      * @param studentId
-     * @param courseClassId
+     * @param courseList
      * @return
      */
-    CourseClass updateSelectCourse(String studentId,String courseClassId);
-
+    boolean updateSelectCourse(String studentId,List<StudentCourse> courseList);
     /**
      * 根据学生的id和教学班id删除对应的选课
      * @param studentId
-     * @param courseClassId
+     * @param courseList
+     * @return
      */
-    void deleteSelectCourse(String studentId,String courseClassId);
+    boolean deleteSelectCourse(String studentId,List<StudentCourse> courseList);
 
     /**
      * 批量更新学生的分数

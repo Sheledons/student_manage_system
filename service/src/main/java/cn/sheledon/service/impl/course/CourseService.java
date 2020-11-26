@@ -37,7 +37,7 @@ public class CourseService implements ICourseService {
 
     @Override
     public List<CourseClass> getCourseClass(int page, int num) {
-        return courseDao.getCourseClass(page,num);
+        return courseDao.getCourseClass((page-1)*num,num);
     }
 
     @Override
@@ -46,26 +46,21 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public CourseClass updateSelectCourse(String studentId, String courseClassId) {
-        courseDao.updateSelectCourse(studentId,courseClassId);
-        CourseClass courseClass=courseDao.getCourseClassByStudentIdAndCourseClassId(studentId,courseClassId);
-        if (courseClass==null){
-            String info=buildInfo("更新选课失败 ，学生id: ",studentId,"  课程id: ",courseClassId);
-            log.info(info);
-            throw new UpdateException(info);
+    public boolean updateSelectCourse(String studentId,List<StudentCourse> courseList) {
+        for (StudentCourse sc:courseList){
+            sc.setStudentId(studentId);
+            courseDao.updateSelectCourse(sc);
         }
-        return courseClass;
+        return true;
     }
 
     @Override
-    public void deleteSelectCourse(String studentId, String courseClassId) {
-        courseDao.deleteSelectCourse(studentId,courseClassId);
-        CourseClass courseClass=courseDao.getCourseClassByStudentIdAndCourseClassId(studentId,courseClassId);
-        if (courseClass!=null){
-            String info=buildInfo("删除选课失败，学生id: ",studentId,"  课程id: ",courseClassId);
-            log.info(info);
-            throw new UpdateException(info);
+    public boolean deleteSelectCourse(String studentId,List<StudentCourse> courseList) {
+        for (StudentCourse sc:courseList){
+            sc.setStudentId(studentId);
+            courseDao.deleteSelectCourse(sc);
         }
+        return true;
     }
 
     @Override
