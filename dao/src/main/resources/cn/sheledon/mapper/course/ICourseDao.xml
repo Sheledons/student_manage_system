@@ -122,7 +122,10 @@
         FROM courseInfo ,student,stuselectcourse
         WHERE student.studentId=stuselectcourse.studentId
         AND stuselectCourse.courseClassId=courseInfo.courseClassId
-        AND student.studentId=#{studentId};
-        AND courseInfo.courseClassId=#{courseClassId}
+        AND student.studentId=#{studentId}
+        AND courseInfo.courseClassId IN
+        <foreach collection="courseClassIdList"  item="item"     open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 </mapper>

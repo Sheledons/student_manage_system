@@ -65,10 +65,8 @@ public class CourseClassController {
     @PostMapping("/studentCourses")
     public ResponseResult addStudentCourses(HttpServletRequest request,@RequestBody List<StudentCourse> courseList){
         Student student= (Student) ControllerUtils.getObjectFromSession(request,"student");
-        if (courseService.updateSelectCourse(student.getStudentId(),courseList)){
-            return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,courseList);
-        }
-        return ControllerUtils.buildResponseResult(ResponseStatus.SERVER_INTER_ERROR);
+        List<CourseClass> courseClasses=courseService.updateSelectCourse(student.getStudentId(),courseList);
+        return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,courseClasses);
     }
     @DeleteMapping("/studentCourses")
     public ResponseResult deleteStudentCourses(HttpServletRequest request,@RequestBody List<StudentCourse> courseList){

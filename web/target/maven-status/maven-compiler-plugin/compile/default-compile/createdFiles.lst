@@ -1,4 +1,11 @@
 cn\sheledon\config\springconfig\RootConfig.class
-cn\sheledon\config\webconfig\WebConfig.class
-cn\sheledon\controller\UserController.class
+cn\sheledon\interceptor\VerifyInterceptor.class
+cn\sheledon\controller\teaching\TeachingController.class
+cn\sheledon\controller\course\CourseClassController.class
+cn\sheledon\controller\student\StudentController.class
 cn\sheledon\config\InitConfig.class
+cn\sheledon\config\webconfig\WebConfig.class
+cn\sheledon\controller\teacher\TeacherController.class
+cn\sheledon\controller\user\UserController$1.class
+cn\sheledon\controller\user\UserController.class
+cn\sheledon\utils\ControllerUtils.class

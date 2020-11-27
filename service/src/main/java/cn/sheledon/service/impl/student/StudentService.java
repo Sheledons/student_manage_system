@@ -50,4 +50,9 @@ public class StudentService implements IStudentService {
     public List<Student> getCourseClassStudentByTeacherId(String teacherId, String courseClassId,int page,int num) {
         return studentDao.getCourseClassStudentInfoById(teacherId,courseClassId,(page-1)*num,num);
     }
+
+    @Override
+    public Object getRoleByUserId(String userId) {
+        return getStudentByUserId(userId);
+    }
 }

@@ -15,11 +15,11 @@ import java.util.List;
 /**
  * @author sheledon
  */
+//@Import({SecurityConfig.class})
 @Configuration
 @ImportResource("classpath:springMVC-servlet.xml")
 @EnableWebMvc
 @ComponentScan("cn.sheledon.controller")
-//@Import({SecurityConfig.class})
 public class WebConfig  extends WebMvcConfigurationSupport {
 
     @Override

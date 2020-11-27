@@ -4,6 +4,7 @@ import cn.sheledon.config.DataBaseConfig;
 import cn.sheledon.config.SpringConfig;
 import cn.sheledon.mapper.course.ICourseDao;
 import cn.sheledon.pojo.CourseClass;
+import cn.sheledon.pojo.StudentCourse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +43,16 @@ public class ICourseDaoTest {
     }
     @Test
     public void deleteSelectCourseTest(){
-        courseDao.deleteSelectCourse("20181102928","7000002");
+//        courseDao.deleteSelectCourse("20181102928","7000002");
         getCourseClassByStudentIdTest();
     }
     @Test
     public void updateStudentScoreTest(){
-        courseDao.updateStudentScore(200,"20181102928","7000002");
+        StudentCourse sc=StudentCourse.builder()
+                .studentId("20181102928")
+                .courseClassId("7000002")
+                .build();
+        courseDao.updateStudentScore(200,sc);
     }
 
     @Test

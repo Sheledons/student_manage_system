@@ -24,13 +24,15 @@ public interface ICourseDao{
     default List<CourseClass> getCourseClassByTeacherId(String teacherId){
         return this.getCourseClassById(teacherId,true);
     }
+
+
     /**
-     * 根据学生id和课程id获得课程信息 *****
+     * 根据学生id和课程id获得课程信息
      * @param studentId
-     * @param courseClassId
+     * @param courseClassIdList
      * @return
      */
-    CourseClass getCourseClassByStudentIdAndCourseClassId(String studentId,String courseClassId);
+    List<CourseClass> getCourseClassByStudentIdAndCourseClassId(String studentId,List<String> courseClassIdList);
     /**
      * 根据学生id获得它所在的教学班的信息
      * @param studentId
@@ -87,10 +89,9 @@ public interface ICourseDao{
     /**
      * 教师对学生分数的录入
      * @param score
-     * @param studentId
-     * @param courseClassId
+     * @param studentCourse
      */
-    void updateStudentScore(@Param("score") int score,@Param("studentId") String studentId,@Param("courseClassId") String courseClassId);
+    void updateStudentScore(@Param("score") int score,@Param("studentCourse") StudentCourse studentCourse);
 
 
 }

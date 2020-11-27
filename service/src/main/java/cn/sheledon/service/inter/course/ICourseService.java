@@ -23,6 +23,8 @@ public interface ICourseService {
      */
     List<CourseClass> getCourseClassByStudentId(String studentId);
 
+
+
     /**
      * 分页获得所有教学班的信息
      * @param page
@@ -44,7 +46,7 @@ public interface ICourseService {
      * @param courseList
      * @return
      */
-    boolean updateSelectCourse(String studentId,List<StudentCourse> courseList);
+    List<CourseClass> updateSelectCourse(String studentId,List<StudentCourse> courseList);
     /**
      * 根据学生的id和教学班id删除对应的选课
      * @param studentId

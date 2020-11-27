@@ -4,7 +4,6 @@ import cn.sheledon.exception.PermissionException;
 import cn.sheledon.exception.UserNotFoundException;
 import cn.sheledon.pojo.*;
 import cn.sheledon.service.inter.student.IStudentService;
-import cn.sheledon.service.inter.teaching.ITeachingService;
 import cn.sheledon.systemGroup.Permission;
 import cn.sheledon.systemGroup.ResponseResult;
 import cn.sheledon.systemGroup.ResponseStatus;
@@ -60,6 +59,14 @@ public class StudentController {
         return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,resList);
     }
 
+    /**
+     * 查询教学版的学生的信息
+     * @param request
+     * @param courseClassId
+     * @param page
+     * @param number
+     * @return
+     */
     @GetMapping("/{courseClassId}/{page}/{number}")
     public ResponseResult getCourseClassStudent(HttpServletRequest request,
                                                 @PathVariable("courseClassId") String courseClassId,

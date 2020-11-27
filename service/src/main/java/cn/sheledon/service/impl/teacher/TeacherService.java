@@ -40,4 +40,9 @@ public class TeacherService implements ITeacherService{
     public TeacherArchive getTeacherArchive(String teacherId) {
         return teacherDao.getTeacherArchive(teacherId);
     }
+
+    @Override
+    public Object getRoleByUserId(String userId) {
+        return getTeacherByUserId(userId);
+    }
 }

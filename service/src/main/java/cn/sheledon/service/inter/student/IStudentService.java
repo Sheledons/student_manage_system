@@ -4,13 +4,14 @@ package cn.sheledon.service.inter.student;
 import cn.sheledon.pojo.Student;
 import cn.sheledon.pojo.StudentArchive;
 import cn.sheledon.pojo.StudentInfo;
+import cn.sheledon.service.inter.IBaseService;
 
 import java.util.List;
 
 /**
  * @author sheledon
  */
-public interface IStudentService {
+public interface IStudentService extends IBaseService {
     /**
      * 根据userId 获得学生信息
      * @param userId

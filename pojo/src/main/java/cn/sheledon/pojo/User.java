@@ -3,6 +3,8 @@ package cn.sheledon.pojo;
 import cn.sheledon.systemGroup.Permission;
 import lombok.*;
 
+import java.io.Serializable;
+
 
 /**
  * @author sheledon
@@ -13,7 +15,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User implements Serializable {
     private String userId;
     private String name;
     private String password;

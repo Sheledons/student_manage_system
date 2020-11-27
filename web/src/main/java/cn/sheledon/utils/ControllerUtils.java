@@ -39,4 +39,9 @@ public class ControllerUtils {
                 .status(status)
                 .build();
     }
+
+    public static void setAttributeToSession(HttpServletRequest request,String key,Object value){
+        HttpSession session=request.getSession();
+        session.setAttribute(key,value);
+    }
 }

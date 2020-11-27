@@ -7,7 +7,11 @@ import java.io.Serializable;
  */
 
 public enum Permission implements Serializable {
-    STUDENT,
-    TEACHER,
-    MANAGER
+    STUDENT("student"),
+    TEACHER("teacher"),
+    MANAGER("manager");
+    String name;
+    Permission(String name) {
+        this.name = name;
+    }
 }

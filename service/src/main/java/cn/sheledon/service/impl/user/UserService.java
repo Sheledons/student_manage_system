@@ -48,7 +48,7 @@ public class UserService implements IUserService {
         if (user==null){
             throw new UserNotFoundException();
         }
-        if (!setPermission(user)){
+        if (!setPermission(resUser)){
             throw new PermissionException();
         }
         return resUser;

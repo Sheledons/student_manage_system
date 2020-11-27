@@ -1,4 +1,10 @@
 D:\IDEAProject\databaseExperiment\web\src\main\java\cn\sheledon\config\webconfig\WebConfig.java
-D:\IDEAProject\databaseExperiment\web\src\main\java\cn\sheledon\controller\UserController.java
+D:\IDEAProject\databaseExperiment\web\src\main\java\cn\sheledon\controller\student\StudentController.java
+D:\IDEAProject\databaseExperiment\web\src\main\java\cn\sheledon\controller\user\UserController.java
+D:\IDEAProject\databaseExperiment\web\src\main\java\cn\sheledon\controller\course\CourseClassController.java
+D:\IDEAProject\databaseExperiment\web\src\main\java\cn\sheledon\controller\teacher\TeacherController.java
+D:\IDEAProject\databaseExperiment\web\src\main\java\cn\sheledon\controller\teaching\TeachingController.java
+D:\IDEAProject\databaseExperiment\web\src\main\java\cn\sheledon\utils\ControllerUtils.java
+D:\IDEAProject\databaseExperiment\web\src\main\java\cn\sheledon\interceptor\VerifyInterceptor.java
 D:\IDEAProject\databaseExperiment\web\src\main\java\cn\sheledon\config\springconfig\RootConfig.java
 D:\IDEAProject\databaseExperiment\web\src\main\java\cn\sheledon\config\InitConfig.java

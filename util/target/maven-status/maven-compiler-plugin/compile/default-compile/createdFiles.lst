@@ -1,2 +1,4 @@
-cn\sheledon\config\RedisConfig.class
-cn\sheledon\selfException\UpdateException.class
+cn\sheledon\exception\UserNotFoundException.class
+cn\sheledon\exception\ErrorParameterException.class
+cn\sheledon\exception\UpdateException.class
+cn\sheledon\exception\PermissionException.class

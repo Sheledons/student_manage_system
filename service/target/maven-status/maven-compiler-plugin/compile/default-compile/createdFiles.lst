@@ -1,3 +1,4 @@
+cn\sheledon\service\inter\IBaseService.class
 cn\sheledon\service\inter\teacher\ITeacherService.class
 cn\sheledon\service\inter\teaching\ITeachingService.class
 cn\sheledon\service\impl\course\CourseService.class

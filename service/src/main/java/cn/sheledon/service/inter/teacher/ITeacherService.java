@@ -2,11 +2,12 @@ package cn.sheledon.service.inter.teacher;
 
 import cn.sheledon.pojo.Teacher;
 import cn.sheledon.pojo.TeacherArchive;
+import cn.sheledon.service.inter.IBaseService;
 
 /**
  * @author sheledon
  */
-public interface ITeacherService {
+public interface ITeacherService extends IBaseService {
     /**
      * 根据用户id获得教师信息
      * @param userId
