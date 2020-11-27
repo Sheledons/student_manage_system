@@ -1,5 +1,4 @@
 package cn.sheledon.controller.student;
-
 import cn.sheledon.exception.PermissionException;
 import cn.sheledon.exception.UserNotFoundException;
 import cn.sheledon.pojo.*;
@@ -27,8 +26,8 @@ public class StudentController {
      *  而对于学生信息的录入更改后面添加到管理员模块，管理员模块会涉及到很多对表数据的更新操作
      */
     private IStudentService studentService;
-    @Autowired
 
+    @Autowired
     public StudentController(IStudentService studentService) {
         this.studentService = studentService;
     }
@@ -83,13 +82,13 @@ public class StudentController {
 
     private Student getAndCheckStudent(HttpServletRequest request){
         Student student= (Student) ControllerUtils.getObjectFromSession(request,"student");
-        checkStudentIsValid(student);
+        User user=(User) ControllerUtils.getObjectFromSession(request,"user");
+        checkStudentIsValid(student,user);
         return student;
     }
 
-    private void checkStudentIsValid(Student student){
-        User user;
-        if (student==null || (user=student.getUser())==null){
+    private void checkStudentIsValid(Student student,User user){
+        if (student==null || user==null){
             throw new UserNotFoundException();
         }
         if (Permission.STUDENT.compareTo(user.getPermission())!=0){

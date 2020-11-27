@@ -91,14 +91,14 @@
             AND teachingcase.courseClassId=courseInfo.courseClassId
             LIMIT #{page},#{num};
     </select>
-    <insert id="createSelectCourse" parameterType="cn.sheledon.pojo.StudentCourse">
+    <insert id="addSelectCourse" parameterType="cn.sheledon.pojo.StudentCourse">
         INSERT INTO stuselectcourse (studentId,courseclassId)
         VALUES(#{studentCourse.studentId},#{studentCourse.courseClassId})
     </insert>
     <delete id="deleteSelectCourse" parameterType="cn.sheledon.pojo.StudentCourse">
         DELETE FROM stuselectcourse
-        WHERE studentId=#{studentId}
-        AND courseClassId=#{courseClassId};
+        WHERE studentId=#{studentCourse.studentId}
+        AND courseClassId=#{studentCourse.courseClassId};
     </delete>
     <update id="updateStudentScore">
         UPDATE stuselectcourse SET score=#{score}

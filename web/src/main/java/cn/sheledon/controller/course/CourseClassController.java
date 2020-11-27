@@ -29,7 +29,7 @@ public class CourseClassController {
     public CourseClassController(ICourseService courseService) {
         this.courseService = courseService;
     }
-    @GetMapping("/courseClass/{page}/{number}")
+    @GetMapping("/teacher/courseClass/{page}/{number}")
     public ResponseResult getCourseClass(HttpServletRequest request, @PathVariable("page") int page, @PathVariable("number") int number){
         if (page<0 || number<0){
             return ControllerUtils.buildResponseResult(cn.sheledon.systemGroup.ResponseStatus.PARAMETER_ERROR);
@@ -41,6 +41,9 @@ public class CourseClassController {
 
     @PutMapping("/studentCourses/scores")
     public ResponseResult updateStudentCourseScores(HttpServletRequest request, @RequestBody List<StudentCourse> studentCourseList){
+        studentCourseList.stream().forEach((sc)->{
+            System.out.println(sc);
+        });
         Teacher teacher=(Teacher)ControllerUtils.getObjectFromSession(request,"teacher");
         boolean flag=courseService.updateStudentScore(studentCourseList);
         if (!flag){
@@ -56,16 +59,17 @@ public class CourseClassController {
         }
         return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,courseService.getCourseClass(page,num));
     }
-    @GetMapping("/studentCourse/scores")
+    @GetMapping("/student/studentCourse/scores")
     public ResponseResult getStudentCourseScores(HttpServletRequest request){
         Student student= (Student) ControllerUtils.getObjectFromSession(request,"student");
         List<CourseClass> list=courseService.getStudentScoreById(student.getStudentId());
         return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,list);
     }
     @PostMapping("/studentCourses")
-    public ResponseResult addStudentCourses(HttpServletRequest request,@RequestBody List<StudentCourse> courseList){
+    public ResponseResult addStudentCourses(HttpServletRequest request,@RequestBody List<StudentCourse> studentCourseList){
+        studentCourseList.stream().forEach((c)->{c.setScore(null);});
         Student student= (Student) ControllerUtils.getObjectFromSession(request,"student");
-        List<CourseClass> courseClasses=courseService.updateSelectCourse(student.getStudentId(),courseList);
+        List<CourseClass> courseClasses=courseService.updateSelectCourse(student.getStudentId(),studentCourseList);
         return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,courseClasses);
     }
     @DeleteMapping("/studentCourses")

@@ -69,7 +69,7 @@
         SELECT * FROM stuArchiveView WHERE studentId=#{studentId};
     </select>
     <select id="getStuInfoByTeacherIdAndId" resultMap="studentMap">
-        SELECT student.name ,student.gender,student.phoneNumber,class.classId ,class.className
+        SELECT student.name ,student.gender,student.phoneNumber,class.className
         <if test="isClass==true">
             FROM student,class,teacher,studentinfo
             WHERE studentinfo.classId=class.classId
@@ -80,6 +80,7 @@
             FROM student,teacher,stuselectcourse,courseClass,teachingCase,class
             WHERE teacher.teacherId=teachingCase.teacherId
             AND courseClass.courseClassId=teachingCase.courseClassId
+            AND courseClass.courseClassId=stuSelectCourse.courseClassId
             AND stuselectCourse.studentId=student.studentId
             AND stuselectcourse.courseClassId=#{id}
         </if>

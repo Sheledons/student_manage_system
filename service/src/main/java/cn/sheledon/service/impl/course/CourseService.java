@@ -52,7 +52,7 @@ public class CourseService implements ICourseService {
         studentCourseList.stream().forEach((sc)->{
             courseClassIdList.add(sc.getCourseClassId());
             sc.setStudentId(studentId);
-            courseDao.updateSelectCourse(sc);
+            courseDao.addSelectCourse(sc);
         });
         return courseDao.getCourseClassByStudentIdAndCourseClassId(studentId,courseClassIdList);
     }

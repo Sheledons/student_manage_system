@@ -13,6 +13,7 @@ import java.io.Serializable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class StudentInfo implements Serializable {
     private String infoId;
     private Major major;

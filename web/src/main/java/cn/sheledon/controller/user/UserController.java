@@ -85,7 +85,8 @@ public class UserController {
                 if (object==null){
                     throw new UserNotFoundException();
                 }
-                ControllerUtils.setAttributeToSession(request,p.name(),object);
+                ControllerUtils.setAttributeToSession(request,p.getName(),object);
+                ControllerUtils.setAttributeToSession(request,"user",user);
                 return p;
             }
         }

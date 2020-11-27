@@ -2,7 +2,6 @@ package cn.sheledon.mapper.course;
 
 import cn.sheledon.pojo.CourseClass;
 import cn.sheledon.pojo.StudentCourse;
-import cn.sheledon.pojo.TeachingCase;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -32,7 +31,7 @@ public interface ICourseDao{
      * @param courseClassIdList
      * @return
      */
-    List<CourseClass> getCourseClassByStudentIdAndCourseClassId(String studentId,List<String> courseClassIdList);
+    List<CourseClass> getCourseClassByStudentIdAndCourseClassId(@Param("studentId") String studentId,@Param("courseClassIdList") List<String> courseClassIdList);
     /**
      * 根据学生id获得它所在的教学班的信息
      * @param studentId
@@ -78,7 +77,7 @@ public interface ICourseDao{
      * 在学生选课关联表中插入数据，即选课
      * @param studentCourse
      */
-    void updateSelectCourse(@Param("studentCourse")StudentCourse studentCourse);
+    void addSelectCourse(@Param("studentCourse")StudentCourse studentCourse);
 
     /**
      * 从选课表中删除记录，即退课操作
