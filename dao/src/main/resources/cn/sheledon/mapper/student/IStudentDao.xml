@@ -62,7 +62,7 @@
     <select id="getStudentByUserId" resultMap="studentMap" parameterType="java.lang.String" >
         SELECT * FROM student WHERE userId=#{userId};
     </select>
-    <select id="getStudentInfo" resultMap="infoMap">
+    <select id="getStudentInfo" resultMap="studentMap">
         select * from studentInfoView WHERE studentId=#{studentId};
     </select>
     <select id="getStudentArchive" resultMap="archiveMap">

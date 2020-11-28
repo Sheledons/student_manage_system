@@ -30,6 +30,16 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
+    @GetMapping("/name")
+    public ResponseResult getName(HttpServletRequest request){
+        try {
+            Teacher teacher= (Teacher) ControllerUtils.getObjectFromSession(request,"teacher");
+            return ResponseResult.builder().status(ResponseStatus.RESPONSE_OK).data(teacher.getName()).build();
+        }catch (Exception e){
+            return ResponseResult.builder().status(ResponseStatus.USERINFO_ERROR).build();
+        }
+    }
+
     @GetMapping("/teacherInfos")
     public ResponseResult getTeacherInfo(HttpServletRequest request) {
         Teacher teacher = (Teacher) ControllerUtils.getObjectFromSession(request, "teacher");

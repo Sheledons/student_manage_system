@@ -32,7 +32,7 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public StudentInfo getStudentInfoByStudentId(String studentId) {
+    public Student getStudentInfoByStudentId(String studentId) {
         return studentDao.getStudentInfo(studentId);
     }
 

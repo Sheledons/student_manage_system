@@ -32,11 +32,25 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    @GetMapping("/name")
+    public ResponseResult getName(HttpServletRequest request){
+        try {
+            Student student= (Student) ControllerUtils.getObjectFromSession(request,"student");
+            return ResponseResult.builder().status(ResponseStatus.RESPONSE_OK).data(student.getName()).build();
+        }catch (Exception e){
+            return ResponseResult.builder().status(ResponseStatus.USERINFO_ERROR).build();
+        }
+    }
+
+
     @GetMapping("/infos")
-    public StudentInfo getInfos(HttpServletRequest request){
+    public ResponseResult getInfos(HttpServletRequest request){
         //后期要使用SpringSecurity对用户是否存在进行校验
         Student student=getAndCheckStudent(request);
-        return studentService.getStudentInfoByStudentId(student.getStudentId());
+        return ResponseResult.builder()
+                .status(ResponseStatus.RESPONSE_OK)
+                .data(studentService.getStudentInfoByStudentId(student.getStudentId()))
+                .build();
     }
 
     @GetMapping("/archives")

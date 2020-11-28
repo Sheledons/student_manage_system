@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 
 
@@ -37,7 +37,6 @@ public class UserController {
     private IStudentService studentService;
     private ITeacherService teacherService;
     private HashMap<Permission, IBaseService> roleMap;
-
     {
         roleMap=new HashMap<>();
     }
@@ -60,23 +59,35 @@ public class UserController {
     public ResponseResult toLogin(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) throws IOException {
         User resUser=userService.getUserOneByNameAndPwd(user);
         Permission permission=checkIdentify(resUser,request);
+        ResponseResult responseResult= ResponseResult.builder().build();
         if (permission==null){
             throw new PermissionException();
         }
         switch (permission){
             case STUDENT:{
-                response.sendRedirect("/studentIndex.html");
+                responseResult.setData("/studentIndex.html");
                 break;
             }
             case TEACHER:{
-                response.sendRedirect("/teacherIndex.html");
+                responseResult.setData("/teacherIndex.html");
                 break;
             }
         }
-        return ResponseResult.builder()
-                .status(ResponseStatus.USERINFO_ERROR)
-                .build();
+        if (responseResult.getData()==null){
+            responseResult.setStatus(ResponseStatus.USERINFO_ERROR);
+            return responseResult;
+        }
+        responseResult.setStatus(ResponseStatus.RESPONSE_OK);
+        return responseResult;
     }
+
+    @GetMapping("/exit")
+    public void toExit(HttpServletRequest request){
+        HttpSession session=request.getSession();
+        session.invalidate();
+    }
+
+
     private Permission checkIdentify(User user,HttpServletRequest request){
         for (Permission p:Permission.values()){
             if (p.compareTo(user.getPermission())==0){

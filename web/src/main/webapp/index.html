@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>index</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+<!--	<script type="text/javascript" src="js/jquery.js"></script>-->
+	<script src="https://libs.baidu.com/jquery/1.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="head">
+	内师大校园帮后台管理
+	<img src="images/logo.jpg" class="logo">
+	<i class="userName">admin</i>
+	<a href="javascript:;" class="exit">退出</a>
+</div>
+<div>
+	<div class="catalog fl">
+		<div class="title">MAIN</div>
+		<div class="det">
+			<ul>
+				<li id="showComplain" class="current"><span></span>投诉</li>
+				<li id="showMessage"><span></span>反馈</li>
+				<li id="showVerify"><span></span>验证</li>
+			</ul>
+		</div>
+	</div>
+	<div class="content fl">
+		<div class="count complainCount">
+			Complain count
+			<span class="num">19</span>
+			<i></i>
+		</div>
+		<div class="count verifyCount">
+			Verify count
+			<span class="num">19</span>
+			<i></i>
+		</div>
+		<div class="count messageCount">
+			Message count
+			<span class="num">0</span>
+			<i></i>
+		</div>
+		<div class="item">
+			<ul class="complain">
+				<li>
+<!--					<img src="images/avatar.jpg">-->
+<!--					<div>这个任务不是去冰岛的任务，而是去了撒哈拉沙漠</div>-->
+<!--					<span  class="naviToDetail"></span>-->
+<!--					<div class="detail">-->
+<!--						<ul>-->
+<!--							<li><span>起始地:</span><span>前期</span></li>-->
+<!--							<li><span>目的地:</span><span>冰岛</span></li>-->
+<!--							<li><span>出发时间:</span><span>2020-2-2</span></li>-->
+<!--							<li><span>车载人数:</span><span>10</span></li>-->
+<!--							<li><span>联系方式:</span><span>1983449241</span></li>-->
+<!--							<li><span>价格:</span><span>客满就走</span></li>-->
+<!--							<li><span>补充:</span><span>客满就走</span></li>-->
+<!--							<button class="complainSuccess">投诉成功</button>-->
+<!--							<button class="complainFail">投诉失败</button>-->
+<!--						</ul>-->
+<!--					</div>-->
+<!--				</li>-->
+			</ul>
+			<ul class="message">
+				<li>
+					<img src="images/avatar.jpg">
+					<div>平台暂时没有反馈</div>
+					<span  class="naviToDetail"></span>
+				</li>
+			</ul>
+			<ul class="verify">
+			</ul>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	//获取数据
+	var detail=document.querySelector(".detail");
+	var exit=document.querySelector(".exit");
+	var verify=document.querySelector(".verify");
+	var complain=document.querySelector(".complain");
+	var naviToDetail=document.querySelectorAll(".naviToDetail")
+	var message=document.querySelector(".message");
+	var messageCount=document.querySelector(".messageCount");
+	var verifyCount=document.querySelector(".verifyCount");
+	var complainCount=document.querySelector(".complainCount");
+	var vc=document.querySelector(".verifyCount .num");
+	var cc=document.querySelector(".complainCount .num");
+	var showMessage=document.querySelector("#showMessage");
+	var showComplain=document.querySelector("#showComplain");
+	var showVerify=document.querySelector("#showVerify");
+	var vcount=0;
+	var vcon="";
+	var ccon="";
+	var getRecord=function(){
+		$.ajax({
+			type:"get",
+			dataType:"json",
+			url:"verify/getStoreVerifyRecord",
+			success:function(data){
+				console.log("success get getStoreVerifyRecord");
+				console.log(data)
+				for(var i=0;i<data.length;i++){
+					vcon+="<li><div>商家认证</div><div><span class=\"tag\">店铺名称</span><span class=\"con\">"+data[i].storeName+"</span></div><div><span class=\"tag\">店铺地址</span><span class=\"con\">"+data[i].storeAddress+"</span></div><button class=\"verifyFail\" data-flag=2403 id="+data[i]._id+">验证失败</button><button class=\"verifySuccess\" data-flag=2403 id="+data[i]._id+">验证成功</button>";
+				}
+				verify.innerHTML=vcon;
+				vcount+=data.length;
+				vc.innerHTML=vcount;
+			}
+		})
+		$.ajax({
+			type:"get",
+			dataType:"json",
+			url:"verify/getDriverVerifyRecord",
+			success:function(data){
+				console.log("success getDriverVerifyRecord");
+				console.log(data)
+				for(var i=0;i<data.length;i++){
+					vcon+="<li><div>车主认证</div><div><span class=\"tag\">车主名称</span><span class=\"con\">"+data[i].driverName+"</span></div><div><span class=\"tag\">联系方式</span><span class=\"con\">"+data[i].driverNum+"</span></div><button class=\"verifyFail\" data-flag=1203 id="+data[i]._id+">验证失败</button><button class=\"verifySuccess\" data-flag=1203 id="+data[i]._id+">验证成功</button>";
+				}
+				verify.innerHTML=vcon;
+				vcount+=data.length;
+				vc.innerHTML=vcount;
+			}
+		})
+		$.ajax({
+			type:"get",
+			dataType:"json",
+			url:"complain/getComplainRecord",
+			success:function(data){
+				console.log("success getDriverVerifyRecord");
+				console.log(data)
+				for(var i=0;i<data.length;i++){
+					ccon+="<li class='comp' id="+data[i]._id+"><img src=\"images/avatar.jpg\"><div>"+data[i].content+"</div><span data-id="+data[i].complainTaskId+" class=\"naviToDetail\"></span><div class=\"detail\"></div></li>"
+				}
+				complain.innerHTML=ccon;
+				cc.innerHTML=data.length;
+			}
+		});
+		$.ajax({
+			type:"get",
+			dataType:"json",
+			url:"user/getName",
+			success:function(data){
+				console.log("success get userName")
+				userName.innerHTML=data
+			}
+		})
+	}
+	window.onload=function(){
+		console.log("页面加载，ajax请求获取记录及管理员信息")
+		// // 默认显示投诉页面
+		getRecord();
+		message.style.display="none";
+		messageCount.style.display="none";
+		complain.style.display="block";
+		complainCount.style.display="block";
+		verify.style.display="none";
+		verifyCount.style.display="none";
+	}
+	//查看详情
+	$('.naviToDetail').live('click',function(){
+		console.log("点击");
+		var allDetalElement=document.querySelectorAll(".detail");
+		for(var i=0;i<allDetalElement.length;i++){
+			allDetalElement[i].style.display="none";
+		}
+		console.log(allDetalElement)
+		//懒加载呗
+		var detailElement=this.nextElementSibling;
+		console.log(this)
+		console.log(detailElement)
+		console.log(detailElement.childNodes)
+		if(detailElement.childNodes.length==0){
+			var _id=this.getAttribute("data-id");
+			var con="";
+			//发送请求获取被投诉任务的数据
+			$.ajax({
+				type:"get",
+				dataTye:"json",
+				url:"complain/taskDetail?id="+_id,
+				success:function(data){
+					console.log("success get taskDetail")
+					console.log(data)
+					console.log(data.startPlace)
+					if(data.startPlace==undefined){
+						con="<ul><li><span>开始时间:</span><span>"+data.startTime+"</span></li><li><span>结束时间:</span><span>"+data.endTime+"</span></li><li><span>内容:</span><span>"+data.content+"</span></li><li><span>联系方式:</span><span>"+data.number+"</span></li><li><span>价格:</span<span>"+data.price+"</span></li><button class=\"complainSuccess\" id="+data._id+">投诉成功</button><button class=\"complainFail\" id="+data._id+">投诉失败</button></ul>"
+					}else{
+						con="<ul><li><span>起始地:</span><span>"+data.startPlace+"</span></li><li><span>目的地:</span><span>"+data.endPlace+"</span></li><li><span>出发时间:</span><span>"+data.startTime+"</span></li><li><span>车载人数:</span><span>"+data.numPeople+"</span></li><li><span>联系方式:</span><span>"+data.number+"</span></li><li><span>价格:</span<span>>"+data.price+"</span></li><li><span>补充:</span>>"+data.supplement+"</span></li><button class=\"complainSuccess\" id="+data._id+">投诉成功</button><button class=\"complainFail\" id="+data._id+">投诉失败</button></ul>"
+					}
+					detailElement.innerHTML=con;
+					detailElement.style.display="block";
+				}
+			})
+		}
+		else{
+			console.log("有")
+			console.log(detailElement.style.display)
+			if(detailElement.style.display=="block")
+				detailElement.style.display="none";
+			else
+				detailElement.style.display="block";
+		}
+	})
+	showMessage.onclick=function(){
+		showMessage.className="current";
+		showComplain.className="";
+		showVerify.className="";
+		messageCount.style.display="block";
+		complainCount.style.display="none";
+		verifyCount.style.display="none";
+		message.style.display="block";
+		complain.style.display="none";
+		verify.style.display="none";
+	}
+	showComplain.onclick=function(){
+		showMessage.className="";
+		showComplain.className="current";
+		showVerify.className="";
+		messageCount.style.display="none";
+		complainCount.style.display="block";
+		verifyCount.style.display="none";
+		message.style.display="none";
+		complain.style.display="block";
+		verify.style.display="none";
+	}
+	showVerify.onclick=function(){
+		showMessage.className="";
+		showComplain.className="";
+		showVerify.className="current";
+		messageCount.style.display="none";
+		complainCount.style.display="none";
+		verifyCount.style.display="block";
+		message.style.display="none";
+		complain.style.display="none";
+		verify.style.display="block";
+	}
+	exit.onclick=function(){
+		$.ajax({
+			type:"get",
+			url:"user/exit",
+			success:function(){
+				location.href="user/login.html"
+			}
+		})
+	}
+</script>
+<script type="text/javascript">
+	$('.complainSuccess').live('click',function(){
+		var id=this.id;
+		console.log(this)
+		console.log(id)
+		var pnode=this.parentNode.parentNode.parentNode;
+		console.log(pnode);
+		console.log("投诉成功")
+		$.ajax({
+			type:"get",
+			dataType:"json",
+			url:"complain/complainSuccess?openid="+id+"&id="+pnode.id,
+			success:function(data){
+				if(data.flag==true){
+					alert("处理成功")
+					pnode.style.display="none";
+				}else{
+					alert("处理失败，请联系网站维护员")
+				}
+			}
+		})
+	})
+	$('.complainFail').live('click',function(){
+		var pnode=this.parentNode.parentNode.parentNode;
+		console.log(pnode)
+		console.log("投诉失败")
+		$.ajax({
+			type:"get",
+			dataType:"json",
+			url:"complain/complainFail?id="+pnode.id,
+			success:function(data){
+				if(data.flag==true){
+					alert("处理成功")
+					pnode.style.display="none";
+				}else{
+					alert("处理失败，请联系网站维护员")
+				}
+			}
+		})
+	})
+</script>
+<script type="text/javascript">
+	var userName=document.querySelector(".userName");
+	var exit=document.querySelector(".exit");
+</script>
+<script type="text/javascript">
+	$('.verifySuccess').live('click',function(){
+		var id=this.id;
+		
+	})
+	$('.verifyFail').live('click',function(){
+
+	})
+</script>
+</body>
+</html>

@@ -1,9 +1,198 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>教务管理系统</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
 </head>
 <body>
+<p  class="title">student_manage_system</p>
+<div class="login" >
+    <p class="head">Login Now</p>
+    <form method="post" class="loginForm">
+        <div class="formItem">
+            <div class="fl">用户名</div>
+            <input type="text" name="name" class="fl userName" >
+        </div>
+        <div class="formItem">
+            <div class="fl">密码</div>
+            <input type="password" name="password" class="fl password">
+        </div>
+        <p class="prompt"></p>
+        <a href="javascript:;" class="openRegister">还没有账号？去注册</a>
+        <div class="submit">登录</div>
+    </form>
+</div>
+<div class="mark" style="display: none;">
+    <form class="register">
+        <span class="close"></span>
+        <p>用户名</p>
+        <input type="text" name="userName" placeholder="设置用户名" class="newName">
+        <span class="rprompt namePrompt">请填写用户名</span>
+        <p>邀请码</p>
+        <input type="text" name="masterCode" placeholder="输入邀请码" class="masterCode">
+        <span class="rprompt codePrompt">请填写邀请码</span>
+        <p>密码</p>
+        <input type="password" name="password" placeholder="密码长度最小6位" class="newPassword">
+        <span class="rprompt pwdPrompt">请填写密码</span>
+        <span class="rprompt pwdLenPrompt">密码长度最小6位</span>
+        <p>再次输入密码</p>
+        <input type="password" name="againPassword" placeholder="密码长度最小6位" class="againPassword">
+        <span class="rprompt againPwdPrompt">请再次输入密码</span>
+        <span class="rprompt samePwdPrompt">密码输入不一致！</span>
+        <div class="nowRegister">立即注册</div>
+    </form>
+</div>
+<script type="text/javascript">
+    //表单校验
+    var userName=document.querySelector(".userName");
+    var password=document.querySelector(".password");
+    var prompt=document.querySelector(".prompt");
+    var patt = /^[\s]*$/;
+    var login=document.querySelector(".submit");
+    tranToJson=function(flag){
+        var array;
+        if(flag==0)
+        array=$(".loginForm").serializeArray();
+        else
+            array=$(".register").serializeArray();
+        var jsonObj={};
+
+        $(array).each(function(){
+
+            jsonObj[this.name]=this.value;
+
+        });
+
+        console.log(jsonObj);
+        //json对象再转换成json字符串
+        return JSON.stringify(jsonObj);
+    }
+    login.onclick=function(){
+        console.log("click")
+        if(patt.test(userName.value)||patt.test(password.value)){
+            console.log("userName or password is null");
+            prompt.style.display="block";
+            prompt.innerHTML="用户名或密码不能为空!";
+        }else{
+            //ajax请求
+            $.ajax({
+                url:"user/login",
+                type: "post",
+                data:tranToJson(0),
+                contentType:"application/json;charset=UTF-8",
+                success:function(response){
+                    if(response.flag==false){
+                        prompt.style.display="block";
+                        prompt.innerHTML=response.message;
+                    }else{
+                        location.href=response.data;
+                    }
+                }
+            })
+        }
+    }
+</script>
+<script type="text/javascript">
+    //用户创建成功时，后台要自动生成唯一的邀请码
+    //判断密码是否合乎规则
+    //一个邀请码可以邀请创建3个用户
+    var patt = /^[\s]*$/;
+    var newName=document.querySelector(".newName");
+    var masterCode=document.querySelector(".masterCode");
+    var newPassword=document.querySelector(".newPassword");
+    var againPassword=document.querySelector(".againPassword");
+    var close=document.querySelector(".close");
+    var mark=document.querySelector(".mark");
+    var register=document.querySelector(".openRegister");
+    var namePrompt=document.querySelector(".namePrompt");
+    var codePrompt=document.querySelector(".codePrompt");
+    var pwdPrompt=document.querySelector(".pwdPrompt");
+    var pwdLenPrompt=document.querySelector(".pwdLenPrompt");
+    var samePwdPrompt=document.querySelector(".samePwdPrompt");
+    var nowRegister=document.querySelector(".nowRegister");
+    register.onclick=function(){
+        mark.style.display="block";
+    }
+    close.onclick=function(){
+        mark.style.display="none";
+        setAllNull();
+    }
+    setAllNull=function(){
+        newName.value="";
+        masterCode.value="";
+        newPassword.value="";
+        againPassword.value="";
+        namePrompt.style.display="none";
+        codePrompt.style.display="none";
+        pwdLenPrompt.style.display="none";
+        pwdPrompt.style.display="none";
+        samePwdPrompt.style.display="none";
+
+    }
+    verifyUserName=function(){
+        if(patt.test(newName.value)){
+            namePrompt.style.display="inline";
+        }else{
+            namePrompt.style.display="none";
+        }
+    }
+    verifyPassword=function(){
+        if(patt.test(newPassword.value)){
+            pwdPrompt.style.display="inline";
+        }
+        else if(newPassword.value.length<6){
+            pwdLenPrompt.style.display="inline";
+        }else{
+            pwdLenPrompt.style.display="none";
+        }
+    }
+    verifyAgainPassword=function(){
+        if(againPassword.value!=newPassword.value){
+            samePwdPrompt.style.display="inline";
+        }else{
+            samePwdPrompt.style.display="none";
+        }
+    }
+    verifyCode=function(){
+        if(patt.test(masterCode.value)){
+            codePrompt.style.display="inline";
+        }else{
+            codePrompt.style.display="none";
+        }
+    }
+    newName.onblur=function(){
+        verifyUserName();
+    }
+
+    newPassword.onblur=function(){
+        verifyPassword();
+    }
+    againPassword.onblur=function(){
+        verifyAgainPassword();
+    }
+    masterCode.onblur=function(){
+        verifyCode();
+    }
+    nowRegister.onclick=function(){
+        $.ajax({
+            type:"POST",
+            url:"user/register",
+            data:tranToJson(1),
+            contentType:"application/json;charset=UTF-8",
+            dataType:"json",
+            success:function(data){
+                //注册成功，跳转到登录页面
+                if(data.flag==true){
+                    location.href="index.html";
+                }else{
+                    alert(data.message);
+                }
+            }
+        })
+    }
+</script>
 </body>
 </html>

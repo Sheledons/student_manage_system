@@ -1,0 +1,235 @@
+.head{
+    width: 100%;
+    height: 60px;
+    background-color: white;
+    box-shadow: 0px 3px 5px #dcdde1;
+    color: #00a8ff;
+    text-align: center;
+    line-height: 60px;
+    font-size: 21px;
+    font-weight: 700;
+  }
+  .logo{
+	width: 53px;
+    border-radius: 50%;
+    position: absolute;
+    right: 97px;
+    box-shadow: 1px 1px 3px 4px #8888;
+    margin-top: 3px;
+  }
+  .head i{
+	position: absolute;
+    right: 290px;
+    font-size: 15px;
+    color: #7f8fa6;
+    width: 114px;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .head a{
+    position: absolute;
+    right: 237px;
+    font-size: 17px;
+    color: #57606f;
+  }
+  .catalog{
+  	height: 637px;
+  	width: 275px;
+  	box-shadow: 0px 3px 5px #dcdde1;
+  }
+  .title{
+  	height:50px;
+  	padding-top: 54px;
+  	padding-left: 33px;
+  	font-weight: 700;
+  	font-size: 20px;
+  	color:#ced4da;
+  }
+  .det{
+  	font-family: "icomoon";
+  }
+  .det ul li{
+	height: 65px;
+    width: 245px;
+    line-height: 65px;
+    font-size: 18px;
+    padding-left: 30px;
+  }
+  .det li span{
+  	color:#ced4da;
+  	margin-right: 10px;
+  }
+  .current{
+  	background-color: #4680ff;
+  	color: white;
+  }
+  .content{
+  	background-color: #f8f9fb;
+      width: 1241px;
+      height: 135px;
+  }
+
+  .count{
+      position: relative;
+      height: 18px;
+      width: 77px;
+      box-shadow: 0px 3px 5px #8888;
+      border-radius: 40px;
+      margin-left: 199px;
+      margin-top: 61px;
+      font-size: 14px;
+      font-weight: 700;
+      color: black;
+      padding: 17px 20px;
+      background-color: white;
+      font-family: "icomoon";
+      cursor:pointer;
+      display: -webkit-inline-box;
+  }
+.count span{
+  	color: #c2c4c6;
+	display: block;
+}
+.count i{
+    position: absolute;
+    right: 18px;
+    top: 17px;
+    color: #df99ca;
+}
+.item{
+  font-family: "icomoon";
+}
+.item>ul>li{
+    position: relative;
+    width: 549px;
+    border-radius: 34px;
+    box-shadow: 0px 2px 17px #8888;
+    padding: 11px;
+    margin: 23px;
+    margin-left: 193px;
+}
+.item li img{
+  border-radius: 50%;
+  width: 60px;
+}
+.item li>div{
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-left: 30px;
+    color: #b5b6bf;
+    font-size: 16px;
+    width: 425px;
+}
+.item li span{
+    right: 35px;
+    font-size: 17px;
+    top: 2px;
+    cursor: pointer;
+}
+.item li span:hover{
+  color: #212529;
+}
+.task{
+  width: 300px;
+  height: 100px;
+}
+.com_title,
+.task_title
+{
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.com_content{
+  font-size: 14px;
+}
+.verify li .tag,
+.verify li .con
+{
+  position: relative;
+  right: 0;
+  font-size: 16px;
+  color:#df99ca;
+  top:0px;
+}
+.verify li .con{
+    color: #ced4da;
+    margin-left: 39px;
+}
+ li button{
+    width: 78px;
+    height: 32px;
+    background-color: #00a8ff;
+    border-radius: 20px;
+    color: white;
+    border: 1px solid;
+    margin-top: 10px;
+}
+.complain li .detail{
+    position: absolute;
+    right: -310px;
+    top: -17px;
+    width: 260px;
+    background-color: #ffeaa7;
+    color: #74b9ff;
+    padding-left: 16px;
+    padding-top: 7px;
+    padding: 7px 16px;
+    border-radius: 22px;
+    display: none;
+}
+.complain  .detail span{
+    margin-right: 15px;
+    right: 0;
+    font-size: 14px;
+    position: inherit;
+    white-space: break-spaces;
+}
+.info_left,.info_right{
+    display: inline-block;
+}
+.info_left{
+    height: inherit;
+    width: 236px;
+}
+.info_left>img{
+    width: 116px;
+    margin-top: 63px;
+    margin-left: 64px;
+    position: absolute;
+    border-radius: 26px;
+}
+.info_right{
+    width: 687px;
+    height: inherit;
+    position: absolute;
+}
+.info_right>div>span{
+    display: inline-block;
+    height: 385px;
+    width: 2px;
+    vertical-align: top;
+    background-color: #bdc3c7;
+}
+.info_right ul{
+    display: inline-block;
+}
+.info_right ul>li{
+    margin: 30px;
+    font-size: 16px;
+    font-weight: 600;
+}
+.info_right ul>li span{
+    margin-right: 4px;
+    display: inline-block;
+}
+.show_info{
+    margin: auto;
+    display: inline-table;
+    height: 500px;
+    margin-left: 131px;
+    box-shadow: 0px 3px 5px #8888;
+}

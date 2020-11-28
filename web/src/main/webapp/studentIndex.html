@@ -1,12 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>index</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <script src="https://libs.baidu.com/jquery/1.6.4/jquery.min.js"></script>
 </head>
 <body>
-    <div>
-        <p>欢迎登录学生界面</p>
+<div class="head">
+    教务管理系统   学生端
+    <img src="images/logo.jpg" class="logo">
+    <i class="userName">admin</i>
+    <a href="javascript:;" class="exit">退出</a>
+</div>
+<div>
+    <div class="catalog fl">
+        <div class="title">MAIN</div>
+        <div class="det">
+            <ul>
+                <li id="showComplain" class="current"><span></span>信息</li>
+                <li id="showMessage"><span></span>课程</li>
+                <li id="showVerify"><span></span>教学计划</li>
+            </ul>
+        </div>
     </div>
+    <div class="content fl">
+        <div class="count">
+            基本信息
+            <i></i>
+        </div>
+        <div class="count">
+            我的档案
+            <i></i>
+        </div>
+        <div class="count">
+            教学计划
+            <i></i>
+        </div>
+    </div>
+    <div class="show_info">
+        <div class="info_left">
+            <img src="images/avatar.jpg">
+        </div>
+        <div class="info_right">
+            <div class="title">基本信息</div>
+            <div>
+                <ul >
+                    <li><span>登录账号:</span></li>
+                    <li><span>姓名:</span></li>
+                    <li><span>性别:</span></li>
+                    <li><span>联系电话:</span></li>
+                    <li><span>专业:</span></li>
+                </ul>
+                <ul >
+                    <li><span>201122221111</span></li>
+                    <li><span>落拓</span></li>
+                    <li><span>男</span></li>
+                    <li><span>123456</span></li>
+                    <li><span>以父之名</span></li>
+                </ul>
+                <span></span>
+                <ul>
+                    <li><span>专业类型:</span></li>
+                    <li><span>班级:</span></li>
+                    <li><span>宿舍楼:</span></li>
+                    <li><span>宿舍号:</span></li>
+                    <li><span>生源地:</span></li>
+                </ul>
+                <ul>
+                    <li><span>一本</span></li>
+                    <li><span>软件工程</span></li>
+                    <li><span>12234</span></li>
+                    <li><span>325343</span></li>
+                    <li><span>中国</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //获取数据
+    var detail=document.querySelector(".detail");
+    var exit=document.querySelector(".exit");
+    var verify=document.querySelector(".verify");
+    var complain=document.querySelector(".complain");
+    var naviToDetail=document.querySelectorAll(".naviToDetail")
+    var message=document.querySelector(".message");
+    var messageCount=document.querySelector(".messageCount");
+    var verifyCount=document.querySelector(".verifyCount");
+    var complainCount=document.querySelector(".complainCount");
+    var vc=document.querySelector(".verifyCount .num");
+    var cc=document.querySelector(".complainCount .num");
+    var showMessage=document.querySelector("#showMessage");
+    var showComplain=document.querySelector("#showComplain");
+    var showVerify=document.querySelector("#showVerify");
+    var vcount=0;
+    var vcon="";
+    var ccon="";
+    var getRecord=function(){
+
+        $.ajax({
+            type:"get",
+            dataType:"json",
+            url:"student/name",
+            success:function(response){
+                console.log("success get userName")
+                userName.innerHTML=response.data
+            }
+        })
+    }
+
+    window.onload=function(){
+        getRecord();
+    }
+    showMessage.onclick=function(){
+        showMessage.className="current";
+        showComplain.className="";
+        showVerify.className="";
+    }
+    showComplain.onclick=function(){
+        showMessage.className="";
+        showComplain.className="current";
+        showVerify.className="";
+    }
+    showVerify.onclick=function(){
+        showMessage.className="";
+        showComplain.className="";
+        showVerify.className="current";
+    }
+    exit.onclick=function(){
+        $.ajax({
+            type:"get",
+            url:"user/exit",
+            success:function(){
+                location.href="login.html"
+            }
+        })
+    }
+</script>
+<script type="text/javascript">
+    var userName=document.querySelector(".userName");
+    var exit=document.querySelector(".exit");
+</script>
+<script type="text/javascript">
+    $('.verifySuccess').live('click',function(){
+        var id=this.id;
+
+    })
+    $('.verifyFail').live('click',function(){
+
+    })
+</script>
 </body>
 </html>

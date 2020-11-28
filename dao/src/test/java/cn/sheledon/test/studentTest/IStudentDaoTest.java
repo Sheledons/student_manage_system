@@ -29,7 +29,7 @@ public class IStudentDaoTest {
 
     @Test
     public void getStudentInfoTest(){
-        StudentInfo info=studentDao.getStudentInfo(testStudentId);
+        Student info=studentDao.getStudentInfo(testStudentId);
         System.out.println(info);
     }
 

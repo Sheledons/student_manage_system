@@ -30,7 +30,7 @@ public interface IStudentService extends IBaseService {
      * @param studentId
      * @return
      */
-    StudentInfo getStudentInfoByStudentId(String studentId);
+    Student getStudentInfoByStudentId(String studentId);
 
     /**
      * 根据学生id获得学生的档案

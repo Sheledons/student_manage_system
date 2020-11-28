@@ -34,7 +34,7 @@ public interface IStudentDao {
      * @param studentId
      * @return
      */
-    StudentInfo getStudentInfo(@Param("studentId") String studentId);
+    Student getStudentInfo(@Param("studentId") String studentId);
 
     /**
      * 根据学生的Id获得学生档案信息
