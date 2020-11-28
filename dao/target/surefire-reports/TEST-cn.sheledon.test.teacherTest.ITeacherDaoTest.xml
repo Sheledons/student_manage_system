@@ -65,8 +65,8 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="cn.sheledon.test.teacherTest.ITeacherDaoTest" name="getTeacherInfoByTeacherIdTest" time="0.009"/>
-  <testcase classname="cn.sheledon.test.teacherTest.ITeacherDaoTest" name="getTeacherByUserIdTest" time="0.009"/>
-  <testcase classname="cn.sheledon.test.teacherTest.ITeacherDaoTest" name="getNameTest" time="0.005"/>
-  <testcase classname="cn.sheledon.test.teacherTest.ITeacherDaoTest" name="getTeacherArchiveTest" time="0.016"/>
+  <testcase classname="cn.sheledon.test.teacherTest.ITeacherDaoTest" name="getTeacherInfoByTeacherIdTest" time="0.011"/>
+  <testcase classname="cn.sheledon.test.teacherTest.ITeacherDaoTest" name="getTeacherByUserIdTest" time="0.011"/>
+  <testcase classname="cn.sheledon.test.teacherTest.ITeacherDaoTest" name="getNameTest" time="0.007"/>
+  <testcase classname="cn.sheledon.test.teacherTest.ITeacherDaoTest" name="getTeacherArchiveTest" time="0.01"/>
 </testsuite>

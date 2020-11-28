@@ -1,3 +1,4 @@
 cn\sheledon\systemGroup\ResponseResult.class
 cn\sheledon\systemGroup\ResultCode.class
+cn\sheledon\impl\BaseEnum.class
 cn\sheledon\systemGroup\ResponseResult$ResponseResultBuilder.class

@@ -4,6 +4,12 @@ package cn.sheledon.systemGroup;
  * @author sheledon
  */
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.io.Serializable;
+
+
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum ResponseStatus {
     RESPONSE_OK(2000,"response ok"),
     SUCCESS_LOGIN(2001,"success_login"),
