@@ -84,6 +84,24 @@
             AND student.studentId=#{id};
         </if>
     </select>
+    <select id="getStudentCanSelectCourseClass" resultMap="courseClassMap">
+        SELECT courseInfo.*
+        FROM courseInfo
+        WHERE courseClassId NOT IN (
+            SELECT courseInfo.courseClassId
+            FROM courseInfo ,student,stuselectcourse
+            WHERE student.studentId=stuselectcourse.studentId
+            AND stuselectCourse.courseClassId=courseInfo.courseClassId
+            AND student.studentId=#{studentId}
+        )
+    </select>
+    <select id="getCourseClassIdByStudentId" resultMap="courseClassMap">
+        SELECT courseInfo.courseClassId
+        FROM courseInfo ,student,stuselectcourse
+        WHERE student.studentId=stuselectcourse.studentId
+        AND stuselectCourse.courseClassId=courseInfo.courseClassId
+        AND student.studentId=#{id};
+    </select>
     <select id="getCourseClass" resultMap="courseClassMap">
             SELECT courseInfo.* ,teacher.name,teacher.gender
             FROM courseInfo,teacher,teachingcase

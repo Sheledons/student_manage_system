@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/base.css">
-    <script src="https://libs.baidu.com/jquery/1.6.4/jquery.min.js"></script>
+    <script src="https://libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
     <style type="text/css">
         .dropdown {
             position: relative;
@@ -121,8 +121,6 @@
                             <div class="dropdown title">
                                 <div style="display: inline-block">查看处分记录</div>
                                 <div class="dropdown-content punishment">
-                                    <p>菜鸟教程</p>
-                                    <p>www.runoob.com</p>
                                 </div>
                             </div>
                         </div>
@@ -149,7 +147,7 @@
         </div>
         <div class="coursesPage" style="display: none">
             <div class="content fl">
-                <div class="count student_course_show count cur_show">
+                <div class="count student_course_show cur_show">
                     我的课程
                     <i></i>
                 </div>
@@ -158,55 +156,58 @@
                     <i></i>
                 </div>
             </div>
-            <div class="show_course item">
+            <div class="show_course course_relate item">
                 <ul class="message item_course">
-                    <li>
-                        <div>
-                            <ul >
-                                <li><span>课程名:</span></li>
-                                <li><span>开始时间:</span></li>
-                                <li><span>结束时间:</span></li>
-                                <li><span>学分:</span></li>
-                                <li><span>教学地点:</span></li>
-                                <li><span>教授教师:</span></li>
-                                <li><span>简介:</span></li>
-
-                            </ul>
-                            <ul class="course_info">
-                                <li><span class="studentId">201122221111</span></li>
-                                <li><span class="name">落拓</span></li>
-                                <li><span class="gender">男</span></li>
-                                <li><span class="phoneNumber">123456</span></li>
-                                <li><span>行纸篓 303</span></li>
-                                <li><span class="birthday">123456</span></li>
-                                <li><span class="birthday" style="white-space:normal">fdsadfdsafdsafsdafdsafhjdsklahfdskjalhfeiowurfhdsjkfhdsjaklfhdsjakfhlesafuuiseahfndlsakfdjhsafsdafhjdskfhdjskal</span></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <ul >
-                                <li><span>课程名:</span></li>
-                                <li><span>开始时间:</span></li>
-                                <li><span>结束时间:</span></li>
-                                <li><span>学分:</span></li>
-                                <li><span>教学地点:</span></li>
-                                <li><span>教授教师:</span></li>
-                                <li><span>简介:</span></li>
-
-                            </ul>
-                            <ul class="course_info">
-                                <li><span class="studentId">201122221111</span></li>
-                                <li><span class="name">落拓</span></li>
-                                <li><span class="gender">男</span></li>
-                                <li><span class="phoneNumber">123456</span></li>
-                                <li><span>行纸篓 303</span></li>
-                                <li><span class="birthday">123456</span></li>
-                                <li><span class="birthday" style="white-space:normal">fdsadfdsafdsafsdafdsafhjdsklahfdskjalhfeiowurfhdsjkfhdsjaklfhdsjakfhlesafuuiseahfndlsakfdjhsafsdafhjdskfhdjskal</span></li>
-                            </ul>
-                        </div>
-
-                    </li>
+                </ul>
+            </div>
+            <div class="show_select_course course_relate item">
+                <ul class="message item_select_course item_course">
+<!--                    <li>-->
+<!--                        <div>-->
+<!--                            <ul>-->
+<!--                                <li><span>可选课程:</span></li>-->
+<!--                                <li><span>开始时间:</span></li>-->
+<!--                                <li><span>结束时间:</span></li>-->
+<!--                                <li><span>学分:</span></li>-->
+<!--                                <li><span>教学地点:</span></li>-->
+<!--                                <li><span>教授教师:</span></li>-->
+<!--                                <li><span>简介:</span></li>-->
+<!--                            </ul>-->
+<!--                            <ul class="course_info">-->
+<!--                                <li><span class="studentId">201122221111</span></li>-->
+<!--                                <li><span class="name">落拓</span></li>-->
+<!--                                <li><span class="gender">男</span></li>-->
+<!--                                <li><span class="phoneNumber">123456</span></li>-->
+<!--                                <li><span>行纸篓 303</span></li>-->
+<!--                                <li><span class="birthday">123456</span></li>-->
+<!--                                <li><span class="birthday" style="white-space:normal">fdsadfdsafdsafsdafdsafhjdsklahfdskjalhfeiowurfhdsjkfhdsjaklfhdsjakfhlesafuuiseahfndlsakfdjhsafsdafhjdskfhdjskal</span></li>-->
+<!--                            </ul>-->
+<!--                            <button class="selectBtn">选课</button>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <div>-->
+<!--                            <ul >-->
+<!--                                <li><span>课程名:</span></li>-->
+<!--                                <li><span>开始时间:</span></li>-->
+<!--                                <li><span>结束时间:</span></li>-->
+<!--                                <li><span>学分:</span></li>-->
+<!--                                <li><span>教学地点:</span></li>-->
+<!--                                <li><span>教授教师:</span></li>-->
+<!--                                <li><span>简介:</span></li>-->
+<!--                            </ul>-->
+<!--                            <ul class="course_info">-->
+<!--                                <li><span class="studentId">201122221111</span></li>-->
+<!--                                <li><span class="name">落拓</span></li>-->
+<!--                                <li><span class="gender">男</span></li>-->
+<!--                                <li><span class="phoneNumber">123456</span></li>-->
+<!--                                <li><span>行纸篓 303</span></li>-->
+<!--                                <li><span class="birthday">123456</span></li>-->
+<!--                                <li><span class="birthday" style="white-space:normal">fdsadfdsafdsafsdafdsafhjdsklahfdskjalhfeiowurfhdsjkfhdsjaklfhdsjakfhlesafuuiseahfndlsakfdjhsafsdafhjdskfhdjskal</span></li>-->
+<!--                            </ul>-->
+<!--                  -->
+<!--                        </div>-->
+<!--                    </li>-->
                 </ul>
             </div>
         </div>
@@ -232,7 +233,6 @@
     var studentCourse=document.querySelector(".student_course_show")
     var selectCourse=document.querySelector(".can_select_show")
 
-
     var studentId=document.querySelector(".studentId");
     var name=document.querySelector(".name")
     var gender=document.querySelector(".gender")
@@ -254,6 +254,13 @@
     var planName=document.querySelector(".planName")
     var selectiveCourseCredit=document.querySelector(".selectiveCourseCredit")
     var requiredCourseCredit=document.querySelector(".requiredCourseCredit")
+    var item_course=document.querySelector(".item_course")
+    var show_course=document.querySelector(".show_course")
+    var show_select_course=document.querySelector(".show_select_course")
+    var item_select_course=document.querySelector(".item_select_course")
+    var can_select_show=document.querySelector(".can_select_show")
+    var student_course_show=document.querySelector(".student_course_show")
+    var course_relate=document.querySelectorAll(".course_relate")
     var getRecord=function(){
         $.ajax({
             type:"get",
@@ -265,6 +272,42 @@
             }
         })
     }
+    $('.show_course').on("click",".currentBtn",function(){
+        var id=$(this).attr("courseClassId")
+        console.log(id)
+        var str="[{ \"courseClassId\":\""+id+"\"}]"
+        console.log($.parseJSON(str))
+        console.log(JSON.stringify($.parseJSON(str)))
+        $.ajax({
+            type:"delete",
+            url:"/courses/studentCourses",
+            contentType:"application/json;charset=UTF-8",
+            data: JSON.stringify($.parseJSON(str)),
+            success:function(response){
+                //后期解决了枚举传值的问题再改
+                item_course.innerHTML=""
+                getStudentCourse()
+            }
+        })
+    })
+    $('.item_select_course').on('click','.selectBtn',function(){
+        var id=$(this).attr("courseClassId")
+        console.log(id)
+        var str="[{ \"courseClassId\":\""+id+"\"}]"
+        console.log($.parseJSON(str))
+        console.log(JSON.stringify($.parseJSON(str)))
+        $.ajax({
+            type:"post",
+            url:"/courses/studentCourses",
+            contentType:"application/json;charset=UTF-8",
+            data: JSON.stringify($.parseJSON(str)),
+            success:function(response){
+                //后期解决了枚举传值的问题再改
+                item_select_course.innerHTML=""
+                getStudentCanSelectCourse();
+            }
+        })
+    });
     base_info_show.onclick=function(){
         clear();
         base_info_show.className="count"
@@ -285,6 +328,20 @@
         base_plan_show.style.backgroundColor="#7ed6df"
         base_plan.style.display="inline-block"
         getPlan()
+    }
+    can_select_show.onclick=function(){
+        clearCourse()
+        can_select_show.style.backgroundColor="#7ed6df"
+        can_select_show.className="count cur_show"
+        show_select_course.style.display="inline-block"
+        getStudentCanSelectCourse()
+    }
+    student_course_show.onclick=function(){
+        clearCourse()
+        student_course_show.style.backgroundColor="#7ed6df"
+        show_course.style.display="inline-block"
+        getStudentCourse()
+
     }
     var getArchive=function(){
         $.ajax({
@@ -344,6 +401,86 @@
             }
         })
     }
+    var getStudentCanSelectCourse=function(){
+        $.ajax({
+            type:"get",
+            url:"/courses/courseClass/options",
+            success:function(response){
+                var resCourses=response.data;
+                var i=0
+                var str=""
+                for (;i<resCourses.length;i++){
+                    var sDate=resCourses[i].teachingStartDate
+                    var eDate=resCourses[i].teachingEndDate
+                    var classroom=resCourses[i].classroom
+                    str+=("                    <li>\n" +
+                        "                        <div>\n" +
+                        "                            <ul>\n" +
+                        "                                <li><span>课程班ID:</span></li>\n" +
+                        "                                <li><span>课程名:</span></li>\n" +
+                        "                                <li><span>开始时间:</span></li>\n" +
+                        "                                <li><span>结束时间:</span></li>\n" +
+                        "                                <li><span>学分:</span></li>\n" +
+                        "                                <li><span>教学地点:</span></li>\n" +
+                        "                                <li><span>简介:</span></li>\n" +
+                        "                            </ul>\n" +
+                        "                            <ul class='course_info'>\n" +
+                        "                                <li><span>"+resCourses[i].courseClassId+"</span></li>\n" +
+                        "                                <li><span>"+resCourses[i].course.courseName+"</span></li>\n" +
+                        "                                <li><span>"+sDate[0]+"年"+sDate[1]+"月"+sDate[2]+"日"+"</span></li>\n"  +
+                        "                                <li><span>"+eDate[0]+"年"+eDate[1]+"月"+eDate[2]+"日"+"</span></li>\n"   +
+                        "                                <li><span>"+resCourses[i].course.teachingDetails.credit+"</span></li>\n"  +
+                        "                                <li><span>"+classroom.location+classroom.classroomNum+"</span></li>\n"  +
+                        "                                <li><span style='white-space: normal'>"+resCourses[i].course.introduce+"</span></li>\n"  +
+                        "                            </ul>\n" +
+                        "                            <button class=\"selectBtn\" courseClassId="+resCourses[i].courseClassId+">选课</button>   \n"+
+                        "                        </div>\n" +
+                        "                    </li>")
+                }
+                item_select_course.innerHTML=str
+            }
+        })
+    }
+    var getStudentCourse=function(){
+        $.ajax({
+            type:"get",
+            url:"/courses/studentCourse",
+            success:function(response){
+                var resCourses=response.data
+                var i=0
+                var str=""
+                for (;i<resCourses.length;i++){
+                    var sDate=resCourses[i].teachingStartDate
+                    var eDate=resCourses[i].teachingEndDate
+                    var classroom=resCourses[i].classroom
+                    str+=("                    <li>\n" +
+                        "                        <div>\n" +
+                        "                            <ul>\n" +
+                        "                                <li><span>课程班ID:</span></li>\n" +
+                        "                                <li><span>课程名:</span></li>\n" +
+                        "                                <li><span>开始时间:</span></li>\n" +
+                        "                                <li><span>结束时间:</span></li>\n" +
+                        "                                <li><span>学分:</span></li>\n" +
+                        "                                <li><span>教学地点:</span></li>\n" +
+                        "                                <li><span>简介:</span></li>\n" +
+                        "                            </ul>\n" +
+                        "                            <ul class='course_info'>\n" +
+                        "                                <li><span>"+resCourses[i].courseClassId+"</span></li>\n" +
+                        "                                <li><span>"+resCourses[i].course.courseName+"</span></li>\n" +
+                        "                                <li><span>"+sDate[0]+"年"+sDate[1]+"月"+sDate[2]+"日"+"</span></li>\n"  +
+                        "                                <li><span>"+eDate[0]+"年"+eDate[1]+"月"+eDate[2]+"日"+"</span></li>\n"   +
+                        "                                <li><span>"+resCourses[i].course.teachingDetails.credit+"</span></li>\n"  +
+                        "                                <li><span>"+classroom.location+classroom.classroomNum+"</span></li>\n"  +
+                        "                                <li><span style='white-space: normal'>"+resCourses[i].course.introduce+"</span></li>\n"+
+                        "                            </ul>\n" +
+                        "                            <button class=\"currentBtn\" courseClassId="+resCourses[i].courseClassId+">退课</button>   \n"+
+                        "                        </div>\n" +
+                        "                    </li>")
+                }
+                item_course.innerHTML=str
+            }
+        })
+    }
     var clear=function(){
         var i=0;
         for(;i<counts.length;i++){
@@ -352,6 +489,14 @@
         }
         for(i=0;i<infos.length;i++){
             infos[i].style.display="none"
+        }
+    }
+    var clearCourse=function(){
+        clear()
+        var i=0;
+        for (;i<course_relate.length;i++){
+            course_relate[i].style.backgroundColor="white"
+            course_relate[i].style.display="none"
         }
     }
     window.onload=function(){
@@ -365,12 +510,21 @@
         showComplain.className="";
         infosPage.style.display="none"
         coursePage.style.display="block"
+        show_select_course.style.display="none"
+        show_course.style.display="inline-block"
+        student_course_show.style.backgroundColor="#7ed6df"
+        getStudentCourse()
     }
     showComplain.onclick=function(){
         showMessage.className="";
         showComplain.className="current";
         coursePage.style.display="none";
         infosPage.style.display="block"
+        clear();
+        base_info_show.className="count"
+        base_info_show.style.backgroundColor="#7ed6df"
+        base_info.style.display="inline-block"
+        getBaseInfo()
     }
     exit.onclick=function(){
         $.ajax({

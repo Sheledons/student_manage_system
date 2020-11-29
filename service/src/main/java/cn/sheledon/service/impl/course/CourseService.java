@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author sheledon
@@ -23,6 +24,12 @@ public class CourseService implements ICourseService {
     @Autowired
     public CourseService(ICourseDao courseDao) {
         this.courseDao = courseDao;
+    }
+
+    @Override
+    public List<CourseClass> getStudentCanSelectCourse(String studentId) {
+        Objects.requireNonNull(studentId);
+        return courseDao.getStudentCanSelectCourseClass(studentId);
     }
 
     @Override

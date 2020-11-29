@@ -9,6 +9,13 @@ import java.util.List;
  * @author sheledon
  */
 public interface ICourseService {
+
+    /**
+     * 获得学生可选的课程
+     * @param studentId
+     * @return
+     */
+    List<CourseClass> getStudentCanSelectCourse(String studentId);
     /**
      * 获得教师所任职的教学班信息
      * @param teacherId
@@ -22,7 +29,6 @@ public interface ICourseService {
      * @return
      */
     List<CourseClass> getCourseClassByStudentId(String studentId);
-
 
 
     /**

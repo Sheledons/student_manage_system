@@ -16,6 +16,13 @@ public interface ICourseDao{
 
 
     /**
+     * 获得学生未选的课程
+     * @param studentId
+     * @return
+     */
+    List<CourseClass> getStudentCanSelectCourseClass(@Param("studentId") String studentId);
+
+    /**
      * 根据教师id获得教师所任职的教学班信息
      * @param teacherId
      * @return

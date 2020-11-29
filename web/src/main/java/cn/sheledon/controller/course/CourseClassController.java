@@ -39,11 +39,15 @@ public class CourseClassController {
         return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,resList);
     }
 
+    @GetMapping("/studentCourse")
+    public ResponseResult getStudentCourse(HttpServletRequest request){
+        Student student= (Student) ControllerUtils.getObjectFromSession(request,"student");
+        List<CourseClass> ccs=courseService.getCourseClassByStudentId(student.getStudentId());
+        return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,ccs);
+    }
+
     @PutMapping("/studentCourses/scores")
     public ResponseResult updateStudentCourseScores(HttpServletRequest request, @RequestBody List<StudentCourse> studentCourseList){
-        studentCourseList.stream().forEach((sc)->{
-            System.out.println(sc);
-        });
         Teacher teacher=(Teacher)ControllerUtils.getObjectFromSession(request,"teacher");
         boolean flag=courseService.updateStudentScore(studentCourseList);
         if (!flag){
@@ -59,6 +63,12 @@ public class CourseClassController {
         }
         return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,courseService.getCourseClass(page,num));
     }
+    @GetMapping("/courseClass/options")
+    public ResponseResult getCourseClassOptions(HttpServletRequest request){
+        Student student= (Student) ControllerUtils.getObjectFromSession(request,"student");
+        return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,courseService.getStudentCanSelectCourse(student.getStudentId()));
+    }
+
     @GetMapping("/student/studentCourse/scores")
     public ResponseResult getStudentCourseScores(HttpServletRequest request){
         Student student= (Student) ControllerUtils.getObjectFromSession(request,"student");
@@ -67,7 +77,10 @@ public class CourseClassController {
     }
     @PostMapping("/studentCourses")
     public ResponseResult addStudentCourses(HttpServletRequest request,@RequestBody List<StudentCourse> studentCourseList){
-        studentCourseList.stream().forEach((c)->{c.setScore(null);});
+        studentCourseList.stream().forEach((c)->{
+            System.out.println(c);
+            c.setScore(null);
+        });
         Student student= (Student) ControllerUtils.getObjectFromSession(request,"student");
         List<CourseClass> courseClasses=courseService.updateSelectCourse(student.getStudentId(),studentCourseList);
         return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,courseClasses);

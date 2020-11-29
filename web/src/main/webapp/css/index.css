@@ -243,7 +243,7 @@
 .item_course ul{
     display: inline-block;
     vertical-align: top;
-    margin-right: 57px;;
+    margin-right: 49px;;
 }
 .course_info{
     word-break: break-all;
@@ -254,4 +254,8 @@
 }
 .content_info{
     overflow: auto;
+}
+.currentBtn,.selectBtn{
+    position: absolute;
+    bottom: 32px;
 }
