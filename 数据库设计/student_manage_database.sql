@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 21/11/2020 22:03:49
+ Date: 29/11/2020 22:30:19
 */
 
 SET NAMES utf8mb4;
@@ -31,6 +31,7 @@ CREATE TABLE `academy`  (
 -- Records of academy
 -- ----------------------------
 INSERT INTO `academy` VALUES ('1000001', '计算机学院');
+INSERT INTO `academy` VALUES ('1000002', '数据学院');
 
 -- ----------------------------
 -- Table structure for address
@@ -61,7 +62,7 @@ CREATE TABLE `certificate`  (
 -- ----------------------------
 -- Records of certificate
 -- ----------------------------
-INSERT INTO `certificate` VALUES ('3000001', '中国诗词大会观看奖');
+INSERT INTO `certificate` VALUES ('3000001', '中国大奖');
 
 -- ----------------------------
 -- Table structure for class
@@ -98,6 +99,8 @@ CREATE TABLE `classroom`  (
 -- ----------------------------
 INSERT INTO `classroom` VALUES ('5000001', 33, '行纸篓', '201');
 INSERT INTO `classroom` VALUES ('5000002', 100, '李工娄', '321');
+INSERT INTO `classroom` VALUES ('5000003', 10, '网院', '111');
+INSERT INTO `classroom` VALUES ('5000004', 11, '李工娄', '1208');
 
 -- ----------------------------
 -- Table structure for course
@@ -105,7 +108,7 @@ INSERT INTO `classroom` VALUES ('5000002', 100, '李工娄', '321');
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course`  (
   `courseId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `courseName` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `courseName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `departmentId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `introduce` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
   PRIMARY KEY (`courseId`) USING BTREE,
@@ -118,6 +121,8 @@ CREATE TABLE `course`  (
 -- ----------------------------
 INSERT INTO `course` VALUES ('6000001', '分布式理论', '9000001', '分布式不真正到企业里实践，你能学会？');
 INSERT INTO `course` VALUES ('6000002', '闪电五连鞭教学', '9000001', '我大意了啊！！！');
+INSERT INTO `course` VALUES ('6000003', '内核', '9000002', '难的一批');
+INSERT INTO `course` VALUES ('6000004', 'no pain no gain', '9000002', 'always remember');
 
 -- ----------------------------
 -- Table structure for courseclass
@@ -138,7 +143,9 @@ CREATE TABLE `courseclass`  (
 -- Records of courseclass
 -- ----------------------------
 INSERT INTO `courseclass` VALUES ('7000001', '2020-09-01', '2021-01-01', '6000001', 100);
-INSERT INTO `courseclass` VALUES ('7000002', '2020-09-02', '2921-01-01', '6000002', 1000);
+INSERT INTO `courseclass` VALUES ('7000002', '2020-09-02', '2921-01-10', '6000002', 1000);
+INSERT INTO `courseclass` VALUES ('7000003', '2021-09-02', '2921-02-02', '6000003', 1);
+INSERT INTO `courseclass` VALUES ('7000004', '2020-01-01', '2090-12-12', '6000004', 12);
 
 -- ----------------------------
 -- Table structure for courseuseclassroom
@@ -149,6 +156,7 @@ CREATE TABLE `courseuseclassroom`  (
   `courseClassId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`classroomId`, `courseClassId`) USING BTREE,
   INDEX `FK_use_to_courseClass`(`courseClassId`) USING BTREE,
+  INDEX `FK_use_to_classroomId`(`classroomId`) USING BTREE,
   CONSTRAINT `FK_use_to_classroom` FOREIGN KEY (`classroomId`) REFERENCES `classroom` (`classroomId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_use_to_courseClass` FOREIGN KEY (`courseClassId`) REFERENCES `courseclass` (`courseClassId`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
@@ -157,6 +165,9 @@ CREATE TABLE `courseuseclassroom`  (
 -- Records of courseuseclassroom
 -- ----------------------------
 INSERT INTO `courseuseclassroom` VALUES ('5000001', '7000001');
+INSERT INTO `courseuseclassroom` VALUES ('5000002', '7000002');
+INSERT INTO `courseuseclassroom` VALUES ('5000003', '7000003');
+INSERT INTO `courseuseclassroom` VALUES ('5000004', '7000004');
 
 -- ----------------------------
 -- Table structure for department
@@ -175,6 +186,7 @@ CREATE TABLE `department`  (
 -- Records of department
 -- ----------------------------
 INSERT INTO `department` VALUES ('9000001', '计算机系', '1000001');
+INSERT INTO `department` VALUES ('9000002', '网络系', '1000002');
 
 -- ----------------------------
 -- Table structure for dormitory
@@ -240,6 +252,7 @@ CREATE TABLE `student`  (
   `userId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`studentId`) USING BTREE,
   INDEX `FK_student_to_info`(`infoId`) USING BTREE,
+  INDEX `userId`(`userId`) USING BTREE,
   CONSTRAINT `FK_student_to_info` FOREIGN KEY (`infoId`) REFERENCES `studentinfo` (`infoId`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
@@ -259,16 +272,16 @@ CREATE TABLE `studentarchive`  (
   `punishmentId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `certificateId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`archiveId`) USING BTREE,
-  INDEX `FK_studentArchive_to_punishment`(`punishmentId`) USING BTREE,
-  INDEX `FK_studentArchive_to_certificate`(`certificateId`) USING BTREE,
-  CONSTRAINT `FK_studentArchive_to_certificate` FOREIGN KEY (`certificateId`) REFERENCES `certificate` (`certificateId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `FK_studentArchive_to_punishment` FOREIGN KEY (`punishmentId`) REFERENCES `punishment` (`punishmentId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `FK_CER`(`certificateId`) USING BTREE,
+  INDEX `FK_PUN`(`punishmentId`) USING BTREE,
+  CONSTRAINT `FK_CER` FOREIGN KEY (`certificateId`) REFERENCES `certificate` (`certificateId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_PUN` FOREIGN KEY (`punishmentId`) REFERENCES `punishment` (`punishmentId`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of studentarchive
 -- ----------------------------
-INSERT INTO `studentarchive` VALUES ('1400001', '上海', '2018-09-01', '1200001', '3000001');
+INSERT INTO `studentarchive` VALUES ('1400001', '上海', '2020-11-29', '1200001', '3000001');
 
 -- ----------------------------
 -- Table structure for studentinfo
@@ -290,7 +303,6 @@ CREATE TABLE `studentinfo`  (
   INDEX `FK_info_to_dormitory`(`dormitoryId`) USING BTREE,
   INDEX `FK_info_to_address`(`addressId`) USING BTREE,
   CONSTRAINT `FK_info_to_address` FOREIGN KEY (`addressId`) REFERENCES `address` (`addressId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `FK_info_to_archive` FOREIGN KEY (`archiveId`) REFERENCES `studentarchive` (`archiveId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_info_to_class` FOREIGN KEY (`classId`) REFERENCES `class` (`classId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_info_to_dormitory` FOREIGN KEY (`dormitoryId`) REFERENCES `dormitory` (`dorId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_info_to_major` FOREIGN KEY (`majorId`) REFERENCES `major` (`majorId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
@@ -329,6 +341,7 @@ CREATE TABLE `stuselectcourse`  (
   `courseClassId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`studentId`, `courseClassId`) USING BTREE,
   INDEX `FK_selectCourse_CourseClass`(`courseClassId`) USING BTREE,
+  INDEX `Fk_index_studentId`(`studentId`) USING BTREE,
   CONSTRAINT `FK_selectCourse_CourseClass` FOREIGN KEY (`courseClassId`) REFERENCES `courseclass` (`courseClassId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_selectCourse_student` FOREIGN KEY (`studentId`) REFERENCES `student` (`studentId`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
@@ -336,7 +349,8 @@ CREATE TABLE `stuselectcourse`  (
 -- ----------------------------
 -- Records of stuselectcourse
 -- ----------------------------
-INSERT INTO `stuselectcourse` VALUES (100, '20181102928', '7000001');
+INSERT INTO `stuselectcourse` VALUES (NULL, '20181102928', '7000002');
+INSERT INTO `stuselectcourse` VALUES (NULL, '20181102928', '7000003');
 
 -- ----------------------------
 -- Table structure for teacher
@@ -353,6 +367,7 @@ CREATE TABLE `teacher`  (
   PRIMARY KEY (`teacherId`) USING BTREE,
   INDEX `FK_teacher_to_teacherArchive`(`archiveId`) USING BTREE,
   INDEX `FK_teacher_to_department`(`departmentId`) USING BTREE,
+  INDEX `teacher`(`teacherId`) USING BTREE,
   CONSTRAINT `FK_teacher_to_department` FOREIGN KEY (`departmentId`) REFERENCES `department` (`departmentId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_teacher_to_teacherArchive` FOREIGN KEY (`archiveId`) REFERENCES `teacherarchive` (`archiveId`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
@@ -393,12 +408,13 @@ CREATE TABLE `teachingcase`  (
   INDEX `FK_teachingCase_to_courseClass`(`courseClassId`) USING BTREE,
   CONSTRAINT `FK_teachingCase_to_courseClass` FOREIGN KEY (`courseClassId`) REFERENCES `courseclass` (`courseClassId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_teachingCase_to_teacher` FOREIGN KEY (`teacherId`) REFERENCES `teacher` (`teacherId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2300001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2300003 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of teachingcase
 -- ----------------------------
 INSERT INTO `teachingcase` VALUES (2300001, 100, 50, '1800001', '7000001');
+INSERT INTO `teachingcase` VALUES (2300002, 10, 1111, '1800001', '7000002');
 
 -- ----------------------------
 -- Table structure for teachingdetails
@@ -421,6 +437,9 @@ CREATE TABLE `teachingdetails`  (
 -- Records of teachingdetails
 -- ----------------------------
 INSERT INTO `teachingdetails` VALUES ('2100001', 1, '大三上', '2200001', '6000001');
+INSERT INTO `teachingdetails` VALUES ('2100002', 2, '大三上', '2200001', '6000002');
+INSERT INTO `teachingdetails` VALUES ('2100003', 10, '大三上', '2200001', '6000003');
+INSERT INTO `teachingdetails` VALUES ('2100004', 3, '大三下', '2200001', '6000004');
 
 -- ----------------------------
 -- Table structure for teachingplan
@@ -458,13 +477,7 @@ CREATE TABLE `user`  (
   `permission` int(0) NOT NULL,
   PRIMARY KEY (`userId`) USING BTREE,
   INDEX `id`(`userId`) USING BTREE,
-  INDEX `userId`(`userId`) USING BTREE,
-  INDEX `userId_2`(`userId`) USING BTREE,
-  INDEX `userId_3`(`userId`) USING BTREE,
-  INDEX `userId_4`(`userId`) USING BTREE,
-  INDEX `userId_5`(`userId`) USING BTREE,
-  INDEX `userId_6`(`userId`) USING BTREE,
-  INDEX `userId_7`(`userId`) USING BTREE
+  INDEX `userId`(`userId`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -480,15 +493,15 @@ DROP VIEW IF EXISTS `courseinfo`;
 CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `courseinfo` AS select `course`.`courseId` AS `courseId`,`course`.`courseName` AS `courseName`,`teachingdetails`.`credit` AS `credit`,`course`.`introduce` AS `introduce`,`courseclass`.`qualifyPeopleNum` AS `qualifyPeopleNum`,`courseclass`.`teachingEndDate` AS `teachingEndDate`,`courseclass`.`teachingStartDate` AS `teachingStartDate`,`classroom`.`location` AS `location`,`classroom`.`classroomNum` AS `classroomNum`,`courseclass`.`courseClassId` AS `courseClassId` from (((((`student` join `course`) join `courseclass`) join `classroom`) join `courseuseclassroom`) join `teachingdetails`) where ((`teachingdetails`.`courseId` = `course`.`courseId`) and (`courseclass`.`courseId` = `course`.`courseId`) and (`courseclass`.`courseClassId` = `courseuseclassroom`.`courseClassId`) and (`courseuseclassroom`.`classroomId` = `classroom`.`classroomId`));
 
 -- ----------------------------
--- View structure for stuarchive
+-- View structure for stuarchiveview
 -- ----------------------------
-DROP VIEW IF EXISTS `stuarchive`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `stuarchive` AS select `student`.`name` AS `name`,`studentarchive`.`origin` AS `origin`,`studentarchive`.`startSchoolDate` AS `startSchoolDate`,`punishment`.`content` AS `punishmentContent`,`punishment`.`category` AS `punishmentCategory`,`certificate`.`content` AS `certificateContent` from ((((`student` join `studentinfo`) join `studentarchive`) join `punishment`) join `certificate`) where ((`student`.`infoId` = `studentinfo`.`infoId`) and (`studentinfo`.`archiveId` = `studentarchive`.`archiveId`) and (`studentarchive`.`punishmentId` = `punishment`.`punishmentId`) and (`studentarchive`.`certificateId` = `certificate`.`certificateId`));
+DROP VIEW IF EXISTS `stuarchiveview`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `stuarchiveview` AS select `student`.`name` AS `name`,`studentarchive`.`origin` AS `origin`,`studentarchive`.`startSchoolDate` AS `startSchoolDate`,`student`.`studentId` AS `studentId`,`punishment`.`content` AS `punishmentContent`,`punishment`.`category` AS `punishmentCategory`,`certificate`.`content` AS `certificateContent` from ((((`student` join `studentinfo`) join `studentarchive`) join `punishment`) join `certificate`) where ((`student`.`infoId` = `studentinfo`.`infoId`) and (`studentinfo`.`archiveId` = `studentarchive`.`archiveId`) and (`studentarchive`.`punishmentId` = `punishment`.`punishmentId`) and (`studentarchive`.`certificateId` = `certificate`.`certificateId`));
 
 -- ----------------------------
--- View structure for studentallinfo
+-- View structure for studentinfoview
 -- ----------------------------
-DROP VIEW IF EXISTS `studentallinfo`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `studentallinfo` AS select `student`.`name` AS `name`,`student`.`gender` AS `gender`,`student`.`birthday` AS `birthday`,`student`.`phoneNumber` AS `phoneNumber`,`major`.`majorName` AS `majorName`,`studenttype`.`typeName` AS `typeName` from (((((`student` join `studentinfo`) join `major`) join `address`) join `dormitory`) join `studenttype`) where ((`student`.`userId` = 2500001) and (`student`.`infoId` = `studentinfo`.`infoId`) and (`studentinfo`.`majorId` = `major`.`majorId`) and (`studentinfo`.`addressId` = `address`.`addressId`) and (`studentinfo`.`dormitoryId` = `dormitory`.`dorId`) and (`studentinfo`.`studentTypeId` = `studenttype`.`studentTypeId`));
+DROP VIEW IF EXISTS `studentinfoview`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `studentinfoview` AS select `student`.`studentId` AS `studentId`,`student`.`name` AS `name`,`student`.`gender` AS `gender`,`student`.`birthday` AS `birthday`,`student`.`phoneNumber` AS `phoneNumber`,`major`.`majorName` AS `majorName`,`studenttype`.`typeName` AS `typeName`,`address`.`city` AS `city`,`address`.`provinces` AS `provinces`,`dormitory`.`buildingNum` AS `buildingNum`,`dormitory`.`dormitoryNum` AS `dormitoryNum`,`class`.`className` AS `className` from ((((((`student` join `studentinfo`) join `major`) join `address`) join `dormitory`) join `studenttype`) join `class`) where ((`student`.`infoId` = `studentinfo`.`infoId`) and (`studentinfo`.`majorId` = `major`.`majorId`) and (`studentinfo`.`addressId` = `address`.`addressId`) and (`studentinfo`.`dormitoryId` = `dormitory`.`dorId`) and (`studentinfo`.`studentTypeId` = `studenttype`.`studentTypeId`) and (`studentinfo`.`classId` = `class`.`classId`));
 
 SET FOREIGN_KEY_CHECKS = 1;
