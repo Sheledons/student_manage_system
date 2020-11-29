@@ -54,9 +54,12 @@ public class StudentController {
     }
 
     @GetMapping("/archives")
-    public StudentArchive getArchive(HttpServletRequest request) {
+    public ResponseResult getArchive(HttpServletRequest request) {
         Student student = getAndCheckStudent(request);
-        return studentService.getStudentArchive(student.getStudentId());
+        return ResponseResult.builder()
+                .status(ResponseStatus.RESPONSE_OK)
+                .data(studentService.getStudentArchive(student.getStudentId()))
+                .build();
     }
 
     @GetMapping("/{classId}/students/{page}/{number}")

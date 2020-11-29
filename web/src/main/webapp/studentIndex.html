@@ -6,6 +6,24 @@
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/base.css">
     <script src="https://libs.baidu.com/jquery/1.6.4/jquery.min.js"></script>
+    <style type="text/css">
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-top: -31px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 12px 16px;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 <div class="head">
@@ -14,7 +32,6 @@
     <i class="userName">admin</i>
     <a href="javascript:;" class="exit">退出</a>
 </div>
-<div>
     <div class="catalog fl">
         <div class="title">MAIN</div>
         <div class="det">
@@ -24,127 +41,184 @@
             </ul>
         </div>
     </div>
-    <div class="content fl">
-        <div class="count base_info_show">
-            基本信息
-            <i></i>
-        </div>
-        <div class="count base_archive_show">
-            我的档案
-            <i></i>
-        </div>
-        <div class="count base_plan_show ">
-            教学计划
-            <i></i>
-        </div>
-    </div>
-    <div class="show_info">
-        <div class="info_left">
-            <img src="images/avatar.jpg">
-        </div>
-        <div class="info_right">
-            <div class="base_info info">
-                <div class="title">基本信息</div>
-                <div>
-                    <ul>
-                        <li><span>登录ID:</span></li>
-                        <li><span>姓名:</span></li>
-                        <li><span>性别:</span></li>
-                        <li><span>联系电话:</span></li>
-                        <li><span>出生日期:</span></li>
+    <div class="content_info">
+        <div class="infosPage">
+            <div class="content fl">
+                <div class="count base_info_show">
+                    基本信息
+                    <i></i>
+                </div>
+                <div class="count base_archive_show">
+                    我的档案
+                    <i></i>
+                </div>
+                <div class="count base_plan_show ">
+                    教学计划
+                    <i></i>
+                </div>
+            </div>
+            <div class="show_info">
+                <div class="info_left">
+                    <img src="images/avatar.jpg">
+                </div>
+                <div class="info_right">
+                    <div class="base_info info">
+                        <div class="title">基本信息</div>
+                        <div>
+                            <ul>
+                                <li><span>登录ID:</span></li>
+                                <li><span>姓名:</span></li>
+                                <li><span>性别:</span></li>
+                                <li><span>联系电话:</span></li>
+                                <li><span>出生日期:</span></li>
 
-                    </ul>
-                    <ul >
-                        <li><span class="studentId">201122221111</span></li>
-                        <li><span class="name">落拓</span></li>
-                        <li><span class="gender">男</span></li>
-                        <li><span class="phoneNumber">123456</span></li>
-                        <li><span class="birthday">123456</span></li>
-                    </ul>
-                    <span></span>
-                    <ul>
-                        <li><span>专业:</span></li>
-                        <li><span>专业类型:</span></li>
-                        <li><span>班级:</span></li>
-                        <li><span>宿舍楼:</span></li>
-                        <li><span>宿舍号:</span></li>
-                        <li><span>家庭地址:</span></li>
-                    </ul>
-                    <ul>
-                        <li><span class="majorName">以父之名</span></li>
-                        <li><span class="majorType">一本</span></li>
-                        <li><span class=className">软件工程</span></li>
-                        <li><span class="dormitory">12234</span></li>
-                        <li><span class="dorNum">325343</span></li>
-                        <li><span class="address">中国</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="base_archive info" style="display: none">
-                <div class="title">我的档案</div>
-                <div>
-                    <ul>
-                        <li><span>入学年份:</span></li>
-                        <li><span>生源地:</span></li>
-                    </ul>
-                    <ul >
-                        <li><span>201122221111</span></li>
-                        <li><span>落拓</span></li>
-                    </ul>
-                    <span></span>
-<!--                    <ul>-->
-<!--                        <li><span>专业类型:</span></li>-->
-<!--                        <li><span>班级:</span></li>-->
-<!--                        <li><span>宿舍楼:</span></li>-->
-<!--                        <li><span>宿舍号:</span></li>-->
-<!--                        <li><span>生源地:</span></li>-->
-<!--                    </ul>-->
-<!--                    <ul>-->
-<!--                        <li><span>一本</span></li>-->
-<!--                        <li><span>软件工程</span></li>-->
-<!--                        <li><span>12234</span></li>-->
-<!--                        <li><span>325343</span></li>-->
-<!--                        <li><span>中国</span></li>-->
-<!--                    </ul>-->
-                </div>
-            </div>
-            <div class="base_plan info" style="display: none">
-                <div class="title">教学计划</div>
-                <div>
-                    <ul>
-                        <li><span>入学年份:</span></li>
-                        <li><span>生源地:</span></li>
-                    </ul>
-                    <ul >
-                        <li><span>201122221111</span></li>
-                        <li><span>落拓</span></li>
-                    </ul>
-                    <span></span>
-                    <!--                    <ul>-->
-                    <!--                        <li><span>专业类型:</span></li>-->
-                    <!--                        <li><span>班级:</span></li>-->
-                    <!--                        <li><span>宿舍楼:</span></li>-->
-                    <!--                        <li><span>宿舍号:</span></li>-->
-                    <!--                        <li><span>生源地:</span></li>-->
-                    <!--                    </ul>-->
-                    <!--                    <ul>-->
-                    <!--                        <li><span>一本</span></li>-->
-                    <!--                        <li><span>软件工程</span></li>-->
-                    <!--                        <li><span>12234</span></li>-->
-                    <!--                        <li><span>325343</span></li>-->
-                    <!--                        <li><span>中国</span></li>-->
-                    <!--                    </ul>-->
+                            </ul>
+                            <ul >
+                                <li><span class="studentId">201122221111</span></li>
+                                <li><span class="name">落拓</span></li>
+                                <li><span class="gender">男</span></li>
+                                <li><span class="phoneNumber">123456</span></li>
+                                <li><span class="birthday">123456</span></li>
+                            </ul>
+                            <span></span>
+                            <ul>
+                                <li><span>专业:</span></li>
+                                <li><span>专业类型:</span></li>
+                                <li><span>班级:</span></li>
+                                <li><span>宿舍楼:</span></li>
+                                <li><span>宿舍号:</span></li>
+                                <li><span>家庭地址:</span></li>
+                            </ul>
+                            <ul>
+                                <li><span class="majorName">以父之名</span></li>
+                                <li><span class="majorType">一本</span></li>
+                                <li><span class="classNames">软件工程</span></li>
+                                <li><span class="dormitory">12234</span></li>
+                                <li><span class="dorNum">325343</span></li>
+                                <li><span class="address">中国</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="base_archive info" style="display: none">
+                        <div class="title">我的档案</div>
+                        <div>
+                            <ul>
+                                <li><span>入学年份:</span></li>
+                                <li><span>生源地:</span></li>
+                            </ul>
+                            <ul>
+                                <li><span class="startSchoolDate"></span></li>
+                                <li><span class="origin"></span></li>
+                            </ul>
+                            <span></span>
+                            <div class="dropdown title">
+                                <div style="display: inline-block">查看获奖记录</div>
+                                <div class="dropdown-content certificate">
+                                    <p>菜鸟教程</p>
+                                    <p>www.runoob.com</p>
+                                </div>
+                            </div>
+                            <div class="dropdown title">
+                                <div style="display: inline-block">查看处分记录</div>
+                                <div class="dropdown-content punishment">
+                                    <p>菜鸟教程</p>
+                                    <p>www.runoob.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="base_plan info" style="display: none">
+                        <div class="title">教学计划</div>
+                        <div>
+                            <ul>
+                                <li><span>指定日期:</span></li>
+                                <li><span>计划名称:</span></li>
+                                <li><span>选修学分:</span></li>
+                                <li><span>必修学分:</span></li>
+                            </ul>
+                            <ul >
+                                <li><span class="makeDate"></span></li>
+                                <li><span class="planName"></span></li>
+                                <li><span class="requiredCourseCredit"></span></li>
+                                <li><span class="selectiveCourseCredit"></span></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="coursesPage" style="display: none">
+            <div class="content fl">
+                <div class="count student_course_show count cur_show">
+                    我的课程
+                    <i></i>
+                </div>
+                <div class="count can_select_show">
+                    我要选课
+                    <i></i>
+                </div>
+            </div>
+            <div class="show_course item">
+                <ul class="message item_course">
+                    <li>
+                        <div>
+                            <ul >
+                                <li><span>课程名:</span></li>
+                                <li><span>开始时间:</span></li>
+                                <li><span>结束时间:</span></li>
+                                <li><span>学分:</span></li>
+                                <li><span>教学地点:</span></li>
+                                <li><span>教授教师:</span></li>
+                                <li><span>简介:</span></li>
+
+                            </ul>
+                            <ul class="course_info">
+                                <li><span class="studentId">201122221111</span></li>
+                                <li><span class="name">落拓</span></li>
+                                <li><span class="gender">男</span></li>
+                                <li><span class="phoneNumber">123456</span></li>
+                                <li><span>行纸篓 303</span></li>
+                                <li><span class="birthday">123456</span></li>
+                                <li><span class="birthday" style="white-space:normal">fdsadfdsafdsafsdafdsafhjdsklahfdskjalhfeiowurfhdsjkfhdsjaklfhdsjakfhlesafuuiseahfndlsakfdjhsafsdafhjdskfhdjskal</span></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <ul >
+                                <li><span>课程名:</span></li>
+                                <li><span>开始时间:</span></li>
+                                <li><span>结束时间:</span></li>
+                                <li><span>学分:</span></li>
+                                <li><span>教学地点:</span></li>
+                                <li><span>教授教师:</span></li>
+                                <li><span>简介:</span></li>
+
+                            </ul>
+                            <ul class="course_info">
+                                <li><span class="studentId">201122221111</span></li>
+                                <li><span class="name">落拓</span></li>
+                                <li><span class="gender">男</span></li>
+                                <li><span class="phoneNumber">123456</span></li>
+                                <li><span>行纸篓 303</span></li>
+                                <li><span class="birthday">123456</span></li>
+                                <li><span class="birthday" style="white-space:normal">fdsadfdsafdsafsdafdsafhjdsklahfdskjalhfeiowurfhdsjkfhdsjaklfhdsjakfhlesafuuiseahfndlsakfdjhsafsdafhjdskfhdjskal</span></li>
+                            </ul>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-</div>
+<script type="text/javascript">
+</script>
 <script type="text/javascript">
     //获取数据
     var exit=document.querySelector(".exit");
+    var userName=document.querySelector(".userName")
     var showMessage=document.querySelector("#showMessage");
     var showComplain=document.querySelector("#showComplain");
-    var showVerify=document.querySelector("#showVerify");
     var base_info_show=document.querySelector(".base_info_show");
     var base_archive_show=document.querySelector(".base_archive_show");
     var counts=document.querySelectorAll(".count");
@@ -153,8 +227,34 @@
     var base_plan=document.querySelector(".base_plan")
     var base_plan_show=document.querySelector(".base_plan_show")
     var infos=document.querySelectorAll(".info")
-    var getRecord=function(){
+    var coursePage=document.querySelector(".coursesPage")
+    var infosPage=document.querySelector(".infosPage")
+    var studentCourse=document.querySelector(".student_course_show")
+    var selectCourse=document.querySelector(".can_select_show")
 
+
+    var studentId=document.querySelector(".studentId");
+    var name=document.querySelector(".name")
+    var gender=document.querySelector(".gender")
+    var phoneNumber=document.querySelector(".phoneNumber")
+    var birthday=document.querySelector(".birthday")
+    var majorName=document.querySelector(".majorName")
+    var majorType=document.querySelector(".majorType")
+    var classNames=document.querySelector(".classNames")
+    var dormitory=document.querySelector(".dormitory")
+    var dorNum=document.querySelector(".dorNum")
+    var address=document.querySelector(".address")
+    var startSchoolDate=document.querySelector(".startSchoolDate")
+    var origin=document.querySelector(".origin")
+
+    var certificate=document.querySelector(".certificate")
+    var punishment=document.querySelector(".punishment")
+
+    var makeDate=document.querySelector(".makeDate")
+    var planName=document.querySelector(".planName")
+    var selectiveCourseCredit=document.querySelector(".selectiveCourseCredit")
+    var requiredCourseCredit=document.querySelector(".requiredCourseCredit")
+    var getRecord=function(){
         $.ajax({
             type:"get",
             dataType:"json",
@@ -170,55 +270,107 @@
         base_info_show.className="count"
         base_info_show.style.backgroundColor="#7ed6df"
         base_info.style.display="inline-block"
+        getBaseInfo()
     }
     base_archive_show.onclick=function () {
         clear();
         base_archive_show.className="count cur_show"
         base_archive_show.style.backgroundColor="#7ed6df"
         base_archive.style.display="inline-block"
+        getArchive()
     }
     base_plan_show.onclick=function(){
         clear();
         base_plan_show.className="count cur_show"
         base_plan_show.style.backgroundColor="#7ed6df"
         base_plan.style.display="inline-block"
+        getPlan()
+    }
+    var getArchive=function(){
+        $.ajax({
+            type:"get",
+            url:"/student/archives",
+            success:function(response){
+                var sd=response.data.startSchoolDate
+                var cer=response.data.certificates
+                var pun=response.data.punishments
+                var i=0;
+                var str="";
+                origin.innerHTML=response.data.origin
+                startSchoolDate.innerHTML=sd[0]+"年"+sd[1]+"月"+sd[2]+"日"
+                for (;i<cer.length;i++){
+                    str+="<p>"+cer[i].content+"</p>"
+                }
+                certificate.innerHTML=str;
+                str=""
+                for (i=0;i<pun.length;i++){
+                    str+="<p>原因:"+pun[i].content+"<br>"+"  类别:"+pun[i].category+"</p>"
+                }
+                punishment.innerHTML=str
+            }
+        })
     }
     var getBaseInfo=function(){
         $.ajax({
             type:"get",
-            url:"student/infos",
+            url:"/student/infos",
             success:function(response){
-                if (response.)
+                var data=response.data;
+                var resAddress=data.studentInfo.address
+                var resDormitory=data.studentInfo.dormitory
+                studentId.innerHTML=data.studentId
+                gender.innerHTML=data.gender
+                phoneNumber.innerHTML=data.phoneNumber
+                birthday.innerHTML=data.birthday[0]+"年"+data.birthday[1]+"月"+data.birthday[2]+"日"
+                majorName.innerHTML=data.studentInfo.major.majorName
+                majorType.innerHTML=data.studentInfo.studentType.typeName
+                classNames.innerHTML=data.studentInfo.studentClass.className
+                address.innerHTML=resAddress.provinces+"  "+resAddress.city
+                dormitory.innerHTML=resDormitory.buildingNum+"楼"
+                dorNum.innerHTML=resDormitory.dormitoryNum+"号"
+            }
+        })
+    }
+    var getPlan=function(){
+        $.ajax({
+            type:"get",
+            url:"/teachings/students/teachingPlans",
+            success:function(response){
+                var da=response.data.makeDate;
+                planName.innerHTML=response.data.planName
+                makeDate.innerHTML=da[0]+"年"+da[1]+"月"+da[2]+"日"
+                requiredCourseCredit.innerHTML=response.data.requiredCourseCredit
+                selectiveCourseCredit.innerHTML=response.data.selectiveCourseCredit
             }
         })
     }
     var clear=function(){
         var i=0;
         for(;i<counts.length;i++){
-            infos[i].style.display="none"
             counts[i].style.backgroundColor="white"
             counts[i].className="count"
+        }
+        for(i=0;i<infos.length;i++){
+            infos[i].style.display="none"
         }
     }
     window.onload=function(){
         base_info_show.style.backgroundColor="#7ed6df"
         getRecord();
+        getBaseInfo()
 
     }
     showMessage.onclick=function(){
         showMessage.className="current";
         showComplain.className="";
-        showVerify.className="";
+        infosPage.style.display="none"
+        coursePage.style.display="block"
     }
     showComplain.onclick=function(){
         showMessage.className="";
         showComplain.className="current";
-        showVerify.className="";
-    }
-    showVerify.onclick=function(){
-        showMessage.className="";
-        showComplain.className="";
-        showVerify.className="current";
+        coursePage.style.display="none";
+        infosPage.style.display="block"
     }
     exit.onclick=function(){
         $.ajax({
@@ -229,19 +381,6 @@
             }
         })
     }
-</script>
-<script type="text/javascript">
-    var userName=document.querySelector(".userName");
-    var exit=document.querySelector(".exit");
-</script>
-<script type="text/javascript">
-    $('.verifySuccess').live('click',function(){
-        var id=this.id;
-
-    })
-    $('.verifyFail').live('click',function(){
-
-    })
 </script>
 </body>
 </html>

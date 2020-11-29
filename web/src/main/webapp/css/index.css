@@ -237,3 +237,21 @@
 .cur_show{
     background-color: #7ed6df;
 }
+.item_course>li{
+    display: inline-block;
+}
+.item_course ul{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 57px;;
+}
+.course_info{
+    word-break: break-all;
+    width: 230px;
+}
+.item_course ul>li{
+    margin-top: 10px;
+}
+.content_info{
+    overflow: auto;
+}
