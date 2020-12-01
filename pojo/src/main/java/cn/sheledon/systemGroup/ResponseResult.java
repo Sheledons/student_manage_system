@@ -16,6 +16,6 @@ import java.io.Serializable;
 @Builder
 public class ResponseResult implements Serializable {
     private Integer code;
-    private ResponseStatus status;
+    private String message;
     private Object data;
 }

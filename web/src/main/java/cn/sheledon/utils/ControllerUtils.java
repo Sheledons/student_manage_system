@@ -30,13 +30,15 @@ public class ControllerUtils {
 
     public static ResponseResult buildResponseResult(ResponseStatus status,Object data){
         return ResponseResult.builder()
-                .status(status)
+                .code(status.getCode())
+                .message(status.getMessage())
                 .data(data)
                 .build();
     }
     public static ResponseResult buildResponseResult(ResponseStatus status){
         return ResponseResult.builder()
-                .status(status)
+                .code(status.getCode())
+                .message(status.getMessage())
                 .build();
     }
 

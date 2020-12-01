@@ -5,11 +5,13 @@ package cn.sheledon.systemGroup;
  */
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
 
 import java.io.Serializable;
 
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
+@Getter
 public enum ResponseStatus {
     RESPONSE_OK(2000,"response ok"),
     SUCCESS_LOGIN(2001,"success_login"),

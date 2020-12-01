@@ -36,9 +36,9 @@ public class StudentController {
     public ResponseResult getName(HttpServletRequest request){
         try {
             Student student= (Student) ControllerUtils.getObjectFromSession(request,"student");
-            return ResponseResult.builder().status(ResponseStatus.RESPONSE_OK).data(student.getName()).build();
+            return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,student);
         }catch (Exception e){
-            return ResponseResult.builder().status(ResponseStatus.USERINFO_ERROR).build();
+            return ControllerUtils.buildResponseResult(ResponseStatus.USERINFO_ERROR);
         }
     }
 
@@ -47,19 +47,13 @@ public class StudentController {
     public ResponseResult getInfos(HttpServletRequest request){
         //后期要使用SpringSecurity对用户是否存在进行校验
         Student student=getAndCheckStudent(request);
-        return ResponseResult.builder()
-                .status(ResponseStatus.RESPONSE_OK)
-                .data(studentService.getStudentInfoByStudentId(student.getStudentId()))
-                .build();
+        return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,studentService.getStudentInfoByStudentId(student.getStudentId()));
     }
 
     @GetMapping("/archives")
     public ResponseResult getArchive(HttpServletRequest request) {
         Student student = getAndCheckStudent(request);
-        return ResponseResult.builder()
-                .status(ResponseStatus.RESPONSE_OK)
-                .data(studentService.getStudentArchive(student.getStudentId()))
-                .build();
+        return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,studentService.getStudentArchive(student.getStudentId()));
     }
 
     @GetMapping("/{classId}/students/{page}/{number}")
