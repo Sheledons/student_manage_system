@@ -1,6 +1,7 @@
 package cn.sheledon.pojo;
 
 import cn.sheledon.systemGroup.Permission;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Serializable {
     private String userId;
     private String name;

@@ -1,8 +1,6 @@
 package cn.sheledon.controller.user;
 import cn.sheledon.exception.PermissionException;
 import cn.sheledon.exception.UserNotFoundException;
-import cn.sheledon.pojo.Student;
-import cn.sheledon.pojo.Teacher;
 import cn.sheledon.pojo.User;
 import cn.sheledon.service.inter.IBaseService;
 import cn.sheledon.service.inter.student.IStudentService;
@@ -11,8 +9,8 @@ import cn.sheledon.service.inter.user.IUserService;
 import cn.sheledon.systemGroup.Permission;
 import cn.sheledon.systemGroup.ResponseResult;
 import cn.sheledon.systemGroup.ResponseStatus;
-import cn.sheledon.utils.ControllerUtils;
-import jdk.nashorn.internal.objects.annotations.Setter;
+import cn.sheledon.utils.ResponseUtils;
+import cn.sheledon.utils.SessionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +18,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 
 /**
@@ -56,29 +56,24 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseResult toLogin(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    public ResponseResult toLogin(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
         User resUser=userService.getUserOneByNameAndPwd(user);
         Permission permission=checkIdentify(resUser,request);
-        ResponseResult responseResult= ResponseResult.builder().build();
-        if (permission==null){
-            throw new PermissionException();
-        }
+        String redirectURL;
         switch (permission){
             case STUDENT:{
-                responseResult.setData("/studentIndex.html");
+                redirectURL="/studentIndex.html";
                 break;
             }
             case TEACHER:{
-                responseResult.setData("/teacherIndex.html");
+                redirectURL="/teacherIndex.html";
                 break;
+            } default:{
+                return ResponseUtils.buildResponseResult(ResponseStatus.USERINFO_ERROR);
             }
         }
-        if (responseResult.getData()==null){
-            responseResult.setStatus(ResponseStatus.USERINFO_ERROR);
-            return responseResult;
-        }
-        responseResult.setStatus(ResponseStatus.RESPONSE_OK);
-        return responseResult;
+        return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,redirectURL);
     }
 
     @GetMapping("/exit")
@@ -86,21 +81,23 @@ public class UserController {
         HttpSession session=request.getSession();
         session.invalidate();
     }
-
-
     private Permission checkIdentify(User user,HttpServletRequest request){
         for (Permission p:Permission.values()){
             if (p.compareTo(user.getPermission())==0){
                 IBaseService baseService=roleMap.get(p);
                 Object object=baseService.getRoleByUserId(user.getUserId());
                 if (object==null){
-                    throw new UserNotFoundException();
+                    return null;
                 }
-                ControllerUtils.setAttributeToSession(request,p.getName(),object);
-                ControllerUtils.setAttributeToSession(request,"user",user);
+                SessionUtils.setAttributeToSession(request,p.getName(),object);
+                SessionUtils.setAttributeToSession(request,"user",user);
                 return p;
             }
         }
         return null;
+    }
+    @ExceptionHandler({PermissionException.class,UserNotFoundException.class,NullPointerException.class})
+    public ResponseResult dealLoginException(){
+        return ResponseUtils.buildResponseResult(ResponseStatus.USERINFO_ERROR);
     }
 }

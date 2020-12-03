@@ -84,9 +84,9 @@
                 data:tranToJson(0),
                 contentType:"application/json;charset=UTF-8",
                 success:function(response){
-                    if(response.flag==false){
+                    if(response.code==4000){
                         prompt.style.display="block";
-                        prompt.innerHTML=response.message;
+                        prompt.innerHTML="用户名或者密码错误";
                     }else{
                         location.href=response.data;
                     }

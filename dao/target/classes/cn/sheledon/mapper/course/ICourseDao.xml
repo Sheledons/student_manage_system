@@ -78,6 +78,7 @@
             AND teacher.teacherId=#{id};
         </if>
         <if test="isTeacher==false">
+            ,stuselectCourse.score
             FROM courseInfo ,student,stuselectcourse
             WHERE student.studentId=stuselectcourse.studentId
             AND stuselectCourse.courseClassId=courseInfo.courseClassId

@@ -66,7 +66,7 @@
                         <div class="title">基本信息</div>
                         <div>
                             <ul>
-                                <li><span>登录ID:</span></li>
+                                <li><span>学号ID:</span></li>
                                 <li><span>姓名:</span></li>
                                 <li><span>性别:</span></li>
                                 <li><span>联系电话:</span></li>
@@ -162,105 +162,14 @@
             </div>
             <div class="show_select_course course_relate item">
                 <ul class="message item_select_course item_course">
-<!--                    <li>-->
-<!--                        <div>-->
-<!--                            <ul>-->
-<!--                                <li><span>可选课程:</span></li>-->
-<!--                                <li><span>开始时间:</span></li>-->
-<!--                                <li><span>结束时间:</span></li>-->
-<!--                                <li><span>学分:</span></li>-->
-<!--                                <li><span>教学地点:</span></li>-->
-<!--                                <li><span>教授教师:</span></li>-->
-<!--                                <li><span>简介:</span></li>-->
-<!--                            </ul>-->
-<!--                            <ul class="course_info">-->
-<!--                                <li><span class="studentId">201122221111</span></li>-->
-<!--                                <li><span class="name">落拓</span></li>-->
-<!--                                <li><span class="gender">男</span></li>-->
-<!--                                <li><span class="phoneNumber">123456</span></li>-->
-<!--                                <li><span>行纸篓 303</span></li>-->
-<!--                                <li><span class="birthday">123456</span></li>-->
-<!--                                <li><span class="birthday" style="white-space:normal">fdsadfdsafdsafsdafdsafhjdsklahfdskjalhfeiowurfhdsjkfhdsjaklfhdsjakfhlesafuuiseahfndlsakfdjhsafsdafhjdskfhdjskal</span></li>-->
-<!--                            </ul>-->
-<!--                            <button class="selectBtn">选课</button>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <div>-->
-<!--                            <ul >-->
-<!--                                <li><span>课程名:</span></li>-->
-<!--                                <li><span>开始时间:</span></li>-->
-<!--                                <li><span>结束时间:</span></li>-->
-<!--                                <li><span>学分:</span></li>-->
-<!--                                <li><span>教学地点:</span></li>-->
-<!--                                <li><span>教授教师:</span></li>-->
-<!--                                <li><span>简介:</span></li>-->
-<!--                            </ul>-->
-<!--                            <ul class="course_info">-->
-<!--                                <li><span class="studentId">201122221111</span></li>-->
-<!--                                <li><span class="name">落拓</span></li>-->
-<!--                                <li><span class="gender">男</span></li>-->
-<!--                                <li><span class="phoneNumber">123456</span></li>-->
-<!--                                <li><span>行纸篓 303</span></li>-->
-<!--                                <li><span class="birthday">123456</span></li>-->
-<!--                                <li><span class="birthday" style="white-space:normal">fdsadfdsafdsafsdafdsafhjdsklahfdskjalhfeiowurfhdsjkfhdsjaklfhdsjakfhlesafuuiseahfndlsakfdjhsafsdafhjdskfhdjskal</span></li>-->
-<!--                            </ul>-->
-<!--                  -->
-<!--                        </div>-->
-<!--                    </li>-->
                 </ul>
             </div>
         </div>
     </div>
+<!--进入index初始化请求-->
 <script type="text/javascript">
-</script>
-<script type="text/javascript">
-    //获取数据
     var exit=document.querySelector(".exit");
     var userName=document.querySelector(".userName")
-    var showMessage=document.querySelector("#showMessage");
-    var showComplain=document.querySelector("#showComplain");
-    var base_info_show=document.querySelector(".base_info_show");
-    var base_archive_show=document.querySelector(".base_archive_show");
-    var counts=document.querySelectorAll(".count");
-    var base_info=document.querySelector(".base_info")
-    var base_archive=document.querySelector(".base_archive")
-    var base_plan=document.querySelector(".base_plan")
-    var base_plan_show=document.querySelector(".base_plan_show")
-    var infos=document.querySelectorAll(".info")
-    var coursePage=document.querySelector(".coursesPage")
-    var infosPage=document.querySelector(".infosPage")
-    var studentCourse=document.querySelector(".student_course_show")
-    var selectCourse=document.querySelector(".can_select_show")
-
-    var studentId=document.querySelector(".studentId");
-    var name=document.querySelector(".name")
-    var gender=document.querySelector(".gender")
-    var phoneNumber=document.querySelector(".phoneNumber")
-    var birthday=document.querySelector(".birthday")
-    var majorName=document.querySelector(".majorName")
-    var majorType=document.querySelector(".majorType")
-    var classNames=document.querySelector(".classNames")
-    var dormitory=document.querySelector(".dormitory")
-    var dorNum=document.querySelector(".dorNum")
-    var address=document.querySelector(".address")
-    var startSchoolDate=document.querySelector(".startSchoolDate")
-    var origin=document.querySelector(".origin")
-
-    var certificate=document.querySelector(".certificate")
-    var punishment=document.querySelector(".punishment")
-
-    var makeDate=document.querySelector(".makeDate")
-    var planName=document.querySelector(".planName")
-    var selectiveCourseCredit=document.querySelector(".selectiveCourseCredit")
-    var requiredCourseCredit=document.querySelector(".requiredCourseCredit")
-    var item_course=document.querySelector(".item_course")
-    var show_course=document.querySelector(".show_course")
-    var show_select_course=document.querySelector(".show_select_course")
-    var item_select_course=document.querySelector(".item_select_course")
-    var can_select_show=document.querySelector(".can_select_show")
-    var student_course_show=document.querySelector(".student_course_show")
-    var course_relate=document.querySelectorAll(".course_relate")
     var getRecord=function(){
         $.ajax({
             type:"get",
@@ -272,42 +181,27 @@
             }
         })
     }
-    $('.show_course').on("click",".currentBtn",function(){
-        var id=$(this).attr("courseClassId")
-        console.log(id)
-        var str="[{ \"courseClassId\":\""+id+"\"}]"
-        console.log($.parseJSON(str))
-        console.log(JSON.stringify($.parseJSON(str)))
+    exit.onclick=function(){
         $.ajax({
-            type:"delete",
-            url:"/courses/studentCourses",
-            contentType:"application/json;charset=UTF-8",
-            data: JSON.stringify($.parseJSON(str)),
-            success:function(response){
-                //后期解决了枚举传值的问题再改
-                item_course.innerHTML=""
-                getStudentCourse()
+            type:"get",
+            url:"user/exit",
+            success:function(){
+                location.href="login.html"
             }
         })
-    })
-    $('.item_select_course').on('click','.selectBtn',function(){
-        var id=$(this).attr("courseClassId")
-        console.log(id)
-        var str="[{ \"courseClassId\":\""+id+"\"}]"
-        console.log($.parseJSON(str))
-        console.log(JSON.stringify($.parseJSON(str)))
-        $.ajax({
-            type:"post",
-            url:"/courses/studentCourses",
-            contentType:"application/json;charset=UTF-8",
-            data: JSON.stringify($.parseJSON(str)),
-            success:function(response){
-                //后期解决了枚举传值的问题再改
-                item_select_course.innerHTML=""
-                getStudentCanSelectCourse();
-            }
-        })
-    });
+    }
+</script>
+<!-- 显示信息 事件的绑定-->
+<script type="text/javascript">
+    var showMessage=document.querySelector("#showMessage");
+    var showComplain=document.querySelector("#showComplain");
+    var base_info_show=document.querySelector(".base_info_show");
+    var base_archive_show=document.querySelector(".base_archive_show");
+    var base_info=document.querySelector(".base_info")
+    var base_archive=document.querySelector(".base_archive")
+    var base_plan=document.querySelector(".base_plan")
+    var base_plan_show=document.querySelector(".base_plan_show")
+    var infos=document.querySelectorAll(".info")
     base_info_show.onclick=function(){
         clear();
         base_info_show.className="count"
@@ -329,20 +223,70 @@
         base_plan.style.display="inline-block"
         getPlan()
     }
-    can_select_show.onclick=function(){
-        clearCourse()
-        can_select_show.style.backgroundColor="#7ed6df"
-        can_select_show.className="count cur_show"
-        show_select_course.style.display="inline-block"
-        getStudentCanSelectCourse()
-    }
-    student_course_show.onclick=function(){
-        clearCourse()
-        student_course_show.style.backgroundColor="#7ed6df"
+    showMessage.onclick=function(){
+        showMessage.className="current";
+        showComplain.className="";
+        infosPage.style.display="none"
+        coursePage.style.display="block"
+        show_select_course.style.display="none"
         show_course.style.display="inline-block"
+        student_course_show.style.backgroundColor="#7ed6df"
         getStudentCourse()
-
     }
+    showComplain.onclick=function(){
+        showMessage.className="";
+        showComplain.className="current";
+        coursePage.style.display="none";
+        infosPage.style.display="block"
+        clear();
+        base_info_show.className="count"
+        base_info_show.style.backgroundColor="#7ed6df"
+        base_info.style.display="inline-block"
+        getBaseInfo()
+    }
+
+</script>
+<!--渲染学生基本信息-->
+<script type="text/javascript">
+    var studentId=document.querySelector(".studentId");
+    var name=document.querySelector(".name")
+    var gender=document.querySelector(".gender")
+    var phoneNumber=document.querySelector(".phoneNumber")
+    var birthday=document.querySelector(".birthday")
+    var majorName=document.querySelector(".majorName")
+    var majorType=document.querySelector(".majorType")
+    var classNames=document.querySelector(".classNames")
+    var dormitory=document.querySelector(".dormitory")
+    var dorNum=document.querySelector(".dorNum")
+    var address=document.querySelector(".address")
+    var origin=document.querySelector(".origin")
+    var getBaseInfo=function(){
+        $.ajax({
+            type:"get",
+            url:"/student/infos",
+            success:function(response){
+                var data=response.data;
+                var resAddress=data.studentInfo.address
+                var resDormitory=data.studentInfo.dormitory
+                studentId.innerHTML=data.studentId
+                gender.innerHTML=data.gender
+                phoneNumber.innerHTML=data.phoneNumber
+                birthday.innerHTML=data.birthday[0]+"年"+data.birthday[1]+"月"+data.birthday[2]+"日"
+                majorName.innerHTML=data.studentInfo.major.majorName
+                majorType.innerHTML=data.studentInfo.studentType.typeName
+                classNames.innerHTML=data.studentInfo.studentClass.className
+                address.innerHTML=resAddress.provinces+"  "+resAddress.city
+                dormitory.innerHTML=resDormitory.buildingNum+"楼"
+                dorNum.innerHTML=resDormitory.dormitoryNum+"号"
+            }
+        })
+    }
+</script>
+<!--渲染学生档案信息-->
+<script type="text/javascript">
+    var startSchoolDate=document.querySelector(".startSchoolDate")
+    var certificate=document.querySelector(".certificate")
+    var punishment=document.querySelector(".punishment")
     var getArchive=function(){
         $.ajax({
             type:"get",
@@ -367,27 +311,13 @@
             }
         })
     }
-    var getBaseInfo=function(){
-        $.ajax({
-            type:"get",
-            url:"/student/infos",
-            success:function(response){
-                var data=response.data;
-                var resAddress=data.studentInfo.address
-                var resDormitory=data.studentInfo.dormitory
-                studentId.innerHTML=data.studentId
-                gender.innerHTML=data.gender
-                phoneNumber.innerHTML=data.phoneNumber
-                birthday.innerHTML=data.birthday[0]+"年"+data.birthday[1]+"月"+data.birthday[2]+"日"
-                majorName.innerHTML=data.studentInfo.major.majorName
-                majorType.innerHTML=data.studentInfo.studentType.typeName
-                classNames.innerHTML=data.studentInfo.studentClass.className
-                address.innerHTML=resAddress.provinces+"  "+resAddress.city
-                dormitory.innerHTML=resDormitory.buildingNum+"楼"
-                dorNum.innerHTML=resDormitory.dormitoryNum+"号"
-            }
-        })
-    }
+</script>
+<!--渲染学生本专业教学计划-->
+<script type="text/javascript">
+    var makeDate=document.querySelector(".makeDate")
+    var planName=document.querySelector(".planName")
+    var selectiveCourseCredit=document.querySelector(".selectiveCourseCredit")
+    var requiredCourseCredit=document.querySelector(".requiredCourseCredit")
     var getPlan=function(){
         $.ajax({
             type:"get",
@@ -401,6 +331,128 @@
             }
         })
     }
+</script>
+<!--课程相关事件绑定-->
+<script type="text/javascript">
+    var counts=document.querySelectorAll(".count");
+    var coursePage=document.querySelector(".coursesPage")
+    var infosPage=document.querySelector(".infosPage")
+    var item_course=document.querySelector(".item_course")
+    var show_course=document.querySelector(".show_course")
+    var show_select_course=document.querySelector(".show_select_course")
+    var item_select_course=document.querySelector(".item_select_course")
+    var can_select_show=document.querySelector(".can_select_show")
+    var student_course_show=document.querySelector(".student_course_show")
+    var course_relate=document.querySelectorAll(".course_relate")
+    can_select_show.onclick=function(){
+        clearCourse()
+        can_select_show.style.backgroundColor="#7ed6df"
+        can_select_show.className="count cur_show"
+        show_select_course.style.display="inline-block"
+        getStudentCanSelectCourse()
+    }
+    student_course_show.onclick=function(){
+        clearCourse()
+        student_course_show.style.backgroundColor="#7ed6df"
+        show_course.style.display="inline-block"
+        getStudentCourse()
+    }
+</script>
+<!--渲染学生课程操作-->
+<script type="text/javascript">
+    var getStudentCourse=function(){
+        $.ajax({
+            type:"get",
+            url:"/courses/studentCourse",
+            success:function(response){
+                var resCourses=response.data
+                var i=0
+                var str=""
+                for (;i<resCourses.length;i++){
+                    var sDate=resCourses[i].teachingStartDate
+                    var eDate=resCourses[i].teachingEndDate
+                    var score;
+                    var classroom=resCourses[i].classroom
+                    str+=("                    <li>\n" +
+                        "                        <div>\n" +
+                        "                            <ul>\n" +
+                        "                                <li><span>课程班ID:</span></li>\n" +
+                        "                                <li><span>课程名:</span></li>\n" +
+                        "                                <li><span>开始时间:</span></li>\n" +
+                        "                                <li><span>结束时间:</span></li>\n" +
+                        "                                <li><span>学分:</span></li>\n" +
+                        "                                <li><span>教学地点:</span></li>\n" +
+                        "                                <li><span>简介:</span></li>\n" +
+                        "                                <li><span>得分:</span></li>\n"+
+                        "                            </ul>\n" +
+                        "                            <ul class='course_info'>\n" +
+                        "                                <li><span>"+resCourses[i].courseClassId+"</span></li>\n" +
+                        "                                <li><span>"+resCourses[i].course.courseName+"</span></li>\n" +
+                        "                                <li><span>"+sDate[0]+"年"+sDate[1]+"月"+sDate[2]+"日"+"</span></li>\n"  +
+                        "                                <li><span>"+eDate[0]+"年"+eDate[1]+"月"+eDate[2]+"日"+"</span></li>\n"   +
+                        "                                <li><span>"+resCourses[i].course.teachingDetails.credit+"</span></li>\n"  +
+                        "                                <li><span>"+classroom.location+classroom.classroomNum+"</span></li>\n"  +
+                        "                                <li><span style='white-space: normal'>"+resCourses[i].course.introduce+"</span></li>\n")
+                    console.log(score=resCourses[i].score)
+                    if ((score=resCourses[i].score)==null){
+                        str+="<li><span>暂无分数哦!!</span></li>\n"
+                    }else{
+                        str+="<li><span>"+score+"</span></li>\n"
+                    }
+                    str+=(
+                    "                            </ul>\n" +
+                    "                            <button class=\"currentBtn\" courseClassId="+resCourses[i].courseClassId+">退课</button>   \n"+
+                    "                        </div>\n" +
+                    "                    </li>")
+                }
+                item_course.innerHTML=str
+            }
+        })
+    }
+</script>
+<!--退课操作-->
+<script type="text/javascript">
+    $('.show_course').on("click",".currentBtn",function(){
+        var id=$(this).attr("courseClassId")
+        var str="[{ \"courseClassId\":\""+id+"\"}]"
+        console.log($.parseJSON(str))
+        console.log(JSON.stringify($.parseJSON(str)))
+        $.ajax({
+            type:"delete",
+            url:"/courses/studentCourses",
+            contentType:"application/json;charset=UTF-8",
+            data: JSON.stringify($.parseJSON(str)),
+            success:function(response){
+                //后期解决了枚举传值的问题再改
+                item_course.innerHTML=""
+                getStudentCourse()
+            }
+        })
+    })
+</script>
+<!--选课操作-->
+<script type="text/javascript">
+    $('.item_select_course').on('click','.selectBtn',function(){
+        var id=$(this).attr("courseClassId")
+        console.log(id)
+        var str="[{ \"courseClassId\":\""+id+"\"}]"
+        console.log($.parseJSON(str))
+        console.log(JSON.stringify($.parseJSON(str)))
+        $.ajax({
+            type:"post",
+            url:"/courses/studentCourses",
+            contentType:"application/json;charset=UTF-8",
+            data: JSON.stringify($.parseJSON(str)),
+            success:function(response){
+                //后期解决了枚举传值的问题再改
+                item_select_course.innerHTML=""
+                getStudentCanSelectCourse();
+            }
+        })
+    });
+</script>
+<!--渲染可选课程-->
+<script type="text/javascript">
     var getStudentCanSelectCourse=function(){
         $.ajax({
             type:"get",
@@ -441,46 +493,18 @@
             }
         })
     }
-    var getStudentCourse=function(){
-        $.ajax({
-            type:"get",
-            url:"/courses/studentCourse",
-            success:function(response){
-                var resCourses=response.data
-                var i=0
-                var str=""
-                for (;i<resCourses.length;i++){
-                    var sDate=resCourses[i].teachingStartDate
-                    var eDate=resCourses[i].teachingEndDate
-                    var classroom=resCourses[i].classroom
-                    str+=("                    <li>\n" +
-                        "                        <div>\n" +
-                        "                            <ul>\n" +
-                        "                                <li><span>课程班ID:</span></li>\n" +
-                        "                                <li><span>课程名:</span></li>\n" +
-                        "                                <li><span>开始时间:</span></li>\n" +
-                        "                                <li><span>结束时间:</span></li>\n" +
-                        "                                <li><span>学分:</span></li>\n" +
-                        "                                <li><span>教学地点:</span></li>\n" +
-                        "                                <li><span>简介:</span></li>\n" +
-                        "                            </ul>\n" +
-                        "                            <ul class='course_info'>\n" +
-                        "                                <li><span>"+resCourses[i].courseClassId+"</span></li>\n" +
-                        "                                <li><span>"+resCourses[i].course.courseName+"</span></li>\n" +
-                        "                                <li><span>"+sDate[0]+"年"+sDate[1]+"月"+sDate[2]+"日"+"</span></li>\n"  +
-                        "                                <li><span>"+eDate[0]+"年"+eDate[1]+"月"+eDate[2]+"日"+"</span></li>\n"   +
-                        "                                <li><span>"+resCourses[i].course.teachingDetails.credit+"</span></li>\n"  +
-                        "                                <li><span>"+classroom.location+classroom.classroomNum+"</span></li>\n"  +
-                        "                                <li><span style='white-space: normal'>"+resCourses[i].course.introduce+"</span></li>\n"+
-                        "                            </ul>\n" +
-                        "                            <button class=\"currentBtn\" courseClassId="+resCourses[i].courseClassId+">退课</button>   \n"+
-                        "                        </div>\n" +
-                        "                    </li>")
-                }
-                item_course.innerHTML=str
-            }
-        })
+</script>
+<!--页面加载事件-->
+<script type="text/javascript">
+    window.onload=function(){
+        base_info_show.style.backgroundColor="#7ed6df"
+        getRecord();
+        getBaseInfo()
+
     }
+</script>
+<!--公共函数-->
+<script type="text/javascript">
     var clear=function(){
         var i=0;
         for(;i<counts.length;i++){
@@ -499,42 +523,7 @@
             course_relate[i].style.display="none"
         }
     }
-    window.onload=function(){
-        base_info_show.style.backgroundColor="#7ed6df"
-        getRecord();
-        getBaseInfo()
 
-    }
-    showMessage.onclick=function(){
-        showMessage.className="current";
-        showComplain.className="";
-        infosPage.style.display="none"
-        coursePage.style.display="block"
-        show_select_course.style.display="none"
-        show_course.style.display="inline-block"
-        student_course_show.style.backgroundColor="#7ed6df"
-        getStudentCourse()
-    }
-    showComplain.onclick=function(){
-        showMessage.className="";
-        showComplain.className="current";
-        coursePage.style.display="none";
-        infosPage.style.display="block"
-        clear();
-        base_info_show.className="count"
-        base_info_show.style.backgroundColor="#7ed6df"
-        base_info.style.display="inline-block"
-        getBaseInfo()
-    }
-    exit.onclick=function(){
-        $.ajax({
-            type:"get",
-            url:"user/exit",
-            success:function(){
-                location.href="login.html"
-            }
-        })
-    }
 </script>
 </body>
 </html>

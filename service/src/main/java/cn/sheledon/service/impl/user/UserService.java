@@ -43,7 +43,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User getUserOneByNameAndPwd(User user){
+    public User getUserOneByNameAndPwd(User user) throws UserNotFoundException,PermissionException{
         User resUser=userDao.getUserByNameAnsPassword(user);
         if (user==null){
             throw new UserNotFoundException();

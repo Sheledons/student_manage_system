@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="7" failures="0" name="cn.sheledon.test.courseTest.ICourseDaoTest" time="0.536" errors="0" skipped="0">
+<testsuite tests="7" failures="0" name="cn.sheledon.test.courseTest.ICourseDaoTest" time="0.589" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_152\jre\bin"/>
     <property name="java.vm.version" value="25.152-b16"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="D:\IDEAProject\databaseExperiment\dao"/>
+    <property name="maven.multiModuleProjectDirectory" value="D:\IDEAProject\databaseExperiment"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="D:\IDEAProject\databaseExperiment\dao"/>
+    <property name="user.dir" value="D:\IDEAProject\databaseExperiment"/>
     <property name="java.runtime.version" value="1.8.0_152-b16"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_152\jre\lib\endorsed"/>
@@ -65,11 +65,11 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="cn.sheledon.test.courseTest.ICourseDaoTest" name="deleteSelectCourseTest" time="0.48"/>
-  <testcase classname="cn.sheledon.test.courseTest.ICourseDaoTest" name="getCourseClassTest" time="0.006"/>
-  <testcase classname="cn.sheledon.test.courseTest.ICourseDaoTest" name="getCourseClassByTeacherIdTest" time="0.008"/>
-  <testcase classname="cn.sheledon.test.courseTest.ICourseDaoTest" name="getCourseClassScoreByStudentIdTest" time="0.001"/>
-  <testcase classname="cn.sheledon.test.courseTest.ICourseDaoTest" name="updateStudentScoreTest" time="0.023"/>
-  <testcase classname="cn.sheledon.test.courseTest.ICourseDaoTest" name="getCourseClassByStudentIdTest" time="0.008"/>
-  <testcase classname="cn.sheledon.test.courseTest.ICourseDaoTest" name="createSelectCourseTest" time="0.01"/>
+  <testcase classname="cn.sheledon.test.courseTest.ICourseDaoTest" name="deleteSelectCourseTest" time="0.518"/>
+  <testcase classname="cn.sheledon.test.courseTest.ICourseDaoTest" name="getCourseClassTest" time="0.011"/>
+  <testcase classname="cn.sheledon.test.courseTest.ICourseDaoTest" name="getCourseClassByTeacherIdTest" time="0.009"/>
+  <testcase classname="cn.sheledon.test.courseTest.ICourseDaoTest" name="getCourseClassScoreByStudentIdTest" time="0.002"/>
+  <testcase classname="cn.sheledon.test.courseTest.ICourseDaoTest" name="updateStudentScoreTest" time="0.026"/>
+  <testcase classname="cn.sheledon.test.courseTest.ICourseDaoTest" name="getCourseClassByStudentIdTest" time="0.011"/>
+  <testcase classname="cn.sheledon.test.courseTest.ICourseDaoTest" name="createSelectCourseTest" time="0.012"/>
 </testsuite>

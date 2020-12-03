@@ -1,18 +1,16 @@
 package cn.sheledon.controller.teacher;
 
 import cn.sheledon.pojo.*;
-import cn.sheledon.service.inter.course.ICourseService;
-import cn.sheledon.service.inter.student.IStudentService;
 import cn.sheledon.service.inter.teacher.ITeacherService;
 import cn.sheledon.systemGroup.ResponseResult;
 import cn.sheledon.systemGroup.ResponseStatus;
-import cn.sheledon.utils.ControllerUtils;
+import cn.sheledon.utils.ResponseUtils;
+import cn.sheledon.utils.SessionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * @author sheledon
@@ -33,25 +31,25 @@ public class TeacherController {
     @GetMapping("/name")
     public ResponseResult getName(HttpServletRequest request){
         try {
-            Teacher teacher= (Teacher) ControllerUtils.getObjectFromSession(request,"teacher");
-            return ResponseResult.builder().status(ResponseStatus.RESPONSE_OK).data(teacher.getName()).build();
+            Teacher teacher= (Teacher) SessionUtils.getObjectFromSession(request,"teacher");
+            return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,teacher.getName());
         }catch (Exception e){
-            return ResponseResult.builder().status(ResponseStatus.USERINFO_ERROR).build();
+            return ResponseUtils.buildResponseResult(ResponseStatus.USERINFO_ERROR);
         }
     }
 
     @GetMapping("/teacherInfos")
     public ResponseResult getTeacherInfo(HttpServletRequest request) {
-        Teacher teacher = (Teacher) ControllerUtils.getObjectFromSession(request, "teacher");
+        Teacher teacher = (Teacher) SessionUtils.getObjectFromSession(request, "teacher");
         Teacher resTeacher = teacherService.getTeacherInfoByTeacherId(teacher.getTeacherId());
-        return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,resTeacher);
+        return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,resTeacher);
     }
 
     @GetMapping("/teacherArchives")
     public ResponseResult getTeacherArchives(HttpServletRequest request) {
-        Teacher teacher = (Teacher) ControllerUtils.getObjectFromSession(request, "teacher");
+        Teacher teacher = (Teacher) SessionUtils.getObjectFromSession(request, "teacher");
         TeacherArchive archive=teacherService.getTeacherArchive(teacher.getTeacherId());
-        return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,archive);
+        return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,archive);
     }
 
 }

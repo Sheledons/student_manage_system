@@ -6,7 +6,8 @@ import cn.sheledon.service.inter.student.IStudentService;
 import cn.sheledon.systemGroup.Permission;
 import cn.sheledon.systemGroup.ResponseResult;
 import cn.sheledon.systemGroup.ResponseStatus;
-import cn.sheledon.utils.ControllerUtils;
+import cn.sheledon.utils.ResponseUtils;
+import cn.sheledon.utils.SessionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,10 +36,10 @@ public class StudentController {
     @GetMapping("/name")
     public ResponseResult getName(HttpServletRequest request){
         try {
-            Student student= (Student) ControllerUtils.getObjectFromSession(request,"student");
-            return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,student);
+            Student student= (Student) SessionUtils.getObjectFromSession(request,"student");
+            return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,student.getName());
         }catch (Exception e){
-            return ControllerUtils.buildResponseResult(ResponseStatus.USERINFO_ERROR);
+            return ResponseUtils.buildResponseResult(ResponseStatus.USERINFO_ERROR);
         }
     }
 
@@ -47,13 +48,13 @@ public class StudentController {
     public ResponseResult getInfos(HttpServletRequest request){
         //后期要使用SpringSecurity对用户是否存在进行校验
         Student student=getAndCheckStudent(request);
-        return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,studentService.getStudentInfoByStudentId(student.getStudentId()));
+        return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,studentService.getStudentInfoByStudentId(student.getStudentId()));
     }
 
     @GetMapping("/archives")
     public ResponseResult getArchive(HttpServletRequest request) {
         Student student = getAndCheckStudent(request);
-        return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,studentService.getStudentArchive(student.getStudentId()));
+        return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,studentService.getStudentArchive(student.getStudentId()));
     }
 
     @GetMapping("/{classId}/students/{page}/{number}")
@@ -62,11 +63,11 @@ public class StudentController {
                                            @PathVariable("page") int page,
                                            @PathVariable("number") int number) {
         if (page<0){
-            return ControllerUtils.buildResponseResult(cn.sheledon.systemGroup.ResponseStatus.PARAMETER_ERROR);
+            return ResponseUtils.buildResponseResult(cn.sheledon.systemGroup.ResponseStatus.PARAMETER_ERROR);
         }
-        Teacher teacher = (Teacher) ControllerUtils.getObjectFromSession(request, "teacher");
+        Teacher teacher = (Teacher) SessionUtils.getObjectFromSession(request, "teacher");
         List<Student> resList= studentService.getClassStudentsByTeacherId(teacher.getTeacherId(), classId, page, number);
-        return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,resList);
+        return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,resList);
     }
 
     /**
@@ -83,17 +84,17 @@ public class StudentController {
                                                 @PathVariable("page") int page,
                                                 @PathVariable("number") int number){
         if (page<0 || number<0){
-            return ControllerUtils.buildResponseResult(ResponseStatus.PARAMETER_ERROR);
+            return ResponseUtils.buildResponseResult(ResponseStatus.PARAMETER_ERROR);
         }
-        Teacher teacher= (Teacher) ControllerUtils.getObjectFromSession(request,"teacher");
+        Teacher teacher= (Teacher) SessionUtils.getObjectFromSession(request,"teacher");
         List<Student> resList=studentService.getCourseClassStudentByTeacherId(teacher.getTeacherId(),courseClassId,page,number);
-        return ControllerUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,resList);
+        return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,resList);
     }
 
 
     private Student getAndCheckStudent(HttpServletRequest request){
-        Student student= (Student) ControllerUtils.getObjectFromSession(request,"student");
-        User user=(User) ControllerUtils.getObjectFromSession(request,"user");
+        Student student= (Student) SessionUtils.getObjectFromSession(request,"student");
+        User user=(User) SessionUtils.getObjectFromSession(request,"user");
         checkStudentIsValid(student,user);
         return student;
     }
