@@ -57,7 +57,15 @@ public class StudentController {
         return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,studentService.getStudentArchive(student.getStudentId()));
     }
 
-    @GetMapping("/{classId}/students/{page}/{number}")
+    /**
+     * 根据班级Id获得学生信息
+     * @param request
+     * @param classId
+     * @param page
+     * @param number
+     * @return
+     */
+    @GetMapping("/class/{classId}/{page}/{number}")
     public ResponseResult getClassStudents(HttpServletRequest request,
                                            @PathVariable("classId") String classId,
                                            @PathVariable("page") int page,
@@ -78,7 +86,7 @@ public class StudentController {
      * @param number
      * @return
      */
-    @GetMapping("/{courseClassId}/{page}/{number}")
+    @GetMapping("/courseClass/{courseClassId}/{page}/{number}")
     public ResponseResult getCourseClassStudent(HttpServletRequest request,
                                                 @PathVariable("courseClassId") String courseClassId,
                                                 @PathVariable("page") int page,

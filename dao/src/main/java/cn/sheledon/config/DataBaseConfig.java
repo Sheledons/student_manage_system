@@ -13,7 +13,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * mysqBatis配置类
+ * myBatis配置类
  * @author sheledon
  */
 @Configuration

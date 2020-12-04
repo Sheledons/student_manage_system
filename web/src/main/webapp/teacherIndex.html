@@ -5,301 +5,404 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/base.css">
-    <!--	<script type="text/javascript" src="js/jquery.js"></script>-->
-    <script src="https://libs.baidu.com/jquery/1.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/teacherPage.css">
+    <script src="https://libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+    <style type="text/css">
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-top: -31px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 12px 16px;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+    </style>
 </head>
 <body>
 <div class="head">
-    教务管理系统，学生端
+    教务管理系统   教师端
     <img src="images/logo.jpg" class="logo">
     <i class="userName">admin</i>
     <a href="javascript:;" class="exit">退出</a>
 </div>
-<div>
-    <div class="catalog fl">
-        <div class="title">MAIN</div>
-        <div class="det">
-            <ul>
-                <li id="showComplain" class="current"><span></span>投诉</li>
-                <li id="showMessage"><span></span>反馈</li>
-                <li id="showVerify"><span></span>验证</li>
-            </ul>
+<div class="catalog fl">
+    <div class="title">MAIN</div>
+    <div class="det">
+        <ul>
+            <li id="showComplain" class="current"><span></span>信息</li>
+            <li id="showMessage"><span></span>我管理的班级</li>
+            <li id="showCoursesClass"><span></span>我的教学班</li>
+        </ul>
+    </div>
+</div>
+<div class="content_info">
+    <div class="infosPage">
+        <div class="content fl">
+            <div class="count base_info_show">
+                基本信息
+                <i></i>
+            </div>
+            <div class="count base_archive_show">
+                我的档案
+                <i></i>
+            </div>
+        </div>
+        <div class="show_info">
+            <div class="info_left">
+                <img src="images/avatar.jpg">
+            </div>
+            <div class="info_right">
+                <div class="base_info info">
+                    <div class="title">基本信息</div>
+                    <div>
+                        <ul>
+                            <li><span>教师ID:</span></li>
+                            <li><span>姓名:</span></li>
+                            <li><span>性别:</span></li>
+                            <li><span>联系方式:</span></li>
+                            <li><span>院系:</span></li>
+                            <li><span>学院:</span></li>
+
+                        </ul>
+                        <ul >
+                            <li><span class="teacherId"></span></li>
+                            <li><span class="teacherName"></span></li>
+                            <li><span class="gender"></span></li>
+                            <li><span class="phoneNumber"></span></li>
+                            <li><span class="department"></span></li>
+                            <li><span class="academy"></span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="base_archive info" style="display: none">
+                    <div class="title">我的档案</div>
+                    <div>
+                        <ul>
+                            <li><span>入职时间:</span></li>
+                            <li><span>职称:</span></li>
+                        </ul>
+                        <ul>
+                            <li><span class="inductionDate"></span></li>
+                            <li><span class="professionalGrade"></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="content fl">
-        <div class="count complainCount">
-            Complain count
-            <span class="num">19</span>
-            <i></i>
+    <div class="classPage" style="display: none">
+        <div class="content fl">
+            <div class="count teacher_class_show cur_show">
+                班级
+                <i></i>
+            </div>
         </div>
-        <div class="count verifyCount">
-            Verify count
-            <span class="num">19</span>
-            <i></i>
+        <div class="show_class class_relate item">
+            <ul class="message item_course class_item">
+            </ul>
         </div>
-        <div class="count messageCount">
-            Message count
-            <span class="num">0</span>
-            <i></i>
-        </div>
-        <div class="item">
-            <ul class="complain">
-                <li>
-                    <!--					<img src="images/avatar.jpg">-->
-                    <!--					<div>这个任务不是去冰岛的任务，而是去了撒哈拉沙漠</div>-->
-                    <!--					<span  class="naviToDetail"></span>-->
-                    <!--					<div class="detail">-->
-                    <!--						<ul>-->
-                    <!--							<li><span>起始地:</span><span>前期</span></li>-->
-                    <!--							<li><span>目的地:</span><span>冰岛</span></li>-->
-                    <!--							<li><span>出发时间:</span><span>2020-2-2</span></li>-->
-                    <!--							<li><span>车载人数:</span><span>10</span></li>-->
-                    <!--							<li><span>联系方式:</span><span>1983449241</span></li>-->
-                    <!--							<li><span>价格:</span><span>客满就走</span></li>-->
-                    <!--							<li><span>补充:</span><span>客满就走</span></li>-->
-                    <!--							<button class="complainSuccess">投诉成功</button>-->
-                    <!--							<button class="complainFail">投诉失败</button>-->
-                    <!--						</ul>-->
-                    <!--					</div>-->
-                    <!--				</li>-->
-            </ul>
-            <ul class="message">
-                <li>
-                    <img src="images/avatar.jpg">
-                    <div>平台暂时没有反馈</div>
-                    <span  class="naviToDetail"></span>
-                </li>
-            </ul>
-            <ul class="verify">
-            </ul>
+        <div class="span" style="overflow-y:scroll">
+            <div class="show_class item ">
+                <ul class="message item_student">
+                    <li style="margin-left: auto;margin-right: auto;background-color: #9AECDB ;position: relative">
+                        <div>
+                            <ul>
+                                <li><span>姓名:</span></li>
+                                <li><span>性别:</span></li>
+                                <li><span>联系电话:</span></li>
+                            </ul>
+                            <ul class="student_info">
+                                <li><span class="studentId">是落拓呀</span></li>
+                                <li><span class="name">男</span></li>
+                                <li><span class="gender">13812389</span></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
+<!--进入index初始化请求-->
 <script type="text/javascript">
-    //获取数据
-    var detail=document.querySelector(".detail");
     var exit=document.querySelector(".exit");
-    var verify=document.querySelector(".verify");
-    var complain=document.querySelector(".complain");
-    var naviToDetail=document.querySelectorAll(".naviToDetail")
-    var message=document.querySelector(".message");
-    var messageCount=document.querySelector(".messageCount");
-    var verifyCount=document.querySelector(".verifyCount");
-    var complainCount=document.querySelector(".complainCount");
-    var vc=document.querySelector(".verifyCount .num");
-    var cc=document.querySelector(".complainCount .num");
-    var showMessage=document.querySelector("#showMessage");
-    var showComplain=document.querySelector("#showComplain");
-    var showVerify=document.querySelector("#showVerify");
-    var vcount=0;
-    var vcon="";
-    var ccon="";
+    var userName=document.querySelector(".userName")
     var getRecord=function(){
         $.ajax({
             type:"get",
             dataType:"json",
-            url:"verify/getStoreVerifyRecord",
-            success:function(data){
-                console.log("success get getStoreVerifyRecord");
-                console.log(data)
-                for(var i=0;i<data.length;i++){
-                    vcon+="<li><div>商家认证</div><div><span class=\"tag\">店铺名称</span><span class=\"con\">"+data[i].storeName+"</span></div><div><span class=\"tag\">店铺地址</span><span class=\"con\">"+data[i].storeAddress+"</span></div><button class=\"verifyFail\" data-flag=2403 id="+data[i]._id+">验证失败</button><button class=\"verifySuccess\" data-flag=2403 id="+data[i]._id+">验证成功</button>";
-                }
-                verify.innerHTML=vcon;
-                vcount+=data.length;
-                vc.innerHTML=vcount;
-            }
-        })
-        $.ajax({
-            type:"get",
-            dataType:"json",
-            url:"verify/getDriverVerifyRecord",
-            success:function(data){
-                console.log("success getDriverVerifyRecord");
-                console.log(data)
-                for(var i=0;i<data.length;i++){
-                    vcon+="<li><div>车主认证</div><div><span class=\"tag\">车主名称</span><span class=\"con\">"+data[i].driverName+"</span></div><div><span class=\"tag\">联系方式</span><span class=\"con\">"+data[i].driverNum+"</span></div><button class=\"verifyFail\" data-flag=1203 id="+data[i]._id+">验证失败</button><button class=\"verifySuccess\" data-flag=1203 id="+data[i]._id+">验证成功</button>";
-                }
-                verify.innerHTML=vcon;
-                vcount+=data.length;
-                vc.innerHTML=vcount;
-            }
-        })
-        $.ajax({
-            type:"get",
-            dataType:"json",
-            url:"complain/getComplainRecord",
-            success:function(data){
-                console.log("success getDriverVerifyRecord");
-                console.log(data)
-                for(var i=0;i<data.length;i++){
-                    ccon+="<li class='comp' id="+data[i]._id+"><img src=\"images/avatar.jpg\"><div>"+data[i].content+"</div><span data-id="+data[i].complainTaskId+" class=\"naviToDetail\"></span><div class=\"detail\"></div></li>"
-                }
-                complain.innerHTML=ccon;
-                cc.innerHTML=data.length;
-            }
-        });
-        $.ajax({
-            type:"get",
-            dataType:"json",
-            url:"user/getName",
-            success:function(data){
+            url:"teachers/name",
+            success:function(response){
                 console.log("success get userName")
-                userName.innerHTML=data
+                userName.innerHTML=response.data
             }
         })
-    }
-    window.onload=function(){
-        console.log("页面加载，ajax请求获取记录及管理员信息")
-        // // 默认显示投诉页面
-        getRecord();
-        message.style.display="none";
-        messageCount.style.display="none";
-        complain.style.display="block";
-        complainCount.style.display="block";
-        verify.style.display="none";
-        verifyCount.style.display="none";
-    }
-    //查看详情
-    $('.naviToDetail').live('click',function(){
-        console.log("点击");
-        var allDetalElement=document.querySelectorAll(".detail");
-        for(var i=0;i<allDetalElement.length;i++){
-            allDetalElement[i].style.display="none";
-        }
-        console.log(allDetalElement)
-        //懒加载呗
-        var detailElement=this.nextElementSibling;
-        console.log(this)
-        console.log(detailElement)
-        console.log(detailElement.childNodes)
-        if(detailElement.childNodes.length==0){
-            var _id=this.getAttribute("data-id");
-            var con="";
-            //发送请求获取被投诉任务的数据
-            $.ajax({
-                type:"get",
-                dataTye:"json",
-                url:"complain/taskDetail?id="+_id,
-                success:function(data){
-                    console.log("success get taskDetail")
-                    console.log(data)
-                    console.log(data.startPlace)
-                    if(data.startPlace==undefined){
-                        con="<ul><li><span>开始时间:</span><span>"+data.startTime+"</span></li><li><span>结束时间:</span><span>"+data.endTime+"</span></li><li><span>内容:</span><span>"+data.content+"</span></li><li><span>联系方式:</span><span>"+data.number+"</span></li><li><span>价格:</span<span>"+data.price+"</span></li><button class=\"complainSuccess\" id="+data._id+">投诉成功</button><button class=\"complainFail\" id="+data._id+">投诉失败</button></ul>"
-                    }else{
-                        con="<ul><li><span>起始地:</span><span>"+data.startPlace+"</span></li><li><span>目的地:</span><span>"+data.endPlace+"</span></li><li><span>出发时间:</span><span>"+data.startTime+"</span></li><li><span>车载人数:</span><span>"+data.numPeople+"</span></li><li><span>联系方式:</span><span>"+data.number+"</span></li><li><span>价格:</span<span>>"+data.price+"</span></li><li><span>补充:</span>>"+data.supplement+"</span></li><button class=\"complainSuccess\" id="+data._id+">投诉成功</button><button class=\"complainFail\" id="+data._id+">投诉失败</button></ul>"
-                    }
-                    detailElement.innerHTML=con;
-                    detailElement.style.display="block";
-                }
-            })
-        }
-        else{
-            console.log("有")
-            console.log(detailElement.style.display)
-            if(detailElement.style.display=="block")
-                detailElement.style.display="none";
-            else
-                detailElement.style.display="block";
-        }
-    })
-    showMessage.onclick=function(){
-        showMessage.className="current";
-        showComplain.className="";
-        showVerify.className="";
-        messageCount.style.display="block";
-        complainCount.style.display="none";
-        verifyCount.style.display="none";
-        message.style.display="block";
-        complain.style.display="none";
-        verify.style.display="none";
-    }
-    showComplain.onclick=function(){
-        showMessage.className="";
-        showComplain.className="current";
-        showVerify.className="";
-        messageCount.style.display="none";
-        complainCount.style.display="block";
-        verifyCount.style.display="none";
-        message.style.display="none";
-        complain.style.display="block";
-        verify.style.display="none";
-    }
-    showVerify.onclick=function(){
-        showMessage.className="";
-        showComplain.className="";
-        showVerify.className="current";
-        messageCount.style.display="none";
-        complainCount.style.display="none";
-        verifyCount.style.display="block";
-        message.style.display="none";
-        complain.style.display="none";
-        verify.style.display="block";
     }
     exit.onclick=function(){
         $.ajax({
             type:"get",
             url:"user/exit",
             success:function(){
-                location.href="user/login.html"
+                location.href="login.html"
             }
         })
     }
 </script>
+<!-- 显示信息 事件的绑定-->
 <script type="text/javascript">
-    $('.complainSuccess').live('click',function(){
-        var id=this.id;
-        console.log(this)
+    var showMessage=document.querySelector("#showMessage");
+    var showComplain=document.querySelector("#showComplain");
+    var base_info_show=document.querySelector(".base_info_show");
+    var base_archive_show=document.querySelector(".base_archive_show");
+    var base_info=document.querySelector(".base_info")
+    var base_archive=document.querySelector(".base_archive")
+    var infos=document.querySelectorAll(".info")
+    var infosPage=document.querySelector(".infosPage")
+    base_info_show.onclick=function(){
+        clear();
+        base_info_show.className="count"
+        base_info_show.style.backgroundColor="#7ed6df"
+        base_info.style.display="inline-block"
+        getBaseInfo()
+    }
+    base_archive_show.onclick=function () {
+        clear();
+        base_archive_show.className="count cur_show"
+        base_archive_show.style.backgroundColor="#7ed6df"
+        base_archive.style.display="inline-block"
+        getArchive()
+    }
+    showMessage.onclick=function(){
+        showMessage.className="current";
+        showComplain.className="";
+        infosPage.style.display="none"
+        classPage.style.display="block"
+        show_class.style.display="inline-block"
+        teacher_class_show.style.backgroundColor="#7ed6df"
+        getTeacherClass()
+    }
+    showComplain.onclick=function(){
+        showMessage.className="";
+        showComplain.className="current";
+        classPage.style.display="none";
+        infosPage.style.display="block"
+        clear();
+        base_info_show.className="count"
+        base_info_show.style.backgroundColor="#7ed6df"
+        base_info.style.display="inline-block"
+        getBaseInfo()
+    }
+
+</script>
+<!--渲染教师基本信息-->
+<script type="text/javascript">
+    var teacherId=document.querySelector(".teacherId");
+    var teacherName=document.querySelector(".teacherName")
+    var gender=document.querySelector(".gender")
+    var phoneNumber=document.querySelector(".phoneNumber")
+    var department=document.querySelector(".department")
+    var academy=document.querySelector(".academy")
+    var getBaseInfo=function(){
+        $.ajax({
+            type:"get",
+            url:"/teachers/infos",
+            success:function(response){
+                var data=response.data;
+                teacherId.innerHTML=data.teacherId
+                teacherName.innerHTML=data.name;
+                gender.innerHTML=data.gender
+                phoneNumber.innerHTML=data.phoneNumber
+                department.innerHTML=data.department.name
+                academy.innerHTML=data.department.academy.name
+            }
+        })
+    }
+</script>
+<!--渲染教师档案信息-->
+<script type="text/javascript">
+    var inductionDate=document.querySelector(".inductionDate")
+    var professionalGrade=document.querySelector(".professionalGrade")
+    var getArchive=function(){
+        $.ajax({
+            type:"get",
+            url:"/teachers/archives",
+            success:function(response){
+                var data=response.data
+                var iidate=data.inductionDate
+                inductionDate.innerHTML=iidate[0]+"年"+iidate[1]+"月"+iidate[2]+"日"
+                professionalGrade.innerHTML=data.professionalGrade
+            }
+        })
+    }
+</script>
+<!--班级事件绑定-->
+<script type="text/javascript">
+    var counts=document.querySelectorAll(".count");
+    var classPage=document.querySelector(".classPage")
+    var item_course=document.querySelector(".item_class")
+    var show_class=document.querySelector(".show_class")
+    var item_select_course=document.querySelector(".item_select_course")
+    var teacher_class_show=document.querySelector(".teacher_class_show")
+    teacher_class_show.onclick=function(){
+        teacher_class_show.style.backgroundColor="#7ed6df"
+        show_class.style.display="inline-block"
+        getTeacherClass()
+    }
+</script>
+<!--渲染教师管理班级的操作-->
+<script type="text/javascript">
+    var class_item=document.querySelector(".class_item")
+    var getTeacherClass=function(){
+        $.ajax({
+            type:"get",
+            url:"/class/teachers",
+            success:function(response){
+                var datas=response.data
+                var str=""
+                for (var i=0;i<datas.length;i++){
+                    str+="                <li>\n" +
+                        "                    <div>\n" +
+                        "                        <ul>\n" +
+                        "                            <li><span>班级ID:</span></li>\n" +
+                        "                            <li><span>班级名称:</span></li>\n" +
+                        "                        </ul>\n" +
+                        "                        <ul class=\"class_item course_info\">\n" +
+                        "                            <li><span class=\"classId\">"+datas[i].classId+"</span></li>\n" +
+                        "                            <li><span class=\"className\">"+datas[i].className+"</span></li>\n" +
+                        "                        </ul>\n" +
+                        "                        <button class=\"showStudentBtn\" classId=\'"+datas[i].classId+"\'>"+"查看学生</button>\n" +
+                        "                    </div>\n" +
+                        "                </li>"
+                }
+                class_item.innerHTML=str
+            }
+        })
+    }
+</script>
+<!--渲染班级学生操作-->
+<script type="text/javascript">
+    var item_student=document.querySelector(".item_student")
+    $('.show_class').on("click",".showStudentBtn",function(){
+        var id=$(this).attr("classId")
+        $.ajax({
+            type:"get",
+            url:"/student/class/"+id+"/1/10",
+            success:function(response){
+                $('.span').show();
+                var datas=response.data
+                var str=""
+                for (var i=0;i<datas.length;i++){
+                    str+="                    <li style=\"margin-left: auto;margin-right: auto;background-color: #9AECDB ;position: relative\">\n" +
+                        "                        <div>\n" +
+                        "                            <ul>\n" +
+                        "                                <li><span>姓名:  "+datas[i].name+"</span></li>\n" +
+                        "                                <li><span>性别:  "+datas[i].gender+"</span></li>\n" +
+                        "                                <li><span>联系电话:  "+datas[i].phoneNumber+"</span></li>\n" +
+                        "                            </ul>\n" +
+                        "                        </div>\n" +
+                        "                    </li>"
+                }
+                item_student.innerHTML=str;
+            }
+        })
+    })
+</script>
+<!--选课操作-->
+<script type="text/javascript">
+    $('.item_select_course').on('click','.selectBtn',function(){
+        var id=$(this).attr("courseClassId")
         console.log(id)
-        var pnode=this.parentNode.parentNode.parentNode;
-        console.log(pnode);
-        console.log("投诉成功")
+        var str="[{ \"courseClassId\":\""+id+"\"}]"
+        console.log($.parseJSON(str))
+        console.log(JSON.stringify($.parseJSON(str)))
         $.ajax({
-            type:"get",
-            dataType:"json",
-            url:"complain/complainSuccess?openid="+id+"&id="+pnode.id,
-            success:function(data){
-                if(data.flag==true){
-                    alert("处理成功")
-                    pnode.style.display="none";
-                }else{
-                    alert("处理失败，请联系网站维护员")
-                }
+            type:"post",
+            url:"/courses/studentCourses",
+            contentType:"application/json;charset=UTF-8",
+            data: JSON.stringify($.parseJSON(str)),
+            success:function(response){
+                //后期解决了枚举传值的问题再改
+                item_select_course.innerHTML=""
+                getStudentCanSelectCourse();
             }
         })
-    })
-    $('.complainFail').live('click',function(){
-        var pnode=this.parentNode.parentNode.parentNode;
-        console.log(pnode)
-        console.log("投诉失败")
+    });
+</script>
+<!--渲染可选课程-->
+<script type="text/javascript">
+    var getStudentCanSelectCourse=function(){
         $.ajax({
             type:"get",
-            dataType:"json",
-            url:"complain/complainFail?id="+pnode.id,
-            success:function(data){
-                if(data.flag==true){
-                    alert("处理成功")
-                    pnode.style.display="none";
-                }else{
-                    alert("处理失败，请联系网站维护员")
+            url:"/courses/courseClass/options",
+            success:function(response){
+                var resCourses=response.data;
+                var i=0
+                var str=""
+                for (;i<resCourses.length;i++){
+                    var sDate=resCourses[i].teachingStartDate
+                    var eDate=resCourses[i].teachingEndDate
+                    var classroom=resCourses[i].classroom
+                    str+=("                    <li>\n" +
+                        "                        <div>\n" +
+                        "                            <ul>\n" +
+                        "                                <li><span>课程班ID:</span></li>\n" +
+                        "                                <li><span>课程名:</span></li>\n" +
+                        "                                <li><span>开始时间:</span></li>\n" +
+                        "                                <li><span>结束时间:</span></li>\n" +
+                        "                                <li><span>学分:</span></li>\n" +
+                        "                                <li><span>教学地点:</span></li>\n" +
+                        "                                <li><span>简介:</span></li>\n" +
+                        "                            </ul>\n" +
+                        "                            <ul class='course_info'>\n" +
+                        "                                <li><span>"+resCourses[i].courseClassId+"</span></li>\n" +
+                        "                                <li><span>"+resCourses[i].course.courseName+"</span></li>\n" +
+                        "                                <li><span>"+sDate[0]+"年"+sDate[1]+"月"+sDate[2]+"日"+"</span></li>\n"  +
+                        "                                <li><span>"+eDate[0]+"年"+eDate[1]+"月"+eDate[2]+"日"+"</span></li>\n"   +
+                        "                                <li><span>"+resCourses[i].course.teachingDetails.credit+"</span></li>\n"  +
+                        "                                <li><span>"+classroom.location+classroom.classroomNum+"</span></li>\n"  +
+                        "                                <li><span style='white-space: normal'>"+resCourses[i].course.introduce+"</span></li>\n"  +
+                        "                            </ul>\n" +
+                        "                            <button class=\"selectBtn\" courseClassId="+resCourses[i].courseClassId+">选课</button>   \n"+
+                        "                        </div>\n" +
+                        "                    </li>")
                 }
+                item_select_course.innerHTML=str
             }
         })
-    })
+    }
 </script>
+
+<!--页面加载事件-->
 <script type="text/javascript">
-    var userName=document.querySelector(".userName");
-    var exit=document.querySelector(".exit");
+    window.onload=function(){
+        base_info_show.style.backgroundColor="#7ed6df"
+        getRecord();
+        getBaseInfo()
+
+    }
 </script>
+<!--公共函数-->
 <script type="text/javascript">
-    $('.verifySuccess').live('click',function(){
-        var id=this.id;
+    var clear=function(){
+        var i=0;
+        for(;i<counts.length;i++){
+            counts[i].style.backgroundColor="white"
+            counts[i].className="count"
+        }
+        for(i=0;i<infos.length;i++){
+            infos[i].style.display="none"
+        }
+    }
 
-    })
-    $('.verifyFail').live('click',function(){
-
-    })
 </script>
 </body>
 </html>

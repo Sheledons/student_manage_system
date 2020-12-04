@@ -49,7 +49,7 @@ public class IStudentDaoTest {
     @Test
     public void getStuInfoByTeacherIdAndIdTestTrue(){
         List<Student> list=studentDao
-                .getStuInfoByTeacherIdAndId("1800001","4000001",true,0,1);
+                .getClassStudentInfoById("1800001","4000001",0,1);
         System.out.println(list);
     }
     @Test

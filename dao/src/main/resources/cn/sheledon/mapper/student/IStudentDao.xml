@@ -70,13 +70,13 @@
     </select>
     <select id="getStuInfoByTeacherIdAndId" resultMap="studentMap">
         SELECT student.name ,student.gender,student.phoneNumber,class.className
-        <if test="isClass==true">
+        <if test="isClass==null">
             FROM student,class,teacher,studentinfo
             WHERE studentinfo.classId=class.classId
             AND studentInfo.infoId=student.infoId
             AND class.classId=#{id}
         </if>
-        <if test="isClass!=true">
+        <if test="isClass!=null">
             FROM student,teacher,stuselectcourse,courseClass,teachingCase,class
             WHERE teacher.teacherId=teachingCase.teacherId
             AND courseClass.courseClassId=teachingCase.courseClassId

@@ -52,7 +52,7 @@ public interface IStudentDao {
      * @return
      */
     default List<Student> getClassStudentInfoById(String teacherId,String classId,int page,int num){
-        return this.getStuInfoByTeacherIdAndId(teacherId,classId,true,page,num);
+        return this.getStuInfoByTeacherIdAndId(teacherId,classId,null,page,num);
     }
 
     /**
@@ -75,7 +75,7 @@ public interface IStudentDao {
      * @param num
      * @return
      */
-    List<Student> getStuInfoByTeacherIdAndId(@Param("teacherId") String teacherId,@Param("id") String id,@Param("isClass") boolean isClass,@Param("page") int page,@Param("num") int num);
+    List<Student> getStuInfoByTeacherIdAndId(@Param("teacherId") String teacherId,@Param("id") String id,@Param("isClass") Boolean isClass,@Param("page") int page,@Param("num") int num);
 
 
 }

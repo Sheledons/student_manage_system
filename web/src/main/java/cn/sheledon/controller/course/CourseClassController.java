@@ -30,6 +30,14 @@ public class CourseClassController {
     public CourseClassController(ICourseService courseService) {
         this.courseService = courseService;
     }
+
+    /**
+     * 教师所带教学班获得
+     * @param request
+     * @param page
+     * @param number
+     * @return
+     */
     @GetMapping("/teacher/courseClass/{page}/{number}")
     public ResponseResult getCourseClass(HttpServletRequest request, @PathVariable("page") int page, @PathVariable("number") int number){
         if (page<0 || number<0){
@@ -39,12 +47,25 @@ public class CourseClassController {
         List<CourseClass> resList=courseService.getCourseClassByTeacherId(teacher.getTeacherId());
         return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,resList);
     }
+
+    /**
+     * 学生当前课程获得
+     * @param request
+     * @return
+     */
     @GetMapping("/studentCourse")
     public ResponseResult getStudentCourse(HttpServletRequest request){
         Student student= (Student) SessionUtils.getObjectFromSession(request,"student");
         List<CourseClass> ccs=courseService.getCourseClassByStudentId(student.getStudentId());
         return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,ccs);
     }
+
+    /**
+     * 学生分数录入
+     * @param request
+     * @param studentCourseList
+     * @return
+     */
     @PutMapping("/studentCourses/scores")
     public ResponseResult updateStudentCourseScores(HttpServletRequest request, @RequestBody List<StudentCourse> studentCourseList){
         Teacher teacher=(Teacher) SessionUtils.getObjectFromSession(request,"teacher");
@@ -54,6 +75,13 @@ public class CourseClassController {
         }
         return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,studentCourseList);
     }
+
+    /**
+     * 获得所有教学班
+     * @param page
+     * @param num
+     * @return
+     */
     @GetMapping("/courseClass/{page}/{num}")
     public ResponseResult getCourseClass(@PathVariable("page") int page,@PathVariable("num") int num){
         if (page<0 || num<0){
@@ -61,18 +89,36 @@ public class CourseClassController {
         }
         return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,courseService.getCourseClass(page,num));
     }
+
+    /**
+     * 学生可选课程
+     * @param request
+     * @return
+     */
     @GetMapping("/courseClass/options")
     public ResponseResult getCourseClassOptions(HttpServletRequest request){
         Student student= (Student) SessionUtils.getObjectFromSession(request,"student");
         return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,courseService.getStudentCanSelectCourse(student.getStudentId()));
     }
 
+    /**
+     * 学生分数获取
+     * @param request
+     * @return
+     */
     @GetMapping("/student/studentCourse/scores")
     public ResponseResult getStudentCourseScores(HttpServletRequest request){
         Student student= (Student) SessionUtils.getObjectFromSession(request,"student");
         List<CourseClass> list=courseService.getStudentScoreById(student.getStudentId());
         return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,list);
     }
+
+    /**
+     * 选课操作
+     * @param request
+     * @param studentCourseList
+     * @return
+     */
     @PostMapping("/studentCourses")
     public ResponseResult addStudentCourses(HttpServletRequest request,@RequestBody List<StudentCourse> studentCourseList){
         studentCourseList.stream().forEach((c)->{
@@ -83,6 +129,13 @@ public class CourseClassController {
         List<CourseClass> courseClasses=courseService.updateSelectCourse(student.getStudentId(),studentCourseList);
         return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,courseClasses);
     }
+
+    /**
+     * 删除选课
+     * @param request
+     * @param courseList
+     * @return
+     */
     @DeleteMapping("/studentCourses")
     public ResponseResult deleteStudentCourses(HttpServletRequest request,@RequestBody List<StudentCourse> courseList){
         Student student= (Student) SessionUtils.getObjectFromSession(request,"student");

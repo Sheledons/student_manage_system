@@ -38,14 +38,14 @@ public class TeacherController {
         }
     }
 
-    @GetMapping("/teacherInfos")
+    @GetMapping("/infos")
     public ResponseResult getTeacherInfo(HttpServletRequest request) {
         Teacher teacher = (Teacher) SessionUtils.getObjectFromSession(request, "teacher");
         Teacher resTeacher = teacherService.getTeacherInfoByTeacherId(teacher.getTeacherId());
         return ResponseUtils.buildResponseResult(ResponseStatus.RESPONSE_OK,resTeacher);
     }
 
-    @GetMapping("/teacherArchives")
+    @GetMapping("/archives")
     public ResponseResult getTeacherArchives(HttpServletRequest request) {
         Teacher teacher = (Teacher) SessionUtils.getObjectFromSession(request, "teacher");
         TeacherArchive archive=teacherService.getTeacherArchive(teacher.getTeacherId());
