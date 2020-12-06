@@ -8,23 +8,9 @@
     <link rel="stylesheet" type="text/css" href="css/teacherPage.css">
     <script src="https://libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
     <style type="text/css">
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            margin-top: -31px;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            padding: 12px 16px;
-        }
         .dropdown:hover .dropdown-content {
             display: block;
         }
-
     </style>
 </head>
 <body>
@@ -102,7 +88,7 @@
     <div class="classPage" style="display: none">
         <div class="content fl">
             <div class="count teacher_class_show cur_show">
-                班级
+                班级列表
                 <i></i>
             </div>
         </div>
@@ -111,6 +97,7 @@
             </ul>
         </div>
         <div class="span" style="overflow-y:scroll">
+            <span class="close"></span>
             <div class="show_class item ">
                 <ul class="message item_student">
                     <li style="margin-left: auto;margin-right: auto;background-color: #9AECDB ;position: relative">
@@ -129,6 +116,18 @@
                     </li>
                 </ul>
             </div>
+        </div>
+    </div>
+    <div class="courseClassPage">
+        <div class="content fl">
+            <div class="count show_courseClass">
+                教学班级
+                <i></i>
+            </div>
+        </div>
+        <div class="show_course  item">
+            <ul class="message item_courseClass item_course class_item">
+            </ul>
         </div>
     </div>
 </div>
@@ -159,14 +158,17 @@
 </script>
 <!-- 显示信息 事件的绑定-->
 <script type="text/javascript">
-    var showMessage=document.querySelector("#showMessage");
-    var showComplain=document.querySelector("#showComplain");
-    var base_info_show=document.querySelector(".base_info_show");
-    var base_archive_show=document.querySelector(".base_archive_show");
+    var showMessage=document.querySelector("#showMessage")
+    var showComplain=document.querySelector("#showComplain")
+    var showCoursesClass=document.querySelector("#showCoursesClass")
+    var courseClassPage=document.querySelector(".courseClassPage")
+    var base_info_show=document.querySelector(".base_info_show")
+    var base_archive_show=document.querySelector(".base_archive_show")
     var base_info=document.querySelector(".base_info")
     var base_archive=document.querySelector(".base_archive")
     var infos=document.querySelectorAll(".info")
     var infosPage=document.querySelector(".infosPage")
+    var show_courseClass=document.querySelector(".show_courseClass")
     base_info_show.onclick=function(){
         clear();
         base_info_show.className="count"
@@ -184,7 +186,9 @@
     showMessage.onclick=function(){
         showMessage.className="current";
         showComplain.className="";
+        showCoursesClass.className=""
         infosPage.style.display="none"
+        courseClassPage.style.display="none"
         classPage.style.display="block"
         show_class.style.display="inline-block"
         teacher_class_show.style.backgroundColor="#7ed6df"
@@ -193,15 +197,27 @@
     showComplain.onclick=function(){
         showMessage.className="";
         showComplain.className="current";
+        showCoursesClass.className=""
         classPage.style.display="none";
         infosPage.style.display="block"
+        courseClassPage.style.display="none"
         clear();
         base_info_show.className="count"
         base_info_show.style.backgroundColor="#7ed6df"
         base_info.style.display="inline-block"
         getBaseInfo()
     }
-
+    showCoursesClass.onclick=function(e){
+        showMessage.className="";
+        showComplain.className="";
+        showCoursesClass.className="current"
+        classPage.style.display="none";
+        infosPage.style.display="none"
+        courseClassPage.style.display="block"
+        show_courseClass.style.display="block"
+        show_courseClass.style.backgroundColor="#7ed6df"
+        getCourseClass()
+    }
 </script>
 <!--渲染教师基本信息-->
 <script type="text/javascript">
@@ -248,7 +264,6 @@
 <script type="text/javascript">
     var counts=document.querySelectorAll(".count");
     var classPage=document.querySelector(".classPage")
-    var item_course=document.querySelector(".item_class")
     var show_class=document.querySelector(".show_class")
     var item_select_course=document.querySelector(".item_select_course")
     var teacher_class_show=document.querySelector(".teacher_class_show")
@@ -256,6 +271,74 @@
         teacher_class_show.style.backgroundColor="#7ed6df"
         show_class.style.display="inline-block"
         getTeacherClass()
+    }
+</script>
+<!--获得教学班级-->
+<script type="text/javascript">
+    var item_courseClass=document.querySelector(".item_courseClass")
+    var getCourseClass=function(){
+        $.ajax({
+            type:"get",
+            url:"/courses/teacher/courseClass/1/10",
+            success:function(response){
+                var datas=response.data
+                var str=""
+                for(var i=0;i<datas.length;i++){
+                    var startDate=datas[i].teachingStartDate
+                    var endDate=datas[i].teachingEndDate
+                    var courseClassId=datas[i].courseClassId
+                    str+="                <li>\n" +
+                        "                    <div>\n" +
+                        "                        <ul>\n" +
+                        "                            <li><span>教学班ID:</span></li>\n" +
+                        "                            <li><span>教学开始时间:</span></li>\n" +
+                        "                            <li><span>教学结束时间:</span></li>\n" +
+                        "                            <li><span>教学课程:</span></li>\n" +
+                        "                            <li><span>教学地点:</span></li>\n" +
+                        "                        </ul>\n" +
+                        "                        <ul class=\"courseClass_item courseClass_info\">\n" +
+                        "                            <li><span class=\"courseClassId\">"+courseClassId+"</span></li>\n" +
+                        "                            <li><span class=\"teachingStartDate\">"+startDate[0]+"年"+ startDate[1]+"月"+startDate[2]+"日"+"</span></li>\n" +
+                    "                                <li><span class=\"teachingEndDate\">"+endDate[0]+"年"+ endDate[1]+"月"+endDate[2]+"日"+"</span></li>\n" +
+                    "                                <li><span class=\"courseClassName\">"+datas[i].course.courseName+"</span></li>\n" +
+                    "                                <li><span class=\"teachingLocation\">"+datas[i].classroom.location+datas[i].classroom.classroomNum+"</span></li>\n" +
+                    "                            </ul>\n" +
+                    "                        <button class=\"showCourseClassStuBtn\">查看学生</button>\n" +
+                    "                        <button class=\"showTeachingCaseBtn  popup\"    onclick=\"showTeachingCase("+courseClassId+ ","+i+")\">查看教学情况" +
+                        "                        <span class='popuptext  myPopup' id=myPopup"+i+">" +
+
+                        "                        </span>"+
+                    "                        </button>\n" +
+                    "                    </div>\n" +
+                    "                </li>"
+                }
+                item_courseClass.innerHTML=str
+            }
+        })
+    }
+</script>
+<!--教学班级事件绑定-->
+<script type="text/javascript">
+    function showTeachingCase(id,i) {
+        var popups = document.querySelectorAll(".myPopup");
+        popups[i].classList.toggle("show");
+        $.ajax({
+            url:"/teachings/teachingCase/"+id,
+            type:"get",
+            success:function(response){
+                if(response.code==2000){
+                    str="    <span>教学评分: "+ response.data.assessmentScore +"</span> \n" +
+                        "    <br>              \n" +
+                        "    <span>教学进度:" + response.data.teachingSchedule  +  "</span> "
+                }else{
+                    str="获得信息失败！"
+                }
+                var sele="#myPopup"+i
+                console.log(sele)
+                var inert=document.querySelector(sele)
+                inert.innerHTML=str
+            }
+        })
     }
 </script>
 <!--渲染教师管理班级的操作-->
@@ -290,6 +373,9 @@
 </script>
 <!--渲染班级学生操作-->
 <script type="text/javascript">
+    $('.close').click(function(){
+       $('.span').hide()
+    });
     var item_student=document.querySelector(".item_student")
     $('.show_class').on("click",".showStudentBtn",function(){
         var id=$(this).attr("classId")
@@ -380,14 +466,14 @@
         })
     }
 </script>
-
 <!--页面加载事件-->
 <script type="text/javascript">
     window.onload=function(){
         base_info_show.style.backgroundColor="#7ed6df"
         getRecord();
         getBaseInfo()
-
+        show_courseClass.style.display="none"
+        courseClassPage.style.display="none"
     }
 </script>
 <!--公共函数-->
