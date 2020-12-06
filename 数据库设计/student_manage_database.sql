@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 29/11/2020 22:30:19
+ Date: 06/12/2020 22:23:42
 */
 
 SET NAMES utf8mb4;
@@ -349,7 +349,7 @@ CREATE TABLE `stuselectcourse`  (
 -- ----------------------------
 -- Records of stuselectcourse
 -- ----------------------------
-INSERT INTO `stuselectcourse` VALUES (NULL, '20181102928', '7000002');
+INSERT INTO `stuselectcourse` VALUES (NULL, '20181102928', '7000001');
 INSERT INTO `stuselectcourse` VALUES (NULL, '20181102928', '7000003');
 
 -- ----------------------------
